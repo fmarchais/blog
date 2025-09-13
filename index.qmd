@@ -18,4 +18,4 @@ Diplômé d'un Master 2 de Biologie - Physiopathologie & Recherche Clinique \n
 
 Je me suis spécialisé dans la programmation en R pour des missions de traitement de données de santé, visualisation et automatisation de process. \n
 
-Dans ce portfolio, vous pourrez retrouver plus de détails sur [mon profil](pages/profil.qmd), découvrir [les différents usages de R](pages/liste_usages.qmd) et mes différents [projets](pages/liste_projets.qmd)
+Dans ce portfolio, vous pourrez retrouver plus de détails sur [mon profil](pages/profil.qmd), découvrir [les différents usages de R](pages/liste_decouvrir.qmd) et mes différents [projets](pages/liste_projets.qmd)
