@@ -1,5 +1,0 @@
-patient_id;age;inclusion_date;CIM10;organe;mutation_yn
-A-1;45;01/02/2020;C34;Poumon;oui
-A-005;75;2020-02-01;c34;poumon;Oui
-A-012;84;01-02-2020;C.34;Poumons;non
-A-025;65;2020/02/01;c 34;POUMON;Non

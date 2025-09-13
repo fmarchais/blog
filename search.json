@@ -1,0 +1,93 @@
+[
+  {
+    "objectID": "pages/profil.html",
+    "href": "pages/profil.html",
+    "title": "Profil",
+    "section": "",
+    "text": "Issu d’un parcours en Biologie et Recherche Clinique, je me suis rapidement dirigé vers le traitement de données de santé à la fin de l’année de Master 1, en me formant en autodidacte au langage R.\nMon parcours professionnel m’a amené à travailler dans le milieu du Dispositif Médical (DM) en orthopédie, puis dans les études de vie réelle (RWD) en cancérologie.\nMes missions actuelles portent principalement sur :\n\nLe nettoyage et la qualification d’études RWD.\nLa qualification et le requêtage d’Entrepôts de Données de Santé (bases SQL)\nLe développement d’applications Shiny ou de rapports avec Markdown/Quarto (Suivi de projets, comparaison de bases)\nData Engineering (Automatisation de process, exécution planifiée, requêtage API)\nEnseignement :\n\nCours d’introduction à R et à la gestion de données, auprès d’étudiants de Licence 2 et Master 2 de biologie\nFormations à R au sein de mon service"
+  },
+  {
+    "objectID": "pages/profil.html#analyse-visualisation",
+    "href": "pages/profil.html#analyse-visualisation",
+    "title": "Profil",
+    "section": "Analyse & Visualisation",
+    "text": "Analyse & Visualisation\nggplot2 et dérivés,\ngwalkr\nstats"
+  },
+  {
+    "objectID": "pages/profil.html#reporting",
+    "href": "pages/profil.html#reporting",
+    "title": "Profil",
+    "section": "Reporting",
+    "text": "Reporting\n\nRmarkdown\n\n\nQuarto\n\n\nR Shiny"
+  },
+  {
+    "objectID": "pages/profil.html#data-engineering",
+    "href": "pages/profil.html#data-engineering",
+    "title": "Profil",
+    "section": "Data Engineering",
+    "text": "Data Engineering\n\nOrchestrateur\n{maestro} est un package R permettant d’orchestrer l’exécution programmée de différents scripts R, permettant ainsi de créer de gérer des pipelines de données.\n\n\nBases de données (SQL)\n\n\nAPI\nhittr2\n\n\nCI/CD\nGitHub, testthat, usethis\nDocker (dockerfiler, rocker, shiny2docker, dockitect …\n\n\nCloud\nun exemple d’interaction avec différents services d’un cloud (stockage, faire tourner R sur un serveur…)"
+  },
+  {
+    "objectID": "pages/tidytuesday.html",
+    "href": "pages/tidytuesday.html",
+    "title": "Tidytuesday",
+    "section": "",
+    "text": "Le Tidytuesday, c’est un évènement qui a lieu chaque semaine, où la communauté R se challenge pour créer des visualisations à partir d’un nouveau jeu de données, publié tous les mardis. \n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "pages/r_decouvrir/decouvrir_connections.html",
+    "href": "pages/r_decouvrir/decouvrir_connections.html",
+    "title": "Recueil de données",
+    "section": "",
+    "text": "R est un langage qui permet d’intéragir avec à peu près n’importe quel format de données :\nMais pas seulement ! R peut également travailler avec des images (OCRiser un PDF pour récupérer son contenu, ou en générer un), des fichiers DICOM, et bien plus encore."
+  },
+  {
+    "objectID": "pages/r_decouvrir/decouvrir_connections.html#google-cloud-platform",
+    "href": "pages/r_decouvrir/decouvrir_connections.html#google-cloud-platform",
+    "title": "Recueil de données",
+    "section": "Google Cloud Platform",
+    "text": "Google Cloud Platform\nVoici une liste non exhaustive des librairies permettant de travailler avec Google Cloud Platform, disponible sur la vignette de {googleAuthR}\n\ngoogleComputeEngineR - Google Compute Engine VMs API\nsearchConsoleR - Search Console API\nbigQueryR - BigQuery API. Part of the cloudyr project.\ngoogleAnalyticsR - Google Analytics API\ngoogleTagManagerR - Google Tag Manager API by IronistM\ngoogleID - Simple user info from G+ API for Shiny app authentication flows.\ngoogleCloudStorageR - Google Cloud Storage API\nRoogleVision - R Package for Image Recogntion, Object Detection, and OCR using the Google’s Cloud Vision API\ngoogleLanguageR - Access Speech to Text, Entity analysis and translation APIs from R\ngoogleCloudRunner - Continuous Development and Integration with Cloud Run, Cloud Scheduler and Cloud Build"
+  },
+  {
+    "objectID": "pages/r_decouvrir/decouvrir_connections.html#aws",
+    "href": "pages/r_decouvrir/decouvrir_connections.html#aws",
+    "title": "Recueil de données",
+    "section": "AWS",
+    "text": "AWS\nLa documentation officielle de Amazon Web Service dispose d’un tutoriel pour accéder aux données du service depuis R."
+  },
+  {
+    "objectID": "pages/r_decouvrir/decouvrir_connections.html#xml",
+    "href": "pages/r_decouvrir/decouvrir_connections.html#xml",
+    "title": "Recueil de données",
+    "section": "XML",
+    "text": "XML\nSupposons que nous ayons un fichier “livres.xml” ressemblant à cela :\n\nlibrary(xml2)\n\nxml_doc &lt;- as_xml_document(\n\"&lt;livres&gt;\n  &lt;livre&gt;\n    &lt;titre&gt;R pour les débutants&lt;/titre&gt;\n    &lt;auteur&gt;Jean Martin&lt;/auteur&gt;\n    &lt;annee&gt;2020&lt;/annee&gt;\n  &lt;/livre&gt;\n  &lt;livre&gt;\n    &lt;titre&gt;Analyse de données avec R&lt;/titre&gt;\n    &lt;auteur&gt;Marie Dupont&lt;/auteur&gt;\n    &lt;annee&gt;2021&lt;/annee&gt;\n  &lt;/livre&gt;\n&lt;/livres&gt;\"\n)\n\nPour lire le fichier .xml, on utilisera\n\nxml_doc &lt;- xml2::read_xml(\"livres.xml\")\n\nEnsuite, on peut extraire les titres avec\n\ntitres_xml &lt;- xml_find_all(xml_doc, \".//livre/titre\")\nprint(titres_xml)\n\n{xml_nodeset (2)}\n[1] &lt;titre&gt;R pour les débutants&lt;/titre&gt;\n[2] &lt;titre&gt;Analyse de données avec R&lt;/titre&gt;\n\n\nLes fonctions xml_find_*() permettent d’utiliser des expression xpath, similaire à du REGEX mais pour les architectures en arbre et renvoient des objets de classe xml_nodeset. Pour récupérer un vecteur character, on rajoute simplement xml_text()\n\ntitres &lt;- xml_text(titres_xml)\nprint(titres)\n\n[1] \"R pour les débutants\"      \"Analyse de données avec R\""
+  },
+  {
+    "objectID": "pages/r_decouvrir/decouvrir_connections.html#json",
+    "href": "pages/r_decouvrir/decouvrir_connections.html#json",
+    "title": "Recueil de données",
+    "section": "JSON",
+    "text": "JSON\nPour lire du JSON, on utilisera simplement fromJSON(), pour convertir une chaîne de texte, ou read_json() pour lire un fichier .json. Les deux fonctions renvoient directement un data.frame\nlibrary(jsonlite)\n\nlivres_json &lt;- fromJSON(\n'\n[\n  {\n    \"titre\": \"R pour les débutants\",\n    \"auteur\": \"Jean Dupont\",\n    \"annee\": 2020\n  },\n  {\n    \"titre\": \"Analyse de données avec R\",\n    \"auteur\": \"Marie Curie\",\n    \"annee\": 2021\n  }\n]\n')\n\nprint(livres_json)\n                  titre      auteur annee\n1 R pour les débutants Jean Dupont 2020 2 Analyse de données avec R Marie Curie 2021\nOn citera aussi la possibilité de convertir un objet R en JSON avec la fonction toJSON()."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Bienvenue",
+    "section": "",
+    "text": "Développeur R et Data Manager de données cliniques \nDiplômé d’un Master 2 de Biologie - Physiopathologie & Recherche Clinique \nJe me suis spécialisé dans la programmation en R pour des missions de traitement de données de santé, visualisation et automatisation de process. \nDans ce portfolio, vous pourrez retrouver plus de détails sur mon profil, découvrir les différents usages de R et mes différents projets"
+  },
+  {
+    "objectID": "pages/liste_projets.html",
+    "href": "pages/liste_projets.html",
+    "title": "Projets",
+    "section": "",
+    "text": "Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "pages/liste_decouvrir.html",
+    "href": "pages/liste_decouvrir.html",
+    "title": "Découvrir R",
+    "section": "",
+    "text": "R est un langage de programmation qui semble particulièrement méconnu. On lit régulièrement que c’est un langage “dédié aux statistiques”, qui serait limité par rapport à d’autres langages (au hasard, Python). \nDans cette section, vous trouverez des exemples des différents usages de R et pourquoi il est selon moi un langage parfait pour travailler avec des données.\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n\n\n\n\n\n\n\n\nRecueil de données\n\n\n\nR\n\nBases de données\n\n\n\nSe connecter à tout type de données\n\n\n\nFélix Marchais\n\n\nJul 29, 2025\n\n\n\n\n\n\nNo matching items"
+  }
+]
