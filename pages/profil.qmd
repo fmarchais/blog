@@ -64,9 +64,9 @@ Les compétences que je souhaite développer dans les mois à venir, au 15 juin 
 
 -   Finaliser la maîtrise de Duckdb et Arrow pour le Big Data (Juillet 2025) ✅
 
--   Publier mes supports de cours dans un site Quarto (Rentrée 2025)
+-   Publier une première version de ce site (Rentrée 2025) ✅
 
--   Publier une première version de ce site (Rentrée 2025)
+-   Publier mes supports de cours dans un site Quarto (Rentrée 2025)
 
 -   Développer mes compétences CI/CD (Automne 2025)
 
