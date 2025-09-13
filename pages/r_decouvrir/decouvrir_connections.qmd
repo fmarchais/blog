@@ -345,7 +345,7 @@ head(cities_table)
 ```{r webscraping_2}
 #| eval: true
 #| echo: false
-head(readr::read_csv("../../data/cities_table"))
+head(readr::read_csv("../../data/cities_table.csv"))
 ```
 
 # OCR et PDF  
