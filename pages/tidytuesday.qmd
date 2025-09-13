@@ -1,0 +1,9 @@
+---
+title: "Tidytuesday"
+format: html
+listing:
+  contents: "tidytuesday/*.qmd"
+  type: default
+---
+
+Le Tidytuesday, c'est un évènement qui a lieu chaque semaine, où la communauté R se challenge pour créer des visualisations à partir d'un nouveau jeu de données, publié tous les mardis. \n

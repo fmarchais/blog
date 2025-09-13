@@ -1,0 +1,44 @@
+{
+  "listingMap": {
+    "index.qmd": [
+      "posts"
+    ],
+    "projets.qmd": [
+      "projets"
+    ],
+    "tidytuesday.qmd": [
+      "tidytuesday"
+    ],
+    "r_usages\\usages_index.qmd": [
+      "r_usages"
+    ],
+    "pages\\projets.qmd": [
+      "projets",
+      "pages/projets/*.qmd"
+    ],
+    "pages\\tidytuesday.qmd": [
+      "tidytuesday",
+      "pages/tidytuesday/*.qmd",
+      "tidytuesday/*.qmd"
+    ],
+    "pages\\r_usages\\usages_index.qmd": [
+      "pages/r_usages",
+      "pages/r_usages/*.qmd"
+    ],
+    "pages\\projets\\liste_projets.qmd": [
+      "pages/projets",
+      "pages/projets/*.qmd"
+    ],
+    "pages\\liste_usages.qmd": [
+      "pages/r_usages/*.qmd",
+      "r_usages/*.qmd"
+    ],
+    "pages\\liste_projets.qmd": [
+      "pages/projets/*.qmd",
+      "projets/*.qmd"
+    ],
+    "pages\\liste_decouvrir.qmd": [
+      "r_decouvrir/*.qmd"
+    ]
+  }
+}

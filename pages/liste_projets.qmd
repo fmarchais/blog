@@ -1,0 +1,9 @@
+---
+title: "Projets"
+format: html
+listing:
+  contents: "projets/*.qmd"
+  type: default
+---
+
+Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n 

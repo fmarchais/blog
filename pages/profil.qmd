@@ -1,0 +1,123 @@
+---
+title: "Profil"
+page-layout: full
+toc: true
+---
+
+# A propos de moi
+
+Issu d'un parcours en Biologie et Recherche Clinique, je me suis rapidement dirigé vers le traitement de données de santé à la fin de l'année de Master 1, en me formant en autodidacte au langage R.
+
+Mon parcours professionnel m'a amené à travailler dans le milieu du Dispositif Médical (DM) en orthopédie, puis dans les études de vie réelle (RWD) en cancérologie.
+
+Mes missions actuelles portent principalement sur :
+
+-   Le nettoyage et la qualification d'études RWD.
+
+-   La qualification et le requêtage d'Entrepôts de Données de Santé (bases SQL)
+
+-   Le développement d'applications Shiny ou de rapports avec Markdown/Quarto (Suivi de projets, comparaison de bases)
+
+-   Data Engineering (Automatisation de process, exécution planifiée, requêtage API)
+
+-   Enseignement :
+
+    -   Cours d'introduction à R et à la gestion de données, auprès d'étudiants de Licence 2 et Master 2 de biologie
+
+    -   Formations à R au sein de mon service
+
+# Stack technique
+
+-   Programmation :
+
+    -   Maîtrise : R, SQL
+
+    -   Notions : HTML, CSS, Python, Shell
+
+-   Bases de données :
+
+    -   MS SQL, MySQL, Oracle
+
+-   Visualisation :
+
+    -   R, Qlik Sense, Power BI
+
+-   CI/CD :
+
+    -   Git (GitHub, GitLab), Docker (en cours)
+
+-   ETL :
+
+    -   Talend
+
+-   e-CRF/EDC :
+
+    -   REDCap, EasyMedStats
+
+-   Catalogues :
+
+    -   Open Metadata
+
+# Roadmap
+
+Les compétences que je souhaite développer dans les mois à venir, au 15 juin 2025 :
+
+-   Finaliser la maîtrise de Duckdb et Arrow pour le Big Data (Juillet 2025) ✅
+
+-   Publier mes supports de cours dans un site Quarto (Rentrée 2025)
+
+-   Publier une première version de ce site (Rentrée 2025)
+
+-   Développer mes compétences CI/CD (Automne 2025)
+
+    -   Être à l'aise avec le déploiement d'applis Shiny et de documents Quarto sur différents outils de publication (GitHub Pages, Posit Connect, Shinyapps.io)
+
+    -   Développer des applis Shiny *Production-grade* avec {rhino} et/ou {golem}, en intégrant des tests unitaires, d'intégration et End-to-End
+
+    -   Apprendre la dockerisation et déployer au moins une appli Shiny dans un docker
+
+-   Découvrir un client Cloud (GCP/AWS/Azure) (Fin 2025)
+
+-   M'initier au Machine Learning (mi-2026)
+
+    -   Remise à niveau en statistiques
+
+    -   Me former à l'utilisation du package {tidymodels}
+
+## Analyse & Visualisation
+
+ggplot2 et dérivés,
+
+gwalkr
+
+stats
+
+## Reporting
+
+### Rmarkdown
+
+### Quarto
+
+### R Shiny
+
+## Data Engineering
+
+### Orchestrateur
+
+{maestro} est un package R permettant d'orchestrer l'exécution programmée de différents scripts R, permettant ainsi de créer de gérer des pipelines de données.
+
+### Bases de données (SQL)
+
+### API
+
+hittr2
+
+### CI/CD
+
+GitHub, testthat, usethis
+
+Docker (dockerfiler, rocker, shiny2docker, dockitect ...
+
+### Cloud
+
+un exemple d'interaction avec différents services d'un cloud (stockage, faire tourner R sur un serveur...)

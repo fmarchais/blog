@@ -1,0 +1,29 @@
+project:
+  type: website
+
+website:
+  title: "Portfolio"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Accueil
+      - href: pages/profil.qmd
+        text: Profil
+      - href: pages/liste_decouvrir.qmd
+        text: Découvrir R
+      - href: pages/liste_projets.qmd
+        text: Projets
+      - href: pages/tidytuesday.qmd
+        text: Tidytuesday
+    right:
+      - icon: github
+        href: https://github.com/fmarchais
+      - icon: linkedin
+        href: www.linkedin.com/in/félix-marchais
+format:
+  html:
+    theme: sandstone
+    css: styles.css
+    toc: true
+
+editor: source

@@ -1,0 +1,51 @@
+libelle_parametre,libelle_parametre_maj,resultat_numerique,libelle_unite,limite_qualite_parametre,reference_qualite_parametre,nom_commune,date_prelevement,conclusion_conformite_prelevement
+Cel. de cyanobactéries toxinogènes,CEL. DE CYANOBACTÉRIES TOXINOGÈNES,0.041,n(cellules)/mL,NA,NA,APREMONT,2025-06-30T14:00:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Cyanobactéries toxinogènes (exprimées en biovolume),CYANOBACTÉRIES TOXINOGÈNES,0.732,mm3/L,NA,NA,APREMONT,2025-06-30T14:00:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Numération des cellules de phytoplanctons,CELLULES DE PHYTOPLANCTONS,1,n(cellules)/mL,NA,NA,APREMONT,2025-06-30T14:00:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Cellules de cyanobactéries,CELLULES DE CYANOBACTÉRIES,0.041,n(cellules)/mL,NA,NA,APREMONT,2025-06-30T14:00:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Microcystine-RR totale,MICROCYSTINE-RR TOTALE,0,µg/L,<=1 µg/L,NA,APREMONT,2025-06-30T13:55:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Somme des microcystines analysées (calcul),SOMME DES MICROCYSTINES ANALYSÉES (CALCUL),0,µg/L,<=1 µg/L,NA,APREMONT,2025-06-30T13:55:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Nodularine totale,NODULARINE TOTALE,0,µg/L,NA,NA,APREMONT,2025-06-30T13:55:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Microcystine-YR totale,MICROCYSTINE-YR TOTALE,0,µg/L,<=1 µg/L,NA,APREMONT,2025-06-30T13:55:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Microcystine-LR totale,MICROCYSTINE-LR TOTALE,0,µg/L,<=1 µg/L,NA,APREMONT,2025-06-30T13:55:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Microcystine-LA totale,MICROCYSTINE-LA TOTALE,0,µg/L,<=1 µg/L,NA,APREMONT,2025-06-30T13:55:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Turbidité néphélométrique NFU,TURBIDITÉ NÉPHÉLOMÉTRIQUE NFU,0,NFU,NA,<=2 NFU,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Aspect (qualitatif),ASPECT (QUALITATIF),0,SANS OBJET,NA,NA,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+pH,PH ,8,unité pH,NA,">=6,5 et <=9 unité pH",POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Chlore total,CHLORE TOTAL,0.15,mg(Cl2)/L,NA,NA,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Bact. et spores sulfito-rédu./100ml,BACT. ET SPORES SULFITO-RÉDU./100ML,0,n/(100mL),NA,<=0 n/(100mL),POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Bactéries coliformes /100ml-MS,BACTÉRIES COLIFORMES /100ML-MS,0,n/(100mL),NA,<=0 n/(100mL),POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Chlore libre,CHLORE LIBRE,0.05,mg(Cl2)/L,NA,NA,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Ammonium (en NH4),AMMONIUM (EN NH4),0.012,mg/L,NA,"<=0,1 mg/L",POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Conductivité à 25°C,CONDUCTIVITÉ À 25°C,496,µS/cm,NA,>=200 et <=1100 µS/cm,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Température de mesure du pH,TEMPÉRATURE DE MESURE DU PH,23.9,°C,NA,NA,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Coloration,COLORATION,0,mg(Pt)/L,NA,<=15 mg(Pt)/L,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Bact. aér. revivifiables à 22°-68h,BACT. AÉR. REVIVIFIABLES À 22°-68H,4,n/mL,NA,NA,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Bact. aér. revivifiables à 36°-44h,BACT. AÉR. REVIVIFIABLES À 36°-44H,5,n/mL,NA,NA,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Odeur (qualitatif),ODEUR (QUALITATIF),0,SANS OBJET,NA,NA,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Fer total,FER TOTAL,0,µg/L,NA,<=200 µg/L,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Entérocoques /100ml-MS,ENTÉROCOQUES /100ML-MS,0,n/(100mL),<=0 n/(100mL),NA,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Saveur (qualitatif),SAVEUR (QUALITATIF),0,SANS OBJET,NA,NA,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Température de l'eau,TEMPÉRATURE DE L'EAU,22.1,°C,NA,<=25 °C,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Escherichia coli /100ml - MF,ESCHERICHIA COLI /100ML - MF,0,n/(100mL),<=0 n/(100mL),NA,POIROUX,2025-06-30T09:35:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Aspect (qualitatif),ASPECT (QUALITATIF),0,SANS OBJET,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Anthracène,ANTHRACÈNE,0,µg/L,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Chrysène,CHRYSÈNE,0,µg/L,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Benzanthracène,BENZANTHRACÈNE,0,µg/L,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Benzo(a)pyrène *,BENZO(A)PYRÈNE *,0,µg/L,<=0.01 µg/L,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Fluorène,FLUORÈNE,0,µg/L,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Pyrène,PYRÈNE,0,µg/L,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Bact. et spores sulfito-rédu./100ml,BACT. ET SPORES SULFITO-RÉDU./100ML,0,n/(100mL),NA,<=0 n/(100mL),ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Entérocoques /100ml-MS,ENTÉROCOQUES /100ML-MS,0,n/(100mL),<=0 n/(100mL),NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Fluoranthène *,FLUORANTHÈNE *,0,µg/L,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Bact. aér. revivifiables à 36°-44h,BACT. AÉR. REVIVIFIABLES À 36°-44H,0,n/mL,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+"Dibenzo(a,h)anthracène","DIBENZO(A,H)ANTHRACÈNE",0,µg/L,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Température de mesure du pH,TEMPÉRATURE DE MESURE DU PH,23.6,°C,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Chlorodibromométhane,CHLORODIBROMOMÉTHANE,19,µg/L,<=100 µg/L,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Chrome total,CHROME TOTAL,0,µg/L,<=50 µg/L,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Saveur (qualitatif),SAVEUR (QUALITATIF),0,SANS OBJET,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+pH,PH ,8.2,unité pH,NA,">=6,5 et <=9 unité pH",ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Bactéries coliformes /100ml-MS,BACTÉRIES COLIFORMES /100ML-MS,0,n/(100mL),NA,<=0 n/(100mL),ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Chlore libre,CHLORE LIBRE,0,mg(Cl2)/L,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Odeur (qualitatif),ODEUR (QUALITATIF),0,SANS OBJET,NA,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+Benzo(b)fluoranthène,BENZO(B)FLUORANTHÈNE,0,µg/L,<=0.1 µg/L,NA,ILE-D'ELLE (L'),2025-06-30T09:30:00Z,Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
