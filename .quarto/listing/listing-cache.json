@@ -14,7 +14,8 @@
     ],
     "pages\\projets.qmd": [
       "projets",
-      "pages/projets/*.qmd"
+      "pages/projets/*.qmd",
+      "projets/*.qmd"
     ],
     "pages\\tidytuesday.qmd": [
       "tidytuesday",
@@ -38,6 +39,9 @@
       "projets/*.qmd"
     ],
     "pages\\liste_decouvrir.qmd": [
+      "r_decouvrir/*.qmd"
+    ],
+    "pages\\decouvrir_r.qmd": [
       "r_decouvrir/*.qmd"
     ]
   }

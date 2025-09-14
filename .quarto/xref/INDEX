@@ -70,5 +70,8 @@
   },
   "pages/r_decouvrir/decouvrir_bigdata.qmd": {
     "decouvrir_bigdata.html": "f1e7e069"
+  },
+  "pages/decouvrir_r.qmd": {
+    "decouvrir_r.html": "67673935"
   }
 }

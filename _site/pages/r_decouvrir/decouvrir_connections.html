@@ -134,15 +134,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Profil</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../pages/liste_decouvrir.html"> 
+    <a class="nav-link" href="../../pages/decouvrir_r.html"> 
 <span class="menu-text">Découvrir R</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../pages/liste_projets.html"> 
+    <a class="nav-link" href="../../pages/projets.html"> 
 <span class="menu-text">Projets</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../pages/tidytuesday.html"> 
+    <a class="nav-link" href="../../pages/tidytuesday.qmd"> 
 <span class="menu-text">Tidytuesday</span></a>
   </li>  
 </ul>
@@ -286,18 +286,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>covid_data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(<span class="st">"https://www.data.gouv.fr/api/1/datasets/r/fe3e7099-a975-4181-9fb5-2dd1b8f1b552"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(covid_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 9
   fra   strate2 jour       PourAvec tx_indic_7J_DC tx_indic_7J_hosp
-  &lt;chr&gt;   &lt;dbl&gt; &lt;date&gt;        &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;           
-1 FR          0 2020-03-07        0 0              0               
-2 FR          0 2020-03-07        1 &lt;NA&gt;           0               
-3 FR          0 2020-03-07        2 &lt;NA&gt;           0               
-4 FR          0 2020-03-08        0 0              0               
-5 FR          0 2020-03-08        1 &lt;NA&gt;           0               
-6 FR          0 2020-03-08        2 &lt;NA&gt;           0               
-# ℹ 3 more variables: tx_indic_7J_SC &lt;chr&gt;, tx_prev_hosp &lt;dbl&gt;,
-#   tx_prev_SC &lt;chr&gt;</code></pre>
+  &lt;chr&gt;   &lt;dbl&gt; &lt;date&gt;        &lt;dbl&gt;          &lt;dbl&gt;            &lt;dbl&gt;
+1 FR          0 2020-03-07        0              0                0
+2 FR          0 2020-03-07        1             NA                0
+3 FR          0 2020-03-07        2             NA                0
+4 FR          0 2020-03-08        0              0                0
+5 FR          0 2020-03-08        1             NA                0
+6 FR          0 2020-03-08        2             NA                0
+# ℹ 3 more variables: tx_indic_7J_SC &lt;dbl&gt;, tx_prev_hosp &lt;dbl&gt;,
+#   tx_prev_SC &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -317,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="parquet" class="level1">
 <h1>Parquet</h1>
-<p>Le format .parquet, encore malheureusement peu connu, est un format compressé et orienté en colonnes, orienté vers la performance. Un même jeu de données au format parquet est entre 5 et 10 fois moins volumineux qu’en csv et est optimisé pour être lu rapidement par R ou Python. On citera aussi sa compatibilité avec DuckDB pour former un duo parfait pour <a href="../../pages/r_decouvrir/decouvrir_bigdata.html">travailler le Big Data avec R</a>. L’un des rares défauts qu’on peut lui trouver est de ne pas être compatible avec Excel, ce qui limite sa diffusion. </p>
+<p>Le format .parquet, encore malheureusement peu connu, est un format compressé et orienté en colonnes, orienté vers la performance. Un même jeu de données au format parquet est entre 5 et 10 fois moins volumineux qu’en csv et est optimisé pour être lu rapidement par R ou Python. On citera aussi sa compatibilité avec DuckDB pour former un duo parfait pour travailler le Big Data avec R. L’un des rares défauts qu’on peut lui trouver est de ne pas être compatible avec Excel, ce qui limite sa diffusion. </p>
 <p>Si vous ne l’avez pas encore lu, je vous renvoie vers cet excellent article : <a href="https://www.icem7.fr/cartographie/parquet-devrait-remplacer-le-format-csv/">Parquet devrait remplacer le format CSV</a></p>
 <p>Il existe deux méthodes principales pour lire un fichier parquet en R : <code>{arrow}</code>, la librairie de <a href="https://arrow.apache.org/">Apache Arrow</a> et <code>{duckDB}</code>, la librairie de <a href="https://duckdb.org/">DuckDB</a>.</p>
 <p>Les deux méthodes permettent de créer une <em>connexion</em> vers le jeu de données, au lieu de les importer dans la mémoire de R, permettant de travailler avec des données pus volumineuses que la RAM. Les deux méthodes permettent d’utiliser <code>{dplyr}</code> pour le requêtage, mais <code>{duckdb}</code> permet aussi de requêter n’importe quel fichier plat en SQL. </p>
@@ -485,45 +487,25 @@ Astuce
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>df_data <span class="ot">&lt;-</span> resp <span class="sc">|&gt;</span></span>
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">resp_body_string</span>() <span class="sc">|&gt;</span></span>
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fromJSON</span>()</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>df_data <span class="ot">&lt;-</span> df_data<span class="sc">$</span>data</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>df_data <span class="ot">&lt;-</span> df_data<span class="sc">$</span>data</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>                                    libelle_parametre
-1                  Cel. de cyanobactéries toxinogènes
-2 Cyanobactéries toxinogènes (exprimées en biovolume)
-3           Numération des cellules de phytoplanctons
-4                          Cellules de cyanobactéries
-5                              Microcystine-RR totale
-6          Somme des microcystines analysées (calcul)
-                       libelle_parametre_maj resultat_numerique  libelle_unite
-1         CEL. DE CYANOBACTÉRIES TOXINOGÈNES              0.041 n(cellules)/mL
-2                 CYANOBACTÉRIES TOXINOGÈNES              0.732          mm3/L
-3                 CELLULES DE PHYTOPLANCTONS              1.000 n(cellules)/mL
-4                 CELLULES DE CYANOBACTÉRIES              0.041 n(cellules)/mL
-5                     MICROCYSTINE-RR TOTALE              0.000           µg/L
-6 SOMME DES MICROCYSTINES ANALYSÉES (CALCUL)              0.000           µg/L
-  limite_qualite_parametre reference_qualite_parametre nom_commune
-1                     &lt;NA&gt;                        &lt;NA&gt;    APREMONT
-2                     &lt;NA&gt;                        &lt;NA&gt;    APREMONT
-3                     &lt;NA&gt;                        &lt;NA&gt;    APREMONT
-4                     &lt;NA&gt;                        &lt;NA&gt;    APREMONT
-5                 &lt;=1 µg/L                        &lt;NA&gt;    APREMONT
-6                 &lt;=1 µg/L                        &lt;NA&gt;    APREMONT
-      date_prelevement
-1 2025-06-30T14:00:00Z
-2 2025-06-30T14:00:00Z
-3 2025-06-30T14:00:00Z
-4 2025-06-30T14:00:00Z
-5 2025-06-30T13:55:00Z
-6 2025-06-30T13:55:00Z
-                                                                        conclusion_conformite_prelevement
-1 Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
-2 Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
-3 Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
-4 Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
-5 Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
-6 Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.</code></pre>
+<pre><code># A tibble: 6 × 9
+  libelle_parametre       libelle_parametre_maj resultat_numerique libelle_unite
+  &lt;chr&gt;                   &lt;chr&gt;                              &lt;dbl&gt; &lt;chr&gt;        
+1 Cel. de cyanobactéries… CEL. DE CYANOBACTÉRI…              0.041 n(cellules)/…
+2 Cyanobactéries toxinog… CYANOBACTÉRIES TOXIN…              0.732 mm3/L        
+3 Numération des cellule… CELLULES DE PHYTOPLA…              1     n(cellules)/…
+4 Cellules de cyanobacté… CELLULES DE CYANOBAC…              0.041 n(cellules)/…
+5 Microcystine-RR totale  MICROCYSTINE-RR TOTA…              0     µg/L         
+6 Somme des microcystine… SOMME DES MICROCYSTI…              0     µg/L         
+# ℹ 5 more variables: limite_qualite_parametre &lt;chr&gt;,
+#   reference_qualite_parametre &lt;chr&gt;, nom_commune &lt;chr&gt;,
+#   date_prelevement &lt;dttm&gt;, conclusion_conformite_prelevement &lt;chr&gt;</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -567,30 +549,26 @@ Attention
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Bow permet d'interroger le robots.txt et nous informe du résultat</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># il enregistre notamment le délai minimum de requêtage autorisé par le site</span></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>session</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;polite session&gt; https://fr.wikipedia.org/wiki/Liste_des_communes_de_la_Vend%C3%A9e
-    User-agent: polite R package
-    robots.txt: 261 rules are defined for 34 bots
-   Crawl delay: 5 sec
-  The path is scrapable for this user-agent</code></pre>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>session</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>page <span class="ot">&lt;-</span> polite<span class="sc">::</span><span class="fu">scrape</span>(session)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># scrape() récupère le contenu autorisé</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>cities_table <span class="ot">&lt;-</span> page <span class="sc">|&gt;</span> </span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_element</span>(<span class="st">"table.wikitable"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_table</span>()</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># html_element récupère le premier élément de la classe "table.wikitable"</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># pour tous les récupérer sous forme de liste : html_elements()</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># html_table() permet de convertir des données tabulaires en un dataframe</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cities_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>page <span class="ot">&lt;-</span> polite<span class="sc">::</span><span class="fu">scrape</span>(session)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># scrape() récupère le contenu autorisé</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>cities_table <span class="ot">&lt;-</span> page <span class="sc">|&gt;</span> </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_element</span>(<span class="st">"table.wikitable"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_table</span>()</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># html_element récupère le premier élément de la classe "table.wikitable"</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># pour tous les récupérer sous forme de liste : html_elements()</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># html_table() permet de convertir des données tabulaires en un dataframe</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cities_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 10
   Nom             CodeInsee `Code postal` Arrondissement Canton Intercommunalité
-  &lt;chr&gt;               &lt;int&gt;         &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;           
+  &lt;chr&gt;               &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;           
 1 La Roche-sur-Y…     85191         85000 La Roche-sur-… La Ro… CA La Roche-sur…
 2 Les Achards         85152         85150 Les Sables-d’… Talmo… Pays-des-Achards
 3 L'Aiguillon-la…     85001         85460 Les Sables-d'… Mareu… CC Sud-Vendée-L…
@@ -609,61 +587,61 @@ Attention
 <p>L’OCR (Optical Character Recognition) est un système de <em>machine learning</em> permettant d’extraire le texte présent sur une image, parfait donc pour exploiter un grand nombre de comtpe-rendus scannés sans avoir à le faire manuellement.</p>
 <p>Dans cet exemple, nous utiliserons le modèle <strong>Tesseract</strong>, développé par Google et aujourd’hui Open Source. Nous utiliserons également la librairie <code>doParallel</code> pour paralléliser le traitement des images et augmenter la vitesse d’OCRisation</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tesseract)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pdftools)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupérer le chemin de tous les fichiers PDF présents dans un dossier</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>list_pdf <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"path/to/folder"</span>, </span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.pdf$"</span>, </span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all.files =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">full.names =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">recursive =</span> <span class="cn">FALSE</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                       )</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>ncores <span class="ot">&lt;-</span> doParallel<span class="sc">::</span><span class="fu">detectCores</span>(<span class="at">logical =</span> <span class="cn">FALSE</span>) <span class="co"># compter les coeurs physiques </span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer le cluster, en laissant 2 coeurs non utilisés</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> doParallel<span class="sc">::</span><span class="fu">makeCluster</span>(ncores<span class="dv">-2</span>)   </span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># et pour arrêter : stopCluster(cl)</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Charger les librariries et les objets dans les clusters</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="do">## clusterEvalQ() : exécute le code dans le cluster</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterEvalQ</span>(cl, {</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(tidyverse);</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(tesseract);</span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(pdftools)</span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="do">## clusterExport() charge l'objet dans le cluster</span></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterExport</span>(cl, <span class="fu">c</span>(<span class="st">"list_pdf"</span>))</span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer une fonction qui renvoie un dataframe en sortie (1 ligne par page)</span></span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>myPdfConvert <span class="ot">&lt;-</span> <span class="cf">function</span>(list_objet) { </span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>  list_objet <span class="sc">%&gt;%</span> <span class="fu">map_df</span>(<span class="sc">~</span> <span class="fu">data.frame</span>(<span class="at">doc_origin =</span> .x, <span class="co">#.x = chaque élément de listobjet</span></span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">texte =</span> <span class="fu">ocr</span>(pdftools<span class="sc">::</span><span class="fu">pdf_convert</span>(.x, <span class="at">dpi =</span> <span class="dv">200</span>)) <span class="co"># océrise un pdf converti en png</span></span>
-<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>                                     ))</span>
-<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Appliquer la fonction myPdfConvert à chaque élément de list_pdf</span></span>
-<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">parLapply</span>(cl, list_pdf, myPdfConvert)</span>
-<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Le résultat est obtenu sous forme de liste (1 élément par cluster) =&gt; les recombiner</span></span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">"rbind"</span>, res)</span>
-<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrêter le cluster</span></span>
-<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
-<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour récupérer numéro de page et nom du doc à chaque ligne (1 ligne = 1 page)</span></span>
-<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>resr <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> </span>
-<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_origin) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">doc_page =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">doc_nom =</span> <span class="fu">str_extract_all</span>(doc_origin, <span class="st">"[[:alnum:]_ ]*</span><span class="sc">\\</span><span class="st">.pdf"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tesseract)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pdftools)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupérer le chemin de tous les fichiers PDF présents dans un dossier</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>list_pdf <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">"path/to/folder"</span>, </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.pdf$"</span>, </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all.files =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">full.names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">recursive =</span> <span class="cn">FALSE</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                       )</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>ncores <span class="ot">&lt;-</span> doParallel<span class="sc">::</span><span class="fu">detectCores</span>(<span class="at">logical =</span> <span class="cn">FALSE</span>) <span class="co"># compter les coeurs physiques </span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer le cluster, en laissant 2 coeurs non utilisés</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> doParallel<span class="sc">::</span><span class="fu">makeCluster</span>(ncores<span class="dv">-2</span>)   </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co"># et pour arrêter : stopCluster(cl)</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Charger les librariries et les objets dans les clusters</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="do">## clusterEvalQ() : exécute le code dans le cluster</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterEvalQ</span>(cl, {</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(tidyverse);</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(tesseract);</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(pdftools)</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="do">## clusterExport() charge l'objet dans le cluster</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="fu">clusterExport</span>(cl, <span class="fu">c</span>(<span class="st">"list_pdf"</span>))</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer une fonction qui renvoie un dataframe en sortie (1 ligne par page)</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>myPdfConvert <span class="ot">&lt;-</span> <span class="cf">function</span>(list_objet) { </span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  list_objet <span class="sc">%&gt;%</span> <span class="fu">map_df</span>(<span class="sc">~</span> <span class="fu">data.frame</span>(<span class="at">doc_origin =</span> .x, <span class="co">#.x = chaque élément de listobjet</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">texte =</span> <span class="fu">ocr</span>(pdftools<span class="sc">::</span><span class="fu">pdf_convert</span>(.x, <span class="at">dpi =</span> <span class="dv">200</span>)) <span class="co"># océrise un pdf converti en png</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>                                     ))</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Appliquer la fonction myPdfConvert à chaque élément de list_pdf</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">parLapply</span>(cl, list_pdf, myPdfConvert)</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Le résultat est obtenu sous forme de liste (1 élément par cluster) =&gt; les recombiner</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">"rbind"</span>, res)</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrêter le cluster</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour récupérer numéro de page et nom du doc à chaque ligne (1 ligne = 1 page)</span></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>resr <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> </span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(doc_origin) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">doc_page =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>(), <span class="at">doc_nom =</span> <span class="fu">str_extract_all</span>(doc_origin, <span class="st">"[[:alnum:]_ ]*</span><span class="sc">\\</span><span class="st">.pdf"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Pour visualiser l’impact de la parallélisation :</p>
 <div class="cell">
@@ -684,31 +662,31 @@ Attention
 <h2 class="anchored" data-anchor-id="xml">XML</h2>
 <p>Supposons que nous ayons un fichier “livres.xml” ressemblant à cela :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xml2)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>xml_doc <span class="ot">&lt;-</span> <span class="fu">as_xml_document</span>(</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="st">"&lt;livres&gt;</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;livre&gt;</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;titre&gt;R pour les débutants&lt;/titre&gt;</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;auteur&gt;Jean Martin&lt;/auteur&gt;</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;annee&gt;2020&lt;/annee&gt;</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;/livre&gt;</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;livre&gt;</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;titre&gt;Analyse de données avec R&lt;/titre&gt;</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;auteur&gt;Marie Dupont&lt;/auteur&gt;</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;annee&gt;2021&lt;/annee&gt;</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;/livre&gt;</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/livres&gt;"</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xml2)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>xml_doc <span class="ot">&lt;-</span> <span class="fu">as_xml_document</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="st">"&lt;livres&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;livre&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;titre&gt;R pour les débutants&lt;/titre&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;auteur&gt;Jean Martin&lt;/auteur&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;annee&gt;2020&lt;/annee&gt;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;/livre&gt;</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;livre&gt;</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;titre&gt;Analyse de données avec R&lt;/titre&gt;</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;auteur&gt;Marie Dupont&lt;/auteur&gt;</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;annee&gt;2021&lt;/annee&gt;</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;/livre&gt;</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/livres&gt;"</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Pour lire le fichier .xml, on utilisera</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>xml_doc <span class="ot">&lt;-</span> xml2<span class="sc">::</span><span class="fu">read_xml</span>(<span class="st">"livres.xml"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>xml_doc <span class="ot">&lt;-</span> xml2<span class="sc">::</span><span class="fu">read_xml</span>(<span class="st">"livres.xml"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ensuite, on peut extraire les titres avec</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>titres_xml <span class="ot">&lt;-</span> <span class="fu">xml_find_all</span>(xml_doc, <span class="st">".//livre/titre"</span>)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(titres_xml)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>titres_xml <span class="ot">&lt;-</span> <span class="fu">xml_find_all</span>(xml_doc, <span class="st">".//livre/titre"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(titres_xml)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (2)}
 [1] &lt;titre&gt;R pour les débutants&lt;/titre&gt;
@@ -717,8 +695,8 @@ Attention
 </div>
 <p>Les fonctions <code>xml_find_*()</code> permettent d’utiliser des expression <strong>xpath</strong>, similaire à du <strong>REGEX</strong> mais pour les architectures en arbre et renvoient des objets de classe <code>xml_nodeset</code>. Pour récupérer un vecteur <code>character</code>, on rajoute simplement <code>xml_text()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>titres <span class="ot">&lt;-</span> <span class="fu">xml_text</span>(titres_xml)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(titres)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>titres <span class="ot">&lt;-</span> <span class="fu">xml_text</span>(titres_xml)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(titres)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "R pour les débutants"      "Analyse de données avec R"</code></pre>
 </div>
@@ -727,25 +705,25 @@ Attention
 <section id="json" class="level2">
 <h2 class="anchored" data-anchor-id="json">JSON</h2>
 <p>Pour lire du JSON, on utilisera simplement <code>fromJSON()</code>, pour convertir une chaîne de texte, ou <code>read_json()</code> pour lire un fichier .json. Les deux fonctions renvoient directement un <code>data.frame</code></p>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>livres_json <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="st">[</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="st">  {</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="st">    "titre": "R pour les débutants",</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="st">    "auteur": "Jean Dupont",</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="st">    "annee": 2020</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="st">  },</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="st">  {</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="st">    "titre": "Analyse de données avec R",</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="st">    "auteur": "Marie Curie",</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="st">    "annee": 2021</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="st">]</span></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="st">'</span>)</span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(livres_json)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>livres_json <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="st">'</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="st">[</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="st">  {</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="st">    "titre": "R pour les débutants",</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="st">    "auteur": "Jean Dupont",</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="st">    "annee": 2020</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="st">  },</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="st">  {</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="st">    "titre": "Analyse de données avec R",</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="st">    "auteur": "Marie Curie",</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="st">    "annee": 2021</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="st">]</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="st">'</span>)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(livres_json)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre><code>                  titre      auteur annee</code></pre>
 <p>1 R pour les débutants Jean Dupont 2020 2 Analyse de données avec R Marie Curie 2021</p>
 <p>On citera aussi la possibilité de convertir un objet R en JSON avec la fonction <code>toJSON()</code>.</p>
