@@ -2,8 +2,12 @@
   {
     "listing": "/pages/decouvrir_r.html",
     "items": [
-      "/pages/r_decouvrir/decouvrir_connections.html"
+      "/pages/decouvrir_r/decouvrir_connections.html"
     ]
+  },
+  {
+    "listing": "/pages/tidytuesday.html",
+    "items": []
   },
   {
     "listing": "/pages/projets.html",
