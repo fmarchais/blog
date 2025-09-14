@@ -20,7 +20,8 @@
     "pages\\tidytuesday.qmd": [
       "tidytuesday",
       "pages/tidytuesday/*.qmd",
-      "tidytuesday/*.qmd"
+      "tidytuesday/*.qmd",
+      "pages/tidytuesday/**/*.qmd"
     ],
     "pages\\r_usages\\usages_index.qmd": [
       "pages/r_usages",

@@ -73,5 +73,17 @@
   },
   "pages/decouvrir_r.qmd": {
     "decouvrir_r.html": "67673935"
+  },
+  "pages/decouvrir_r/decouvrir_bigdata.qmd": {
+    "decouvrir_bigdata.html": "bfd655fe"
+  },
+  "pages/decouvrir_r/decouvrir_connections.qmd": {
+    "decouvrir_connections.html": "533331a1"
+  },
+  "pages/decouvrir_r/decouvrir_nettoyage.qmd": {
+    "decouvrir_nettoyage.html": "3cce8c34"
+  },
+  "pages/tidytuesday/20250914/tidytuesday_20250914.qmd": {
+    "tidytuesday_20250914.html": "ca75c9bf"
   }
 }

@@ -1,0 +1,65 @@
+---
+title: "R pour le Big Data"
+format: html
+description: "Traiter des données plus volumineuses que la mémoire vive avec R"
+author: "Félix Marchais"
+date: "2025-07-30"
+categories:
+  - R
+  - Big Data
+execute: 
+  eval: false 
+  echo: true
+draft: true
+---
+
+# Big Data  
+
+## Apache Arrow et DuckDB  
+
+Grâce à Apache Arrow et Duckdb, il est possible de traiter de grands volumes de données facilement avec R. Ci-dessous, un exemple de requête sur un jeu de données de plus d'1 milliard de lignes. \n
+
+Les données sont celles du dataset TLC Trip Record Data (https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), et contiennent les informations de trajets de taxis new-yorkais. \n
+
+Dans cet exemple, les données de chaque mois entre janvier 2013 et avril 2025 ont été récupérées et regroupées dans un dossier appelé taxi_dataset. Ce dossier contient 147 fichiers au format .Parquet et pèse 14Go pour plus d'un milliard de lignes (le format .Parquet est un format compressé, le même jeu de données en .csv pèse environ 100Go). \n
+
+```{r echo = TRUE, eval = FALSE, comment = FALSE, message = FALSE}
+
+library(tidyverse) # Tidyverse sert à la manipulation de données
+library(duckdb) # duckdb pour créer une base duckdb virtuelle
+library(arrow) # Arrow pour lire des fichiers .Parquet
+library(duckplyr) # Duckplyr pour utiliser dplyr avec le moteur duckdb
+library(DBI) # DBI pour créer une connection à la base duckdb virtuelle
+library(microbenchmark) # Pour vérifier les temps d'exécution
+
+# Créer une base duckdb virtuelle
+conn_ddb <- dbConnect(duckdb(), dbdir = ":memory:")
+
+yellow_taxi <- conn_ddb %>% 
+  tbl("read_parquet('D:\\taxi_dataset\\*.parquet')" )
+# Il suffit d'indiquer le chemin vers le dossier contenant les 157 fichiers pour que {arrow} reconstitue le tout et le considère comme un seul dataset (il faut évidemment que les jeux de données suivent le même schéma)
+# Ici, yellow_taxi ne contient pas directement les données, mais une connexion au dataset.
+# on peut désormais requêter yellow_taxi comme un dataframe classique avec la grammaire de {dplyr}, sans avoir chargé les données dans la mémoire vive de R
+
+yellow %>% count()
+# 1.101.292.583 => 1 milliard de lignes
+
+# Utiliser microbenchmark() pour calculer le temps d'éxécution
+microbenchmark(
+  res = x <- yellow %>% 
+    # filtrer les lignes
+    filter(trip_distance >=2) %>%  
+    # Créer une colonne "year" qui contient l'année du voyage
+    mutate(year = year(tpep_pickup_datetime)) %>% 
+    # Aggréger tip_amount pour obtenir la moyenne du pourboire par nombre de passagers
+    summarize(mean_tip_amount = mean(tip_amount), .by = year) %>%
+    collect(), # Ajouter collect() pour récupérer les données
+  times = 1
+)
+# 14.2 secondes
+```
+
+
+## Spark et Hadoop  
+
+On peut aussi se connecter à un cluster Spark, et envoyer ses requêtes depuis R avec la syntaxe de {dplyr} en utilisant {sparklyr}.

@@ -165,13 +165,55 @@
     "href": "pages/decouvrir_r.html",
     "title": "Découvrir R",
     "section": "",
-    "text": "R est un langage de programmation qui semble particulièrement méconnu. On lit régulièrement que c’est un langage “dédié aux statistiques”, qui serait limité par rapport à d’autres langages (au hasard, Python). \nDans cette section, vous trouverez des exemples des différents usages de R et pourquoi il est selon moi un langage parfait pour travailler avec des données.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n\n\n\n\nRecueil de données\n\n\n\nR\n\n\nBases de données\n\n\n\nSe connecter à tout type de données\n\n\n\nFélix Marchais\n\n\nJul 29, 2025\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "R est un langage de programmation qui semble particulièrement méconnu. On lit régulièrement que c’est un langage “dédié aux statistiques”, qui serait limité par rapport à d’autres langages (au hasard, Python). \nDans cette section, vous trouverez des exemples des différents usages de R et pourquoi il est selon moi un langage parfait pour travailler avec des données.\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "pages/projets.html",
     "href": "pages/projets.html",
     "title": "Projets",
     "section": "",
-    "text": "Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n\n\n\n\n\n\n\n\n\n\n\nCette section est encore en travaux !\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n\n\n\n\n\n\n\n\n\n\n\nCette section est encore en travaux !\n\n\n\nDes projets seront bientôt publiés ici\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "pages/decouvrir_r/decouvrir_connections.html",
+    "href": "pages/decouvrir_r/decouvrir_connections.html",
+    "title": "Recueil de données",
+    "section": "",
+    "text": "R est un langage qui permet d’intéragir avec à peu près n’importe quel format de données :\nMais pas seulement ! R peut également travailler avec des images (OCRiser un PDF pour récupérer son contenu, ou en générer un), des fichiers DICOM, et bien plus encore."
+  },
+  {
+    "objectID": "pages/decouvrir_r/decouvrir_connections.html#google-cloud-platform",
+    "href": "pages/decouvrir_r/decouvrir_connections.html#google-cloud-platform",
+    "title": "Recueil de données",
+    "section": "Google Cloud Platform",
+    "text": "Google Cloud Platform\nVoici une liste non exhaustive des librairies permettant de travailler avec Google Cloud Platform, disponible sur la vignette de {googleAuthR}\n\ngoogleComputeEngineR - Google Compute Engine VMs API\nsearchConsoleR - Search Console API\nbigQueryR - BigQuery API. Part of the cloudyr project.\ngoogleAnalyticsR - Google Analytics API\ngoogleTagManagerR - Google Tag Manager API by IronistM\ngoogleID - Simple user info from G+ API for Shiny app authentication flows.\ngoogleCloudStorageR - Google Cloud Storage API\nRoogleVision - R Package for Image Recogntion, Object Detection, and OCR using the Google’s Cloud Vision API\ngoogleLanguageR - Access Speech to Text, Entity analysis and translation APIs from R\ngoogleCloudRunner - Continuous Development and Integration with Cloud Run, Cloud Scheduler and Cloud Build"
+  },
+  {
+    "objectID": "pages/decouvrir_r/decouvrir_connections.html#aws",
+    "href": "pages/decouvrir_r/decouvrir_connections.html#aws",
+    "title": "Recueil de données",
+    "section": "AWS",
+    "text": "AWS\nLa documentation officielle de Amazon Web Service dispose d’un tutoriel pour accéder aux données du service depuis R."
+  },
+  {
+    "objectID": "pages/decouvrir_r/decouvrir_connections.html#xml",
+    "href": "pages/decouvrir_r/decouvrir_connections.html#xml",
+    "title": "Recueil de données",
+    "section": "XML",
+    "text": "XML\nSupposons que nous ayons un fichier “livres.xml” ressemblant à cela :\n\nlibrary(xml2)\n\nxml_doc &lt;- as_xml_document(\n\"&lt;livres&gt;\n  &lt;livre&gt;\n    &lt;titre&gt;R pour les débutants&lt;/titre&gt;\n    &lt;auteur&gt;Jean Martin&lt;/auteur&gt;\n    &lt;annee&gt;2020&lt;/annee&gt;\n  &lt;/livre&gt;\n  &lt;livre&gt;\n    &lt;titre&gt;Analyse de données avec R&lt;/titre&gt;\n    &lt;auteur&gt;Marie Dupont&lt;/auteur&gt;\n    &lt;annee&gt;2021&lt;/annee&gt;\n  &lt;/livre&gt;\n&lt;/livres&gt;\"\n)\n\nPour lire le fichier .xml, on utilisera\n\nxml_doc &lt;- xml2::read_xml(\"livres.xml\")\n\nEnsuite, on peut extraire les titres avec\n\ntitres_xml &lt;- xml_find_all(xml_doc, \".//livre/titre\")\nprint(titres_xml)\n\n{xml_nodeset (2)}\n[1] &lt;titre&gt;R pour les débutants&lt;/titre&gt;\n[2] &lt;titre&gt;Analyse de données avec R&lt;/titre&gt;\n\n\nLes fonctions xml_find_*() permettent d’utiliser des expression xpath, similaire à du REGEX mais pour les architectures en arbre et renvoient des objets de classe xml_nodeset. Pour récupérer un vecteur character, on rajoute simplement xml_text()\n\ntitres &lt;- xml_text(titres_xml)\nprint(titres)\n\n[1] \"R pour les débutants\"      \"Analyse de données avec R\""
+  },
+  {
+    "objectID": "pages/decouvrir_r/decouvrir_connections.html#json",
+    "href": "pages/decouvrir_r/decouvrir_connections.html#json",
+    "title": "Recueil de données",
+    "section": "JSON",
+    "text": "JSON\nPour lire du JSON, on utilisera simplement fromJSON(), pour convertir une chaîne de texte, ou read_json() pour lire un fichier .json. Les deux fonctions renvoient directement un data.frame\nlibrary(jsonlite)\n\nlivres_json &lt;- fromJSON(\n'\n[\n  {\n    \"titre\": \"R pour les débutants\",\n    \"auteur\": \"Jean Dupont\",\n    \"annee\": 2020\n  },\n  {\n    \"titre\": \"Analyse de données avec R\",\n    \"auteur\": \"Marie Curie\",\n    \"annee\": 2021\n  }\n]\n')\n\nprint(livres_json)\n                  titre      auteur annee\n1 R pour les débutants Jean Dupont 2020 2 Analyse de données avec R Marie Curie 2021\nOn citera aussi la possibilité de convertir un objet R en JSON avec la fonction toJSON()."
+  },
+  {
+    "objectID": "pages/tidytuesday/20250914/tidytuesday_20250914.html",
+    "href": "pages/tidytuesday/20250914/tidytuesday_20250914.html",
+    "title": "Tidytuesday - 2025-09-02",
+    "section": "",
+    "text": "Source : australian.museum\n\nlibrary(dplyr)\nlibrary(leaflet)\nlibrary(leaflet.extras)\nlibrary(tidytuesdayR)\n\ntuesdata &lt;- tt_load(\"2025-09-02\")\n\nfrog_id &lt;- tuesdata$frogID_data\n\nArrondir pour regrouper des observations et créer une heatmap\n\ndf &lt;- frog_id %&gt;% \n  select(lat = decimalLatitude, \n         lon = decimalLongitude,\n         name = scientificName) %&gt;%\n  mutate_at(c(\"lat\",\"lon\"), ~ round(., digits = 2)) %&gt;%\n  group_by(lat, lon) %&gt;%\n  count()\n\n\n# Créer le nom des provinces\naus_provinces &lt;- data.frame(\n  name = c(\"New South Wales\", \"Victoria\", \"Queensland\", \"Western Australia\",\n           \"South Australia\", \"Tasmania\", \"Northern Territory\"),\n  latitude = c(-32, -36.5, -25, -28, -30, -42.8821, -20),\n  longitude = c(151.2093, 144.9631, 148, 117, 138.6007, 147.3272, 130.8456)\n)\n\n\nleaflet(df) %&gt;%\n  addTiles() %&gt;%\n  addHeatmap(\n    lng = ~lon, lat = ~lat, intensity = ~n,\n    blur = 1, max = 10, radius = 15\n  )  %&gt;%\n  addLabelOnlyMarkers(\n    lng = ~ aus_provinces$longitude, lat = ~aus_provinces$latitude,\n    label = ~ aus_provinces$name,\n    labelOptions = labelOptions(noHide = TRUE, direction = 'auto', textOnly = TRUE)\n  )"
   }
 ]

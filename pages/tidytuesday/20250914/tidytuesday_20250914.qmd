@@ -1,0 +1,80 @@
+---
+title: "Tidytuesday - 2025-09-02"
+description: "Observations des grenouilles en Australie"
+author: "Félix Marchais"
+date: "2025-09-14"
+format: html
+execute: 
+  eval: true 
+  echo: true
+  message: false
+  warning: false
+---
+
+![](frogs.jpg)
+
+Source : [australian.museum](https://australian.museum/blog/amri-news/do-pobblebonks-sing-to-suit-their-surrounds/)
+
+```{r setup}
+#| eval: FALSE
+
+library(dplyr)
+library(leaflet)
+library(leaflet.extras)
+library(tidytuesdayR)
+
+tuesdata <- tt_load("2025-09-02")
+
+frog_id <- tuesdata$frogID_data
+```
+
+```{r import}
+#| eval: true 
+#| echo: false
+
+library(dplyr)
+library(leaflet)
+library(leaflet.extras)
+library(tidytuesdayR)
+library(readr)
+
+frog_id <- read_csv("frog.csv")
+```
+
+Arrondir pour regrouper des observations et créer une heatmap
+
+```{r cleaning}
+
+df <- frog_id %>% 
+  select(lat = decimalLatitude, 
+         lon = decimalLongitude,
+         name = scientificName) %>%
+  mutate_at(c("lat","lon"), ~ round(., digits = 2)) %>%
+  group_by(lat, lon) %>%
+  count()
+
+```
+
+```{r plot}
+# Créer le nom des provinces
+aus_provinces <- data.frame(
+  name = c("New South Wales", "Victoria", "Queensland", "Western Australia",
+           "South Australia", "Tasmania", "Northern Territory"),
+  latitude = c(-32, -36.5, -25, -28, -30, -42.8821, -20),
+  longitude = c(151.2093, 144.9631, 148, 117, 138.6007, 147.3272, 130.8456)
+)
+
+
+leaflet(df) %>%
+  addTiles() %>%
+  addHeatmap(
+    lng = ~lon, lat = ~lat, intensity = ~n,
+    blur = 1, max = 10, radius = 15
+  )  %>%
+  addLabelOnlyMarkers(
+    lng = ~ aus_provinces$longitude, lat = ~aus_provinces$latitude,
+    label = ~ aus_provinces$name,
+    labelOptions = labelOptions(noHide = TRUE, direction = 'auto', textOnly = TRUE)
+  )
+
+```

@@ -1,0 +1,574 @@
+---
+title: "Recueil de données"
+description: "Se connecter à tout type de données"
+format: html
+author: "Félix Marchais"
+date: "2025-07-29"
+categories:
+  - R
+  - Bases de données
+execute: 
+  eval: false 
+  echo: true
+  message: false
+  warning: false
+---
+
+
+R est un langage qui permet d'intéragir avec à peu près n'importe quel format de données : \n
+
+-   Des fichiers tabulaires (CSV, Excel, Parquet...), en local ou sur un serveur
+
+-   Des bases SQL/NoSQL : MS SQL Server, MySQL, MongoDB, Oracle, DuckDB...
+
+-   Des données hébergées sur un cloud (GCP, AWS, Azure...)
+
+-   Des données récupérées via du webscraping ou une requête API
+
+-   Des données au format JSON ou XML
+
+Mais pas seulement ! R peut également travailler avec des images (OCRiser un PDF pour récupérer son contenu, ou en générer un), des fichiers DICOM, et bien plus encore.
+
+# CSV en local
+
+Commençons avec le plus simple : les fichiers CSV
+
+```{r csv}
+library(readr) # package du Tidyverse
+read_csv("path/to/iris.csv")
+```
+
+
+```{r}
+#| eval: true
+#| echo: false
+head(iris)
+```
+
+
+
+On fait difficilement plus facile. On notera tout de même que `{readr}` offre des arguments et fonctions supplémentaires pour gérer différents problèmes que l'on rencontre souvent avec le CSV : les séparateurs et l'encodage. \n
+
+La fonction `read_csv` lit par défaut des fichiers au "format international" dont le séparateur est une virgule (,) et la décimale un point (.). Cependant, en France (et en Europe), on utilisé généralement la virgule comme séparateur décimal. On a donc inventé le format csv avec séparateur point-virgule (;) et décimale en virgule (,). Pour lire un fichier sous ce format, on peut utiliser la fonction `read_csv2()` de `{readr}`. \n
+
+Pour des formats encore plus exotiques (tsv par exemple), `read_delim()` permet de préciser le délimiteur. \n
+
+On notera aussi que les fonctions `read_*()` fournissent des arguments permettant d'expliciter les valeurs nulles, de retirer les espaces en début/fin de chaîne (ce qui arrive très souvent sur des données saisies à la main dans Excel), de différencier des noms de colonnes en doublons, ou encore de sauter les premières lignes d'un fichier.
+
+```{r csv_2}
+library(readr)
+read_csv2("path/to/file_fr.csv", # lire un fichier au format FR, delim = ;
+          na = c("","NULL","NA"), # les cases contenant "","NULL" et "NA" seront vides
+          trim_ws = TRUE, # trim_whitespace : retirer les espaces en fin de chaîne
+          skip = 1, # sauter la première ligne
+          name_repair = "unique" # différencier les noms en doublons
+)
+```
+
+# CSV à distance
+
+Les fonctions `read.*()` (en base R) et `read_*()` (`{readr}`) permettent toutes de charger des fichiers CSV via une URL.
+
+```{r read_csv_url}
+#| eval: true
+covid_data <- readr::read_csv2("https://www.data.gouv.fr/api/1/datasets/r/fe3e7099-a975-4181-9fb5-2dd1b8f1b552")
+head(covid_data)
+```
+
+```{r read_csv_url_2}
+#| eval: false
+#| echo: false
+
+head(readr::read_csv("../../data/covid_data.csv"))
+```
+
+# Excel
+
+Les fichiers dits "Excel" ont l'extension .xls ou .xlsx, et peuvent contenir différents feuillets, de la mise en forme, des cellules fusionnées, des formules, des commentaires et des graphes. \n
+
+Pour lire ces données, il existe plusieurs librairies : `{readxl}`, `{openxslx}` ou `{openxslx2}`
+
+```{r readxl}
+
+library(readxl)
+read_excel("path/to/file.xslx",
+           sheet = 1, # feuillet, par numéro ou par nom
+           range = "B3:D87", # les cellules à garder (optionnel)
+           na = c("","NULL","NA"), # les cellules à considérer vides
+           .name_repair = "unique" # différencier les noms en doublons
+)
+
+```
+
+# Parquet
+
+Le format .parquet, encore malheureusement peu connu, est un format compressé et orienté en colonnes, orienté vers la performance. Un même jeu de données au format parquet est entre 5 et 10 fois moins volumineux qu'en csv et est optimisé pour être lu rapidement par R ou Python. On citera aussi sa compatibilité avec DuckDB pour former un duo parfait pour [travailler le Big Data avec R](decouvrir_bigdata.qmd). L'un des rares défauts qu'on peut lui trouver est de ne pas être compatible avec Excel, ce qui limite sa diffusion. \n
+
+Si vous ne l'avez pas encore lu, je vous renvoie vers cet excellent article : [Parquet devrait remplacer le format CSV](https://www.icem7.fr/cartographie/parquet-devrait-remplacer-le-format-csv/)
+
+Il existe deux méthodes principales pour lire un fichier parquet en R : `{arrow}`, la librairie de [Apache Arrow](https://arrow.apache.org/) et `{duckDB}`, la librairie de [DuckDB](https://duckdb.org/).
+
+Les deux méthodes permettent de créer une *connexion* vers le jeu de données, au lieu de les importer dans la mémoire de R, permettant de travailler avec des données pus volumineuses que la RAM. Les deux méthodes permettent d'utiliser `{dplyr}` pour le requêtage, mais `{duckdb}` permet aussi de requêter n'importe quel fichier plat en SQL. \n
+
+On notera également la capacité à lire plusieurs fichiers regroupés dans un dossier (ayant le même schéma), voire même des fichiers partitionnés ([au style Hive](https://arrow.apache.org/docs/r/reference/hive_partition.html)), permettant de ne scanner que les données nécessaires, pour optimiser encore plus la performance de requêtage.
+
+```{r parquet}
+
+# Arrow : 
+library(arrow)
+arrow_df <- read_parquet("path/to/file.parquet")
+
+# Il est possible de lire directement un ensemble de fichiers .parquet ayant le même schéma 
+# et regroupés dans un dossier (données par batch, avec un fichier par mois par exemple)
+arrow_dataset <- open_dataset("path/to/folder")
+# Ici, arrow_dataset est une connexion, de classe `Dataset`
+# Un `Dataset` de {arrow} se requête avec {dplyr}
+# pour récupérer les données dans l'environnement de R : 
+arrow_df <- arrow_dataset |> 
+  filter(...) |>  # la plupart des fonctions de {dplyr} sont compatibles
+  select(...) |>  
+  collect() # pour exécuter la requête et récupérer un tibble/dataframe
+
+
+
+# DuckDB :
+library(duckdb)
+library(DBI) # DataBase Interface
+library(dplyr)
+
+conn_ddb <- DBI::dbConnect(duckdb(), dbdir = ":memory:") # Créer une base duckdb virtuelle
+duck_df <- conn_ddb |> 
+  tbl("path/dataset/**/*.parquet") |> 
+  filter(...)
+# Le ** signifie "tout", et permet de lire tous les fichiers .parquet du dossier
+# Dans un fichier partitionné par exemple
+
+```
+
+
+:::{.callout-tip}
+## Note  
+{arrow} renvoie des objets de type `arrow_table` ou `Dataset`, qui ne sont compatibles qu'avec les fonctions de `{dplyr}`. Si vous souhaitez modifier une colonne avec une fonction de `{purrr}`, `{lubridate}` ou `{stringr}`, il faudra d'abord utiliser `collect()` pour obtenir un `tibble`. \n
+
+A l'inverse, `{duckdb}` renvoie des objets de classe `tbl` (donc des `tibble`). Si l'on ajoute l'incroyable performance de requêtage du moteur duckdb, j'aurais plutôt tendance à privilégier cette méthode
+:::
+
+:::{.callout-important}
+## Info  
+Récemment, `{duckplyr}`, une librairie intégrant `{dplyr}` avec le moteur de `{duckdb}` [a rejoint le `Tidyverse`](https://www.tidyverse.org/blog/2025/06/duckplyr-1-1-0/), signe que Duckdb est perçu comme un outil d'avenir.
+
+:::
+
+
+# Connexions aux bases SQL
+
+Si vous utilisez Rstudio, le moyen le plus simple de se connecter à une source de données est d'utiliser l'onglet *Connections*, généralement situé en haut à droite, avec votre *Environnement*. En cliquant sur *New connection*, une fenêtre apparaît et va automatiquement vous proposer les sources à disposition. \n
+
+![Exemple des connexions existantes sur mon poste](/images/rstudio_connections.png)
+
+Si vous avez déjà configuré un DSN contenant vos identifiants, les informations de connexion devraient déjà être remplies, vous n'avez plus qu'à cliquer sur "OK", et le code s'exécutera dans la console. Vous pourrez alors visualiser vos bases dans l'onglet *Connections*
+
+![](/images/rstudio_connections_dsn.png){width="515"}
+
+Sinon, vous aurez besoin d'entrer les paramètres suivants :
+
+-   *user* = "..." pour le nom d'utilisateur
+
+-   *password* = "..." pour le mot de passe
+
+-   *host* et *port* si besoin
+
+-   *dbname* pour le nom de la base de données
+
+Si vous utilisez uniquement la console, vous pouvez rentrer directement les paramètres dans `dbConnect()`, en arguments de la fonction.\n
+
+Une fois connecté, on peut requêter ses données avec `{dplyr}` ou en SQL, en utilisant `dbGetQuery()`
+
+```{r db_get_query}
+library(DBI)
+library(odbc)
+conn <- DBI::dbConnect(odbc::odbc() ,"server-name", database = "MA_BASE")
+
+# SQL
+ma_table <- DBI::dbGetQuery(conn, 
+                            "SELECT * FROM MA_TABLE
+                            WHERE ...")
+
+
+# DPLYR
+library(dplyr)
+ma_table_2 <- dplyr::tbl(conn, "MA_TABLE") |>  # ici, on créé une connexion à la table
+  dplyr::filter(...) |>  # on créé la requête
+  dplyr::collect() # et on collecte le résultat dans R avec collect()
+```
+
+Pour interagir avec une base SQL pour autre chose qu'une requête (UPDATE, DROP, ...), on peut utiliser la librairie `{dbplyr}`, un back-end de `{dplyr}` pour les bases de données, ou utiliser `DBI::dbExecute()`
+
+# Cloud
+
+R dispose de nombreuses librairies pour récupérer des données hébergées sur un serveur cloud. \n Je n'entrerai pas dans les détails de cette partie, car je n'ai pas encore eu beaucoup l'occasion de pratiquer par moi-même, mais je penserai à la mettre à jour dès que possible. \n
+
+## Google Cloud Platform
+
+Voici une liste non exhaustive des librairies permettant de travailler avec Google Cloud Platform, disponible sur la vignette de [`{googleAuthR}`](https://code.markedmondson.me/googleAuthR/)
+
+-   [googleComputeEngineR](https://cloudyr.github.io/googleComputeEngineR/) - Google Compute Engine VMs API
+
+-   [searchConsoleR](https://code.markedmondson.me/searchConsoleR/) - Search Console API
+
+-   [bigQueryR](https://code.markedmondson.me/bigQueryR/) - BigQuery API. Part of the cloudyr project.
+
+-   [googleAnalyticsR](https://code.markedmondson.me/googleAnalyticsR/) - Google Analytics API
+
+-   [googleTagManagerR](https://github.com/IronistM/googleTagManageR) - Google Tag Manager API by IronistM
+
+-   [googleID](https://github.com/MarkEdmondson1234/googleID) - Simple user info from G+ API for Shiny app authentication flows.
+
+-   [googleCloudStorageR](https://code.markedmondson.me/googleCloudStorageR/) - Google Cloud Storage API
+
+-   [RoogleVision](https://github.com/cloudyr/googleCloudVisionR) - R Package for Image Recogntion, Object Detection, and OCR using the Google’s Cloud Vision API
+
+-   [googleLanguageR](https://github.com/ropensci/googleLanguageR) - Access Speech to Text, Entity analysis and translation APIs from R
+
+-   [googleCloudRunner](https://code.markedmondson.me/googleCloudRunner/) - Continuous Development and Integration with Cloud Run, Cloud Scheduler and Cloud Build
+
+## AWS
+
+La documentation officielle de Amazon Web Service dispose [d'un tutoriel](https://aws.amazon.com/fr/blogs/opensource/getting-started-with-r-on-amazon-web-services/) pour accéder aux données du service depuis R.
+
+# API REST
+
+Le plus simple selon moi pour requêter une API REST avec R est d'utiliser l'excellent `{httr2}` de Hadley Wickham (que vous connaissez déjà certainement si vous utilisez le Tidyverse). La documentation du package est disponible [ici](https://httr2.r-lib.org/)
+
+La première chose à faire est évidemment de lire la documentation de l'API que l'on souhaite requêter. Pour vous entraîner, vous pouvez utiliser [une des API disponibles sur data.gouv.fr](https://www.data.gouv.fr/dataservices). Pour cet exemple, j'utiliserai [l'API de Hub'eau pour la qualité de l'eau potable en France](https://hubeau.eaufrance.fr/page/api-qualite-eau-potable#console). \n
+
+Une fois rendus sur le site, la documentation nous indique que la "Base URL" est hubeau.eaufrance.fr/api, puis nous indique les extensions à ajouter selon ce que l'on souhaite requêter (liste des communes ou résultats), puis les parmètres de filtrage
+
+On utilisera également la librairie `{jsonlite}` pour convertir les données récupérées au format JSON en un data.frame
+
+::: callout-tip
+## Astuce
+Le package `{httr2}` nécessite l'installation du package `{curl}`, qui peut poser problème si vous êtes sur un réseau professionnel protégé par un pare-feu. Dans ce cas, contactez votre DSI, ou ... faites un partage de connexion depuis votre téléphone 🤫
+:::
+
+```{r hubeau}
+#| eval: true
+
+library(httr2)
+library(jsonlite)
+
+base_url <- "http://hubeau.eaufrance.fr/api"
+
+req <- request(base_url) |>  # pointer vers l'url de base
+  req_url_path_append("/v1/qualite_eau_potable/resultats_dis") |> #extension
+  req_url_query(code_departement = "85") |> # paramètres de la requête
+  req_url_query(size = "50") |> 
+  req_url_query(    
+    fields = c('libelle_parametre','libelle_parametre_maj',
+               'resultat_numerique', 'libelle_unite',
+               'limite_qualite_parametre','reference_qualite_parametre',
+               'nom_commune','date_prelevement',
+               'conclusion_conformite_prelevement'), 
+    .multi = "comma")
+
+resp <- req_perform(req)
+
+df_data <- resp |>
+  resp_body_string() |>
+  fromJSON()
+
+df_data <- df_data$data
+
+head(df_data)
+
+```
+
+```{r hubeau_2}
+#| eval: false
+#| echo: false
+
+head(readr::read_csv("../../data/hubeau_data.csv"))
+```
+
+
+::: callout-tip
+## Cacher les clés API
+Dans le cas où vous utilisez une API privée nécessitant une clé, il est judicieux d'éviter de stocker vos identifiants dans le script R. Pour cela, vous pouvez utiliser un fichier [.Rprofile](https://docs.posit.co/ide/user/ide/guide/environments/r/managing-r.html), stocké sur votre machine locale, et qui se lance quand vous démarrez votre IDE.
+Ainsi, vos identifiants sont présents dans votre environnement sans avoir à les déclarer dans le script. Si vous hébergez votre code sur GitHub, vous pouvez inclure le .Rprofile dans le .gitignore pour éviter de les inclure dans le repo, et utiliser la fonction [*Github Secrets*](https://docs.github.com/fr/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets) pour remplacer le .Rprofile.
+:::
+
+
+
+# Webscraping  
+
+Si vous souhaitez récupérer des données sur un site web qui ne propose pas d'API, l'une des solutions est le [*web scraping*](https://fr.wikipedia.org/wiki/Web_scraping). 
+
+
+::: callout-warning
+## Attention
+Tous les sites n'autorisent pas le web scraping, et les données doivent être *nativement* publiques, *tombées* dans le domaine publique ou sous licence libre *si votre usage n'est pas commercial*. Renseignez-vous avant de scraper une page !
+:::
+
+Le principal package de web scraping en R est [`{rvest}`](https://rvest.tidyverse.org/index.html) (toujours développé par Hadley Wickham). 
+Pour cet exemple, j'utiliserai aussi [`{polite}`](https://dmi3kno.github.io/polite/index.html), un package qui permet de suivre 3 règles d'éthique lors d'une session de scraping : *"Demander la permission, prendre doucement et ne jamais demander deux fois"*.
+Ces règles permettent d'éviter de causer des problèmes en récoltant des données non autorisées ou en surchargeant le serveur de requêtes, et nous éviterons d'être bannis par les administrateurs du site scrapé.
+
+Dans cet exemple, nous allons récupérer une table contenant la liste des communes de Vendée, sur [cette page wikipédia](https://fr.wikipedia.org/wiki/Liste_des_communes_de_la_Vend%C3%A9e)
+
+```{r webscraping}
+
+library(rvest)
+library(polite)
+
+url <- "https://fr.wikipedia.org/wiki/Liste_des_communes_de_la_Vend%C3%A9e"
+session <- polite::bow(url) 
+# Bow permet d'interroger le robots.txt et nous informe du résultat
+# il enregistre notamment le délai minimum de requêtage autorisé par le site
+
+session
+
+page <- polite::scrape(session)
+# scrape() récupère le contenu autorisé
+
+cities_table <- page |> 
+  rvest::html_element("table.wikitable") |> 
+  rvest::html_table()
+
+# html_element récupère le premier élément de la classe "table.wikitable"
+# pour tous les récupérer sous forme de liste : html_elements()
+# html_table() permet de convertir des données tabulaires en un dataframe
+
+head(cities_table)
+
+```
+
+```{r webscraping_2}
+#| eval: true
+#| echo: false
+head(readr::read_csv("../../data/cities_table.csv"))
+```
+
+# OCR et PDF  
+
+Dans le domaine de la santé, les compte-rendus médicaux contiennent énormément de données intéressantes, mais sont malheureusement difficilement exploitables car dans un format non-structuré : un papier scanné et stocké en PDF.
+
+L'OCR (Optical Character Recognition) est un système de *machine learning* permettant d'extraire le texte présent sur une image, parfait donc pour exploiter un grand nombre de comtpe-rendus scannés sans avoir à le faire manuellement.
+
+Dans cet exemple, nous utiliserons le modèle **Tesseract**, développé par Google et aujourd'hui Open Source. Nous utiliserons également la librairie `doParallel` pour paralléliser le traitement des images et augmenter la vitesse d'OCRisation
+
+```{r ocr}
+library(tidyverse)
+library(tesseract)
+library(doParallel)
+library(pdftools)
+
+# Récupérer le chemin de tous les fichiers PDF présents dans un dossier
+list_pdf <- list.files(path = "path/to/folder", 
+                       pattern = "\\.pdf$", 
+                       all.files = TRUE, 
+                       full.names = TRUE,
+                       recursive = FALSE
+                       )
+
+ncores <- doParallel::detectCores(logical = FALSE) # compter les coeurs physiques 
+
+# Créer le cluster, en laissant 2 coeurs non utilisés
+cl <- doParallel::makeCluster(ncores-2)   
+# et pour arrêter : stopCluster(cl)
+
+
+# Charger les librariries et les objets dans les clusters
+## clusterEvalQ() : exécute le code dans le cluster
+clusterEvalQ(cl, {
+  library(tidyverse);
+  library(tesseract);
+  library(pdftools)
+  })
+
+## clusterExport() charge l'objet dans le cluster
+clusterExport(cl, c("list_pdf"))
+
+
+# Créer une fonction qui renvoie un dataframe en sortie (1 ligne par page)
+
+myPdfConvert <- function(list_objet) { 
+  list_objet %>% map_df(~ data.frame(doc_origin = .x, #.x = chaque élément de listobjet
+                                     texte = ocr(pdftools::pdf_convert(.x, dpi = 200)) # océrise un pdf converti en png
+                                     ))
+}
+
+
+# Appliquer la fonction myPdfConvert à chaque élément de list_pdf
+res <- parLapply(cl, list_pdf, myPdfConvert)
+# Le résultat est obtenu sous forme de liste (1 élément par cluster) => les recombiner
+res <- do.call("rbind", res)
+
+# Arrêter le cluster
+stopCluster(cl)
+
+
+# Pour récupérer numéro de page et nom du doc à chaque ligne (1 ligne = 1 page)
+resr <- res %>% 
+  group_by(doc_origin) %>% 
+  mutate(doc_page = 1:n(), doc_nom = str_extract_all(doc_origin, "[[:alnum:]_ ]*\\.pdf")) %>%
+  ungroup()
+
+
+```
+
+
+Pour visualiser l'impact de la parallélisation : 
+
+```{r ocr2}
+#| echo: false
+#| eval: true
+
+library(ggplot2)
+
+plot <- data.frame(
+  time_s = c(16,34,49,79,140,28,95,148,340,445),
+  cluster = c(rep("Parallélisé",5), rep("Normal",5)),
+  nombre_pages = c(24,60,108,216,300,24,60,108,216,300)
+  )
+
+ggplot(plot,
+       aes(x = nombre_pages, 
+           y = time_s, 
+           group = cluster, 
+           color = cluster)
+       ) +
+  geom_line() +
+  geom_point() +
+  ylab("Temps en secondes") +
+  scale_x_continuous("Nombre de pages", limits = c(0,300)) +
+  ggtitle("Comparaison du temps d'OCR selon le mode de calcul")
+
+```
+
+
+
+
+
+# JSON et XML  
+
+Les formats **XML** (eXtensible Markup Language) et **JSON** (JavaScript Object Notation) sont largement utilisés pour le stockage et l’échange de données, notamment dans les **API REST**, les **flux RSS**, ou le stockage de données hiérarchiques .
+
+Pour lire les fichiers XML, on utilisera`{xml2}` et pour JSON :`{jsonlite}` (il en existe de nombreuses autres, mais ce sont les plus connues)
+
+## XML  
+
+Supposons que nous ayons un fichier "livres.xml" ressemblant à cela :
+
+```{r, xml_1}
+#| echo: TRUE
+#| eval: TRUE
+library(xml2)
+
+xml_doc <- as_xml_document(
+"<livres>
+  <livre>
+    <titre>R pour les débutants</titre>
+    <auteur>Jean Martin</auteur>
+    <annee>2020</annee>
+  </livre>
+  <livre>
+    <titre>Analyse de données avec R</titre>
+    <auteur>Marie Dupont</auteur>
+    <annee>2021</annee>
+  </livre>
+</livres>"
+)
+
+```
+
+Pour lire le fichier .xml, on utilisera
+
+```{r, xml_2}
+#| echo: TRUE
+#| eval: FALSE
+
+xml_doc <- xml2::read_xml("livres.xml")
+```
+
+Ensuite, on peut extraire les titres avec
+
+```{r xml_3}
+#| echo: TRUE
+#| eval: TRUE
+
+titres_xml <- xml_find_all(xml_doc, ".//livre/titre")
+print(titres_xml)
+```
+
+Les fonctions `xml_find_*()` permettent d'utiliser des expression **xpath**, similaire à du **REGEX** mais pour les architectures en arbre et renvoient des objets de classe `xml_nodeset`. Pour récupérer un vecteur `character`, on rajoute simplement `xml_text()`
+
+```{r xml_4}
+#| echo: TRUE
+#| eval: TRUE
+titres <- xml_text(titres_xml)
+print(titres)
+```
+
+
+## JSON  
+
+Pour lire du JSON, on utilisera simplement `fromJSON()`, pour convertir une chaîne de texte, ou `read_json()` pour lire un fichier .json. Les deux fonctions renvoient directement un `data.frame`
+
+```{r json_1}
+#| echo: TRUE
+#| eval: TRUE
+#| results: "asis"
+library(jsonlite)
+
+livres_json <- fromJSON(
+'
+[
+  {
+    "titre": "R pour les débutants",
+    "auteur": "Jean Dupont",
+    "annee": 2020
+  },
+  {
+    "titre": "Analyse de données avec R",
+    "auteur": "Marie Curie",
+    "annee": 2021
+  }
+]
+')
+
+print(livres_json)
+```
+
+On citera aussi la possibilité de convertir un objet R en JSON avec la fonction `toJSON()`. 
+
+
+
+# DICOM  
+
+Sans rentrer dans les détails ici, le format DICOM (Digital Imaging and Communications in Medicine) est un standard pour l'imagerie médicale. le package `{Espadon}` [développé par le CNRS](https://espadon.cnrs.fr/) permet d'interagir avec ce format
+
+# GPX  
+
+GPX est un format pour les données géospatiales, qui permet par exemple de créer un itinéraire sur une carte. [Cet article](https://www.appsilon.com/post/r-gpx-files) explique très bien comment lire ce standard, souvent stocké au format XML.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

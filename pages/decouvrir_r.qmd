@@ -4,7 +4,7 @@ format: html
 toc: true
 listing: 
   type: grid
-  contents: "r_decouvrir/*.qmd"
+  contents: "decouvrir_r/*.qmd"
   categories: true
   sort-ui: true
 ---

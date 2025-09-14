@@ -22,8 +22,17 @@ jobs:
         with:
           r-version: '4.2.0'
 
-      - name: install libcurl on server
+      - name: Install libpng development libraries for {png}
+        run: sudo apt-get update && sudo apt-get install -y libpng-dev
+
+      - name: install libcurl on server for {curl}
         run: sudo apt-get install -y libcurl4-openssl-dev
+        
+      - name: install libgdal on server for {terra}
+        run: sudo apt-get install -y libgdal-dev
+        
+      - name: install libudunits2-dev dependency 
+        run: sudo apt-get install -y libudunits2-dev
 
       - name: Install R Dependencies
         uses: r-lib/actions/setup-renv@v2
