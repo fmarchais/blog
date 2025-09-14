@@ -2,7 +2,7 @@
 title: "Tidytuesday"
 format: html
 listing:
-  contents: "pages/tidytuesday/**/*.qmd"
+  contents: "tidytuesday/**/*.qmd"
   type: grid
 ---
 

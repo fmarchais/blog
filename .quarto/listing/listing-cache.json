@@ -21,7 +21,9 @@
       "tidytuesday",
       "pages/tidytuesday/*.qmd",
       "tidytuesday/*.qmd",
-      "pages/tidytuesday/**/*.qmd"
+      "pages/tidytuesday/**/*.qmd",
+      "pages/tidytuesday/*/*.qmd",
+      "tidytuesday/**/*.qmd"
     ],
     "pages\\r_usages\\usages_index.qmd": [
       "pages/r_usages",
@@ -43,7 +45,8 @@
       "r_decouvrir/*.qmd"
     ],
     "pages\\decouvrir_r.qmd": [
-      "r_decouvrir/*.qmd"
+      "r_decouvrir/*.qmd",
+      "decouvrir_r/*.qmd"
     ]
   }
 }

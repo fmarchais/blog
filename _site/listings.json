@@ -5,7 +5,9 @@
   },
   {
     "listing": "/pages/tidytuesday.html",
-    "items": []
+    "items": [
+      "/pages/tidytuesday/20250914/tidytuesday_20250914.html"
+    ]
   },
   {
     "listing": "/pages/liste_usages.html",
@@ -21,7 +23,9 @@
   },
   {
     "listing": "/pages/decouvrir_r.html",
-    "items": []
+    "items": [
+      "/pages/decouvrir_r/decouvrir_connections.html"
+    ]
   },
   {
     "listing": "/pages/projets.html",
