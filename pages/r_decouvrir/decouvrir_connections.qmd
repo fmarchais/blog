@@ -70,19 +70,17 @@ read_csv2("path/to/file_fr.csv", # lire un fichier au format FR, delim = ;
 Les fonctions `read.*()` (en base R) et `read_*()` (`{readr}`) permettent toutes de charger des fichiers CSV via une URL.
 
 ```{r read_csv_url}
-
+#| eval: true
 covid_data <- readr::read_csv2("https://www.data.gouv.fr/api/1/datasets/r/fe3e7099-a975-4181-9fb5-2dd1b8f1b552")
 head(covid_data)
 ```
 
 ```{r read_csv_url_2}
-#| eval: true
+#| eval: false
 #| echo: false
 
 head(readr::read_csv("../../data/covid_data.csv"))
 ```
-
-
 
 # Excel
 
@@ -254,6 +252,8 @@ Le package `{httr2}` nécessite l'installation du package `{curl}`, qui peut pos
 :::
 
 ```{r hubeau}
+#| eval: true
+
 library(httr2)
 library(jsonlite)
 
@@ -284,7 +284,7 @@ head(df_data)
 ```
 
 ```{r hubeau_2}
-#| eval: true
+#| eval: false
 #| echo: false
 
 head(readr::read_csv("../../data/hubeau_data.csv"))
