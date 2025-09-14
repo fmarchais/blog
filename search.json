@@ -1,38 +1,24 @@
 [
   {
-    "objectID": "pages/profil.html",
-    "href": "pages/profil.html",
-    "title": "Profil",
+    "objectID": "pages/decouvrir_r.html",
+    "href": "pages/decouvrir_r.html",
+    "title": "Découvrir R",
     "section": "",
-    "text": "Issu d’un parcours en Biologie et Recherche Clinique, je me suis rapidement dirigé vers le traitement de données de santé à la fin de l’année de Master 1, en me formant en autodidacte au langage R.\nMon parcours professionnel m’a amené à travailler dans le milieu du Dispositif Médical (DM) en orthopédie, puis dans les études de vie réelle (RWD) en cancérologie.\nMes missions actuelles portent principalement sur :\n\nLe nettoyage et la qualification d’études RWD.\nLa qualification et le requêtage d’Entrepôts de Données de Santé (bases SQL)\nLe développement d’applications Shiny ou de rapports avec Markdown/Quarto (Suivi de projets, comparaison de bases)\nData Engineering (Automatisation de process, exécution planifiée, requêtage API)\nEnseignement :\n\nCours d’introduction à R et à la gestion de données, auprès d’étudiants de Licence 2 et Master 2 de biologie\nFormations à R au sein de mon service"
+    "text": "R est un langage de programmation qui semble particulièrement méconnu. On lit régulièrement que c’est un langage “dédié aux statistiques”, qui serait limité par rapport à d’autres langages (au hasard, Python). \nDans cette section, vous trouverez des exemples des différents usages de R et pourquoi il est selon moi un langage parfait pour travailler avec des données.\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n\n\n\n\n\n\n\n\nRecueil de données\n\n\n\nR\n\nBases de données\n\n\n\nSe connecter à tout type de données\n\n\n\nFélix Marchais\n\n\nJul 29, 2025\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "pages/profil.html#analyse-visualisation",
-    "href": "pages/profil.html#analyse-visualisation",
-    "title": "Profil",
-    "section": "Analyse & Visualisation",
-    "text": "Analyse & Visualisation\nggplot2 et dérivés,\ngwalkr\nstats"
-  },
-  {
-    "objectID": "pages/profil.html#reporting",
-    "href": "pages/profil.html#reporting",
-    "title": "Profil",
-    "section": "Reporting",
-    "text": "Reporting\n\nRmarkdown\n\n\nQuarto\n\n\nR Shiny"
-  },
-  {
-    "objectID": "pages/profil.html#data-engineering",
-    "href": "pages/profil.html#data-engineering",
-    "title": "Profil",
-    "section": "Data Engineering",
-    "text": "Data Engineering\n\nOrchestrateur\n{maestro} est un package R permettant d’orchestrer l’exécution programmée de différents scripts R, permettant ainsi de créer de gérer des pipelines de données.\n\n\nBases de données (SQL)\n\n\nAPI\nhittr2\n\n\nCI/CD\nGitHub, testthat, usethis\nDocker (dockerfiler, rocker, shiny2docker, dockitect …\n\n\nCloud\nun exemple d’interaction avec différents services d’un cloud (stockage, faire tourner R sur un serveur…)"
-  },
-  {
-    "objectID": "pages/tidytuesday.html",
-    "href": "pages/tidytuesday.html",
-    "title": "Tidytuesday",
+    "objectID": "pages/projets.html",
+    "href": "pages/projets.html",
+    "title": "Projets",
     "section": "",
-    "text": "Le Tidytuesday, c’est un évènement qui a lieu chaque semaine, où la communauté R se challenge pour créer des visualisations à partir d’un nouveau jeu de données, publié tous les mardis. \n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Bienvenue",
+    "section": "",
+    "text": "Développeur R et Data Manager de données cliniques \nDiplômé d’un Master 2 de Biologie - Physiopathologie & Recherche Clinique \nJe me suis spécialisé dans la programmation en R pour des missions de traitement de données de santé, visualisation et automatisation de process. \nDans ce portfolio, vous pourrez retrouver plus de détails sur mon profil, découvrir les différents usages de R et mes différents projets"
   },
   {
     "objectID": "pages/r_decouvrir/decouvrir_connections.html",
@@ -70,24 +56,31 @@
     "text": "JSON\nPour lire du JSON, on utilisera simplement fromJSON(), pour convertir une chaîne de texte, ou read_json() pour lire un fichier .json. Les deux fonctions renvoient directement un data.frame\nlibrary(jsonlite)\n\nlivres_json &lt;- fromJSON(\n'\n[\n  {\n    \"titre\": \"R pour les débutants\",\n    \"auteur\": \"Jean Dupont\",\n    \"annee\": 2020\n  },\n  {\n    \"titre\": \"Analyse de données avec R\",\n    \"auteur\": \"Marie Curie\",\n    \"annee\": 2021\n  }\n]\n')\n\nprint(livres_json)\n                  titre      auteur annee\n1 R pour les débutants Jean Dupont 2020 2 Analyse de données avec R Marie Curie 2021\nOn citera aussi la possibilité de convertir un objet R en JSON avec la fonction toJSON()."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Bienvenue",
+    "objectID": "pages/profil.html",
+    "href": "pages/profil.html",
+    "title": "Profil",
     "section": "",
-    "text": "Développeur R et Data Manager de données cliniques \nDiplômé d’un Master 2 de Biologie - Physiopathologie & Recherche Clinique \nJe me suis spécialisé dans la programmation en R pour des missions de traitement de données de santé, visualisation et automatisation de process. \nDans ce portfolio, vous pourrez retrouver plus de détails sur mon profil, découvrir les différents usages de R et mes différents projets"
+    "text": "Issu d’un parcours en Biologie et Recherche Clinique, je me suis rapidement dirigé vers le traitement de données de santé à la fin de l’année de Master 1, en me formant en autodidacte au langage R.\nMon parcours professionnel m’a amené à travailler dans le milieu du Dispositif Médical (DM) en orthopédie, puis dans les études de vie réelle (RWD) en cancérologie.\nMes missions actuelles portent principalement sur :\n\nLe nettoyage et la qualification d’études RWD.\nLa qualification et le requêtage d’Entrepôts de Données de Santé (bases SQL)\nLe développement d’applications Shiny ou de rapports avec Markdown/Quarto (Suivi de projets, comparaison de bases)\nData Engineering (Automatisation de process, exécution planifiée, requêtage API)\nEnseignement :\n\nCours d’introduction à R et à la gestion de données, auprès d’étudiants de Licence 2 et Master 2 de biologie\nFormations à R au sein de mon service"
   },
   {
-    "objectID": "pages/liste_projets.html",
-    "href": "pages/liste_projets.html",
-    "title": "Projets",
-    "section": "",
-    "text": "Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n\n\n\n\n\n\n\n\nNo matching items"
+    "objectID": "pages/profil.html#analyse-visualisation",
+    "href": "pages/profil.html#analyse-visualisation",
+    "title": "Profil",
+    "section": "Analyse & Visualisation",
+    "text": "Analyse & Visualisation\nggplot2 et dérivés,\ngwalkr\nstats"
   },
   {
-    "objectID": "pages/liste_decouvrir.html",
-    "href": "pages/liste_decouvrir.html",
-    "title": "Découvrir R",
-    "section": "",
-    "text": "R est un langage de programmation qui semble particulièrement méconnu. On lit régulièrement que c’est un langage “dédié aux statistiques”, qui serait limité par rapport à d’autres langages (au hasard, Python). \nDans cette section, vous trouverez des exemples des différents usages de R et pourquoi il est selon moi un langage parfait pour travailler avec des données.\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n\n\n\n\n\n\n\n\nRecueil de données\n\n\n\nR\n\nBases de données\n\n\n\nSe connecter à tout type de données\n\n\n\nFélix Marchais\n\n\nJul 29, 2025\n\n\n\n\n\n\nNo matching items"
+    "objectID": "pages/profil.html#reporting",
+    "href": "pages/profil.html#reporting",
+    "title": "Profil",
+    "section": "Reporting",
+    "text": "Reporting\n\nRmarkdown\n\n\nQuarto\n\n\nR Shiny"
+  },
+  {
+    "objectID": "pages/profil.html#data-engineering",
+    "href": "pages/profil.html#data-engineering",
+    "title": "Profil",
+    "section": "Data Engineering",
+    "text": "Data Engineering\n\nOrchestrateur\n{maestro} est un package R permettant d’orchestrer l’exécution programmée de différents scripts R, permettant ainsi de créer de gérer des pipelines de données.\n\n\nBases de données (SQL)\n\n\nAPI\nhittr2\n\n\nCI/CD\nGitHub, testthat, usethis\nDocker (dockerfiler, rocker, shiny2docker, dockitect …\n\n\nCloud\nun exemple d’interaction avec différents services d’un cloud (stockage, faire tourner R sur un serveur…)"
   }
 ]
