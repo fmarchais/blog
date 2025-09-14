@@ -13,7 +13,7 @@ website:
         text: Découvrir R
       - href: pages/projets.qmd
         text: Projets
-      - href: pages/tidytuesday.qmd
+      - href: "https://fmarchais.github.io/tidytuesday/"
         text: Tidytuesday
     right:
       - icon: github

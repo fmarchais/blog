@@ -6,4 +6,12 @@ listing:
   type: default
 ---
 
-Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n 
+Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n
+
+![](/images/en_construction.jpg){fig-align="center"}
+
+::: callout-caution
+## Cette section est encore en travaux !
+
+Des projets seront bientôt publiés ici
+:::
