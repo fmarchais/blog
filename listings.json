@@ -7,7 +7,9 @@
   },
   {
     "listing": "/pages/tidytuesday.html",
-    "items": []
+    "items": [
+      "/pages/tidytuesday/20250914/tidytuesday_20250914.html"
+    ]
   },
   {
     "listing": "/pages/projets.html",
