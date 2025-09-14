@@ -9,19 +9,27 @@ execute:
   echo: true
   message: false
   warning: false
+editor_options: 
+  chunk_output_type: console
 ---
 
 ![](frogs.jpg)
 
 Source : [australian.museum](https://australian.museum/blog/amri-news/do-pobblebonks-sing-to-suit-their-surrounds/)
 
+Cette semaine, le tidytuesday porte sur des données d'observations de grenouilles en Australie, dont l'article est diponible [ici](https://australian.museum/blog/amri-news/frogid-dataset-6/) \n
+
+Pour cette première participation, je vais simplement créer une heatmap pour visualiser la densité des observations sur la carte de l'Australie. Pour cela, on aura besoin du package `{leaflet}` et `{leaflet.extras}`
+
+Dans un premier temps, on va récupérer les données de la semaine.
+
 ```{r setup}
 #| eval: FALSE
 
+library(tidytuesdayR)
 library(dplyr)
 library(leaflet)
 library(leaflet.extras)
-library(tidytuesdayR)
 
 tuesdata <- tt_load("2025-09-02")
 
@@ -41,7 +49,11 @@ library(readr)
 frog_id <- read_csv("frog.csv")
 ```
 
-Arrondir pour regrouper des observations et créer une heatmap
+L'étape de transformation de données sera assez simple :
+
+-   Nettoyer les noms de colonnes
+
+-   Compter le nombre d'observation pour chaque combinaison de coordonnées
 
 ```{r cleaning}
 
@@ -49,32 +61,42 @@ df <- frog_id %>%
   select(lat = decimalLatitude, 
          lon = decimalLongitude,
          name = scientificName) %>%
-  mutate_at(c("lat","lon"), ~ round(., digits = 2)) %>%
   group_by(lat, lon) %>%
   count()
 
 ```
+
+Pour le plaisir, je rajouterai les provinces du pays sur la carte. \n
+
+Ensuite, il suffit de créer la carte avec \`leaflet()\`.
 
 ```{r plot}
 # Créer le nom des provinces
 aus_provinces <- data.frame(
   name = c("New South Wales", "Victoria", "Queensland", "Western Australia",
            "South Australia", "Tasmania", "Northern Territory"),
-  latitude = c(-32, -36.5, -25, -28, -30, -42.8821, -20),
-  longitude = c(151.2093, 144.9631, 148, 117, 138.6007, 147.3272, 130.8456)
+  latitude = c(-32, -36.5, -25, -26, -30, -42, -20),
+  longitude = c(151, 145, 148, 117, 137, 147, 131)
 )
 
 
 leaflet(df) %>%
   addTiles() %>%
   addHeatmap(
-    lng = ~lon, lat = ~lat, intensity = ~n,
-    blur = 1, max = 10, radius = 15
+    lng = ~ lon,
+    lat = ~ lat,
+    intensity = ~ n,
+    blur = 1,
+    max = 10, 
+    radius = 15
   )  %>%
   addLabelOnlyMarkers(
-    lng = ~ aus_provinces$longitude, lat = ~aus_provinces$latitude,
+    lng = ~ aus_provinces$longitude,
+    lat = ~aus_provinces$latitude,
     label = ~ aus_provinces$name,
     labelOptions = labelOptions(noHide = TRUE, direction = 'auto', textOnly = TRUE)
   )
 
 ```
+
+Cette carte permet de voir facilement que la côte Ouest a une densité d'observation bien plus importante que le reste du pays, principalement autour de Syndey et Melbourne, avec également un grand nombre d'observations autour de Perth à l'Ouest.
