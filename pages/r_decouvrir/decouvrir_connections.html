@@ -291,20 +291,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>covid_data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(<span class="st">"https://www.data.gouv.fr/api/1/datasets/r/fe3e7099-a975-4181-9fb5-2dd1b8f1b552"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(covid_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 9
   fra   strate2 jour       PourAvec tx_indic_7J_DC tx_indic_7J_hosp
-  &lt;chr&gt;   &lt;dbl&gt; &lt;date&gt;        &lt;dbl&gt;          &lt;dbl&gt;            &lt;dbl&gt;
-1 FR          0 2020-03-07        0              0                0
-2 FR          0 2020-03-07        1             NA                0
-3 FR          0 2020-03-07        2             NA                0
-4 FR          0 2020-03-08        0              0                0
-5 FR          0 2020-03-08        1             NA                0
-6 FR          0 2020-03-08        2             NA                0
-# ℹ 3 more variables: tx_indic_7J_SC &lt;dbl&gt;, tx_prev_hosp &lt;dbl&gt;,
-#   tx_prev_SC &lt;dbl&gt;</code></pre>
+  &lt;chr&gt;   &lt;dbl&gt; &lt;date&gt;        &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;           
+1 FR          0 2020-03-07        0 0              0               
+2 FR          0 2020-03-07        1 &lt;NA&gt;           0               
+3 FR          0 2020-03-07        2 &lt;NA&gt;           0               
+4 FR          0 2020-03-08        0 0              0               
+5 FR          0 2020-03-08        1 &lt;NA&gt;           0               
+6 FR          0 2020-03-08        2 &lt;NA&gt;           0               
+# ℹ 3 more variables: tx_indic_7J_SC &lt;chr&gt;, tx_prev_hosp &lt;dbl&gt;,
+#   tx_prev_SC &lt;chr&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -496,21 +494,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>df_data <span class="ot">&lt;-</span> df_data<span class="sc">$</span>data</span>
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 9
-  libelle_parametre       libelle_parametre_maj resultat_numerique libelle_unite
-  &lt;chr&gt;                   &lt;chr&gt;                              &lt;dbl&gt; &lt;chr&gt;        
-1 Cel. de cyanobactéries… CEL. DE CYANOBACTÉRI…              0.041 n(cellules)/…
-2 Cyanobactéries toxinog… CYANOBACTÉRIES TOXIN…              0.732 mm3/L        
-3 Numération des cellule… CELLULES DE PHYTOPLA…              1     n(cellules)/…
-4 Cellules de cyanobacté… CELLULES DE CYANOBAC…              0.041 n(cellules)/…
-5 Microcystine-RR totale  MICROCYSTINE-RR TOTA…              0     µg/L         
-6 Somme des microcystine… SOMME DES MICROCYSTI…              0     µg/L         
-# ℹ 5 more variables: limite_qualite_parametre &lt;chr&gt;,
-#   reference_qualite_parametre &lt;chr&gt;, nom_commune &lt;chr&gt;,
-#   date_prelevement &lt;dttm&gt;, conclusion_conformite_prelevement &lt;chr&gt;</code></pre>
+<pre><code>                                    libelle_parametre
+1                  Cel. de cyanobactéries toxinogènes
+2 Cyanobactéries toxinogènes (exprimées en biovolume)
+3           Numération des cellules de phytoplanctons
+4                          Cellules de cyanobactéries
+5                              Microcystine-RR totale
+6          Somme des microcystines analysées (calcul)
+                       libelle_parametre_maj resultat_numerique  libelle_unite
+1         CEL. DE CYANOBACTÉRIES TOXINOGÈNES              0.041 n(cellules)/mL
+2                 CYANOBACTÉRIES TOXINOGÈNES              0.732          mm3/L
+3                 CELLULES DE PHYTOPLANCTONS              1.000 n(cellules)/mL
+4                 CELLULES DE CYANOBACTÉRIES              0.041 n(cellules)/mL
+5                     MICROCYSTINE-RR TOTALE              0.000           µg/L
+6 SOMME DES MICROCYSTINES ANALYSÉES (CALCUL)              0.000           µg/L
+  limite_qualite_parametre reference_qualite_parametre nom_commune
+1                     &lt;NA&gt;                        &lt;NA&gt;    APREMONT
+2                     &lt;NA&gt;                        &lt;NA&gt;    APREMONT
+3                     &lt;NA&gt;                        &lt;NA&gt;    APREMONT
+4                     &lt;NA&gt;                        &lt;NA&gt;    APREMONT
+5                 &lt;=1 µg/L                        &lt;NA&gt;    APREMONT
+6                 &lt;=1 µg/L                        &lt;NA&gt;    APREMONT
+      date_prelevement
+1 2025-06-30T14:00:00Z
+2 2025-06-30T14:00:00Z
+3 2025-06-30T14:00:00Z
+4 2025-06-30T14:00:00Z
+5 2025-06-30T13:55:00Z
+6 2025-06-30T13:55:00Z
+                                                                        conclusion_conformite_prelevement
+1 Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+2 Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+3 Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+4 Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+5 Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.
+6 Eau d'alimentation conforme aux exigences de qualité en vigueur pour l'ensemble des paramètres mesurés.</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
