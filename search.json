@@ -4,7 +4,7 @@
     "href": "pages/decouvrir_r.html",
     "title": "Découvrir R",
     "section": "",
-    "text": "R est un langage de programmation qui semble particulièrement méconnu. On lit régulièrement que c’est un langage “dédié aux statistiques”, qui serait limité par rapport à d’autres langages (au hasard, Python). \nDans cette section, vous trouverez des exemples des différents usages de R et pourquoi il est selon moi un langage parfait pour travailler avec des données.\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n\n\n\n\n\n\n\n\nRecueil de données\n\n\n\nR\n\nBases de données\n\n\n\nSe connecter à tout type de données\n\n\n\nFélix Marchais\n\n\nJul 29, 2025\n\n\n\n\n\n\nNo matching items"
+    "text": "R est un langage de programmation qui semble particulièrement méconnu. On lit régulièrement que c’est un langage “dédié aux statistiques”, qui serait limité par rapport à d’autres langages (au hasard, Python). \nDans cette section, vous trouverez des exemples des différents usages de R et pourquoi il est selon moi un langage parfait pour travailler avec des données.\n\n\n\n\n\n\nCautionCette section est encore en travaux !\n\n\n\nPlus d’articles seront bientôt publiés ici\n\n\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n\n\n\n\n\n\n\n\nRecueil de données\n\n\n\nR\n\nBases de données\n\n\n\nSe connecter à tout type de données\n\n\n\nFélix Marchais\n\n\nJul 29, 2025\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "pages/profil.html",
@@ -19,6 +19,13 @@
     "title": "Tidytuesday",
     "section": "",
     "text": "Le Tidytuesday, c’est un évènement qui a lieu chaque semaine, où la communauté R se challenge pour créer des visualisations à partir d’un nouveau jeu de données, publié tous les mardis. \n\n\n\n\n\n\n\n\n\n\n\n\nTidytuesday - 2025-09-02\n\n\nObservations des grenouilles en Australie\n\n\n\nFélix Marchais\n\n\nSep 14, 2025\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "pages/projets/Gestionnaire_projets.html",
+    "href": "pages/projets/Gestionnaire_projets.html",
+    "title": "Gestionnaire_projets",
+    "section": "",
+    "text": "Cette application Shiny a été créée comme un tableau de bord permettant à un chef de projet de suivre l’avancée de différentes études. A partir d’un jeu de données fictif chargé dans l’application, il est possible de suivre le nombre et le détail des projets, ainsi que le calendrier de chaque projet et la charge de travail à venir.\nL’application est disponible ici"
   },
   {
     "objectID": "index.html",
@@ -67,7 +74,7 @@
     "href": "pages/projets.html",
     "title": "Projets",
     "section": "",
-    "text": "Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n\n\n\n\n\n\nCautionCette section est encore en travaux !\n\n\n\nDes projets seront bientôt publiés ici\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n\n\n\n\n\n\nCautionCette section est encore en travaux !\n\n\n\nPlus de projets seront bientôt publiés ici\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGestionnaire_projets\n\n\nUn tableau de bord pour les chefs de projets\n\n\n\nFélix Marchais\n\n\nSep 15, 2025\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "pages/tidytuesday/20250914/tidytuesday_20250914.html",

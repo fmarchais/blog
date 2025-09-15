@@ -13,6 +13,8 @@
   },
   {
     "listing": "/pages/projets.html",
-    "items": []
+    "items": [
+      "/pages/projets/Gestionnaire_projets.html"
+    ]
   }
 ]
