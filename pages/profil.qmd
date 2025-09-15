@@ -70,7 +70,7 @@ Les compétences que je souhaite développer dans les mois à venir, au 15 juin 
 
 -   Développer mes compétences CI/CD (Automne 2025)
 
-    -   Être à l'aise avec le déploiement d'applis Shiny et de documents Quarto sur différents outils de publication (GitHub Pages, Posit Connect, Shinyapps.io)
+    -   Être à l'aise avec le déploiement d'applis Shiny et de documents Quarto sur différents outils de publication (GitHub Pages, Posit Connect, Shinyapps.io) ✅
 
     -   Développer des applis Shiny *Production-grade* avec {rhino} et/ou {golem}, en intégrant des tests unitaires, d'intégration et End-to-End
 
@@ -78,46 +78,12 @@ Les compétences que je souhaite développer dans les mois à venir, au 15 juin 
 
 -   Découvrir un client Cloud (GCP/AWS/Azure) (Fin 2025)
 
+-   Me former à Databricks (Fin 2025)
+
 -   M'initier au Machine Learning (mi-2026)
 
     -   Remise à niveau en statistiques
 
     -   Me former à l'utilisation du package {tidymodels}
 
-## Analyse & Visualisation
 
-ggplot2 et dérivés,
-
-gwalkr
-
-stats
-
-## Reporting
-
-### Rmarkdown
-
-### Quarto
-
-### R Shiny
-
-## Data Engineering
-
-### Orchestrateur
-
-{maestro} est un package R permettant d'orchestrer l'exécution programmée de différents scripts R, permettant ainsi de créer de gérer des pipelines de données.
-
-### Bases de données (SQL)
-
-### API
-
-hittr2
-
-### CI/CD
-
-GitHub, testthat, usethis
-
-Docker (dockerfiler, rocker, shiny2docker, dockitect ...
-
-### Cloud
-
-un exemple d'interaction avec différents services d'un cloud (stockage, faire tourner R sur un serveur...)
