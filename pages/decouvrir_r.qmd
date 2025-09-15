@@ -12,3 +12,9 @@ listing:
 R est un langage de programmation qui semble particulièrement méconnu. On lit régulièrement que c'est un langage "dédié aux statistiques", qui serait limité par rapport à d'autres langages (au hasard, Python). \n
 
 Dans cette section, vous trouverez des exemples des différents usages de R et pourquoi il est selon moi un langage parfait pour travailler avec des données.
+
+::: callout-caution
+## Cette section est encore en travaux !
+
+Plus d'articles seront bientôt publiés ici
+:::

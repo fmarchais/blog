@@ -78,9 +78,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -217,11 +217,6 @@ window.Quarto = {
 
 
 <p>Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. </p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="..\images/en_construction.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -239,9 +234,31 @@ Cette section est encore en travaux !
 
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="U2hpbnklMkNHZXN0aW9uJTIwZGUlMjBwcm9qZXRzJTJDRGFzaGJvYXJk" data-listing-date-sort="1757887200000" data-listing-file-modified-sort="1757973336486" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="61">
+<a href="../pages/projets/Gestionnaire_projets.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Gestionnaire_projets
+</h5>
+<div class="card-text listing-description">
+Un tableau de bord pour les chefs de projets
+</div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Félix Marchais
+</div>
+<div class="listing-date">
+Sep 15, 2025
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items
