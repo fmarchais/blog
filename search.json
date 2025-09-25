@@ -1,40 +1,5 @@
 [
   {
-    "objectID": "pages/decouvrir_r.html",
-    "href": "pages/decouvrir_r.html",
-    "title": "Découvrir R",
-    "section": "",
-    "text": "R est un langage de programmation qui semble particulièrement méconnu. On lit régulièrement que c’est un langage “dédié aux statistiques”, qui serait limité par rapport à d’autres langages (au hasard, Python). \nDans cette section, vous trouverez des exemples des différents usages de R et pourquoi il est selon moi un langage parfait pour travailler avec des données.\n\n\n\n\n\n\nCautionCette section est encore en travaux !\n\n\n\nPlus d’articles seront bientôt publiés ici\n\n\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n\n\n\n\n\n\n\n\nRecueil de données\n\n\n\nR\n\nBases de données\n\n\n\nSe connecter à tout type de données\n\n\n\nFélix Marchais\n\n\nJul 29, 2025\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "pages/profil.html",
-    "href": "pages/profil.html",
-    "title": "Profil",
-    "section": "",
-    "text": "A propos de moi\nIssu d’un parcours en Biologie et Recherche Clinique, je me suis rapidement dirigé vers le traitement de données de santé à la fin de l’année de Master 1, en me formant en autodidacte au langage R.\nMon parcours professionnel m’a amené à travailler dans le milieu du Dispositif Médical (DM) en orthopédie, puis dans les études de vie réelle (RWD) en cancérologie.\nMes missions actuelles portent principalement sur :\n\nLe nettoyage et la qualification d’études RWD.\nLa qualification et le requêtage d’Entrepôts de Données de Santé (bases SQL)\nLe développement d’applications Shiny ou de rapports avec Markdown/Quarto (Suivi de projets, comparaison de bases)\nData Engineering (Automatisation de process, exécution planifiée, requêtage API)\nEnseignement :\n\nCours d’introduction à R et à la gestion de données, auprès d’étudiants de Licence 2 et Master 2 de biologie\nFormations à R au sein de mon service\n\n\n\n\nStack technique\n\nProgrammation :\n\nMaîtrise : R, SQL\nNotions : HTML, CSS, Python, Shell\n\nBases de données :\n\nMS SQL, MySQL, Oracle\n\nVisualisation :\n\nR, Qlik Sense, Power BI\n\nCI/CD :\n\nGit (GitHub, GitLab), Docker (en cours)\n\nETL :\n\nTalend\n\ne-CRF/EDC :\n\nREDCap, EasyMedStats\n\nCatalogues :\n\nOpen Metadata\n\n\n\n\nRoadmap\nLes compétences que je souhaite développer dans les mois à venir, au 15 juin 2025 :\n\nFinaliser la maîtrise de Duckdb et Arrow pour le Big Data (Juillet 2025) ✅\nPublier une première version de ce site (Rentrée 2025) ✅\nPublier mes supports de cours dans un site Quarto (Rentrée 2025)\nDévelopper mes compétences CI/CD (Automne 2025)\n\nÊtre à l’aise avec le déploiement d’applis Shiny et de documents Quarto sur différents outils de publication (GitHub Pages, Posit Connect, Shinyapps.io) ✅\nDévelopper des applis Shiny Production-grade avec {rhino} et/ou {golem}, en intégrant des tests unitaires, d’intégration et End-to-End\nApprendre la dockerisation et déployer au moins une appli Shiny dans un docker ✅\n\nDéployer cette application via un workflow dans GitHub Pages (Septembre)\n\n\nDécouvrir un client Cloud (GCP/AWS/Azure) (Fin 2025)\nMe former à Databricks (Fin 2025)\nM’initier au Machine Learning (mi-2026)\n\nRemise à niveau en statistiques\nMe former à l’utilisation du package {tidymodels}"
-  },
-  {
-    "objectID": "pages/tidytuesday.html",
-    "href": "pages/tidytuesday.html",
-    "title": "Tidytuesday",
-    "section": "",
-    "text": "Le Tidytuesday, c’est un évènement qui a lieu chaque semaine, où la communauté R se challenge pour créer des visualisations à partir d’un nouveau jeu de données, publié tous les mardis. \n\n\n\n\n\n\n\n\n\n\n\n\nTidytuesday - 2025-09-02\n\n\nObservations des grenouilles en Australie\n\n\n\nFélix Marchais\n\n\nSep 14, 2025\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "pages/projets/Gestionnaire_projets.html",
-    "href": "pages/projets/Gestionnaire_projets.html",
-    "title": "Gestionnaire_projets",
-    "section": "",
-    "text": "Cette application Shiny a été créée comme un tableau de bord permettant à un chef de projet de suivre l’avancée de différentes études. A partir d’un jeu de données fictif chargé dans l’application, il est possible de suivre le nombre et le détail des projets, ainsi que le calendrier de chaque projet et la charge de travail à venir.\nL’application est disponible ici"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Bienvenue",
-    "section": "",
-    "text": "Développeur R et Data Manager de données cliniques \nDiplômé d’un Master 2 de Biologie - Physiopathologie & Recherche Clinique \nJe me suis spécialisé dans la programmation en R pour des missions de traitement de données de santé, visualisation et automatisation de process. \nDans ce portfolio, vous pourrez retrouver plus de détails sur mon profil, découvrir les différents usages de R et mes différents projets"
-  },
-  {
     "objectID": "pages/decouvrir_r/decouvrir_connections.html",
     "href": "pages/decouvrir_r/decouvrir_connections.html",
     "title": "Recueil de données",
@@ -70,11 +35,39 @@
     "text": "JSON\nPour lire du JSON, on utilisera simplement fromJSON(), pour convertir une chaîne de texte, ou read_json() pour lire un fichier .json. Les deux fonctions renvoient directement un data.frame\nlibrary(jsonlite)\n\nlivres_json &lt;- fromJSON(\n'\n[\n  {\n    \"titre\": \"R pour les débutants\",\n    \"auteur\": \"Jean Dupont\",\n    \"annee\": 2020\n  },\n  {\n    \"titre\": \"Analyse de données avec R\",\n    \"auteur\": \"Marie Curie\",\n    \"annee\": 2021\n  }\n]\n')\n\nprint(livres_json)\n                  titre      auteur annee\n1 R pour les débutants Jean Dupont 2020 2 Analyse de données avec R Marie Curie 2021\nOn citera aussi la possibilité de convertir un objet R en JSON avec la fonction toJSON()."
   },
   {
-    "objectID": "pages/projets.html",
-    "href": "pages/projets.html",
-    "title": "Projets",
+    "objectID": "pages/profil.html",
+    "href": "pages/profil.html",
+    "title": "Profil",
     "section": "",
-    "text": "Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n\n\n\n\n\n\nCautionCette section est encore en travaux !\n\n\n\nPlus de projets seront bientôt publiés ici\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGestionnaire_projets\n\n\nUn tableau de bord pour les chefs de projets\n\n\n\nFélix Marchais\n\n\nSep 15, 2025\n\n\n\n\n\n\nNo matching items"
+    "text": "A propos de moi\nIssu d’un parcours en Biologie et Recherche Clinique, je me suis rapidement dirigé vers le traitement de données de santé à la fin de l’année de Master 1, en me formant en autodidacte au langage R.\nMon parcours professionnel m’a amené à travailler dans le milieu du Dispositif Médical (DM) en orthopédie, puis dans les études de vie réelle (RWD) en cancérologie.\nMes missions actuelles portent principalement sur :\n\nLe nettoyage et la qualification d’études RWD.\nLa qualification et le requêtage d’Entrepôts de Données de Santé (bases SQL)\nLe développement d’applications Shiny ou de rapports avec Markdown/Quarto (Suivi de projets, comparaison de bases)\nData Engineering (Automatisation de process, exécution planifiée, requêtage API)\nEnseignement :\n\nCours d’introduction à R et à la gestion de données, auprès d’étudiants de Licence 2 et Master 2 de biologie\nFormations à R au sein de mon service\n\n\n\n\nStack technique\n\nProgrammation :\n\nMaîtrise : R, SQL\nNotions : HTML, CSS, Python, Shell\n\nBases de données :\n\nMS SQL, MySQL, Oracle\n\nVisualisation :\n\nR, Qlik Sense, Power BI\n\nCI/CD :\n\nGit (GitHub, GitLab), Docker (en cours)\n\nETL :\n\nTalend\n\ne-CRF/EDC :\n\nREDCap, EasyMedStats\n\nCatalogues :\n\nOpen Metadata\n\n\n\n\nRoadmap\nLes compétences que je souhaite développer dans les mois à venir, au 15 juin 2025 :\n\nFinaliser la maîtrise de Duckdb et Arrow pour le Big Data (Juillet 2025) ✅\nPublier une première version de ce site (Rentrée 2025) ✅\nPublier mes supports de cours dans un site Quarto (Rentrée 2025)\nDévelopper mes compétences CI/CD (Automne 2025)\n\nÊtre à l’aise avec le déploiement d’applis Shiny et de documents Quarto sur différents outils de publication (GitHub Pages, Posit Connect, Shinyapps.io) ✅\nDévelopper des applis Shiny Production-grade avec {rhino} et/ou {golem}, en intégrant des tests unitaires, d’intégration et End-to-End\nApprendre la dockerisation et déployer au moins une appli Shiny dans un docker ✅\n\nDéployer cette application via un workflow dans GitHub Pages (Septembre)\n\n\nDécouvrir un client Cloud (GCP/AWS/Azure) (Fin 2025)\nMe former à Databricks (Fin 2025)\nM’initier au Machine Learning (mi-2026)\n\nRemise à niveau en statistiques\nMe former à l’utilisation du package {tidymodels}"
+  },
+  {
+    "objectID": "pages/tidytuesday.html",
+    "href": "pages/tidytuesday.html",
+    "title": "Tidytuesday",
+    "section": "",
+    "text": "Le Tidytuesday, c’est un évènement qui a lieu chaque semaine, où la communauté R se challenge pour créer des visualisations à partir d’un nouveau jeu de données, publié tous les mardis. \n\n\n\n\n\n\n\n\n\n\n\n\nTidytuesday - 2025-09-02\n\n\nObservations des grenouilles en Australie\n\n\n\nFélix Marchais\n\n\nSep 14, 2025\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "pages/projets/Gestionnaire_projets.html",
+    "href": "pages/projets/Gestionnaire_projets.html",
+    "title": "Gestionnaire_projets",
+    "section": "",
+    "text": "Cette application Shiny a été créée comme un tableau de bord permettant à un chef de projet de suivre l’avancée de différentes études. A partir d’un jeu de données fictif chargé dans l’application, il est possible de suivre le nombre et le détail des projets, ainsi que le calendrier de chaque projet et la charge de travail à venir.\nL’application est disponible ici"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Bienvenue",
+    "section": "",
+    "text": "Développeur R et Data Manager de données cliniques \nDiplômé d’un Master 2 de Biologie - Physiopathologie & Recherche Clinique \nJe me suis spécialisé dans la programmation en R pour des missions de traitement de données de santé, visualisation et automatisation de process. \nDans ce portfolio, vous pourrez retrouver plus de détails sur mon profil, découvrir les différents usages de R et mes différents projets"
+  },
+  {
+    "objectID": "pages/decouvrir_r.html",
+    "href": "pages/decouvrir_r.html",
+    "title": "Découvrir R",
+    "section": "",
+    "text": "R est un langage de programmation qui semble particulièrement méconnu. On lit régulièrement que c’est un langage “dédié aux statistiques”, qui serait limité par rapport à d’autres langages (au hasard, Python). \nDans cette section, vous trouverez des exemples des différents usages de R et pourquoi il est selon moi un langage parfait pour travailler avec des données.\n\n\n\n\n\n\nCautionCette section est encore en travaux !\n\n\n\nPlus d’articles seront bientôt publiés ici\n\n\n\n\n\n\n\n\n   \n    \n    \n      Order By\n      Default\n      \n        Title\n      \n      \n        Date - Oldest\n      \n      \n        Date - Newest\n      \n      \n        Author\n      \n    \n  \n\n\n\n\n\n\n\n\nRecueil de données\n\n\n\nR\n\nBases de données\n\n\n\nSe connecter à tout type de données\n\n\n\nFélix Marchais\n\n\nJul 29, 2025\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "pages/tidytuesday/20250914/tidytuesday_20250914.html",
@@ -82,5 +75,12 @@
     "title": "Tidytuesday - 2025-09-02",
     "section": "",
     "text": "Source : australian.museum\nCette semaine, le tidytuesday porte sur des données d’observations de grenouilles en Australie, dont l’article est diponible ici \nPour cette première participation, je vais simplement créer une heatmap pour visualiser la densité des observations sur la carte de l’Australie. Pour cela, on aura besoin du package {leaflet} et {leaflet.extras}\nDans un premier temps, on va récupérer les données de la semaine.\n\nlibrary(tidytuesdayR)\nlibrary(dplyr)\nlibrary(leaflet)\nlibrary(leaflet.extras)\n\ntuesdata &lt;- tt_load(\"2025-09-02\")\n\nfrog_id &lt;- tuesdata$frogID_data\n\nL’étape de transformation de données sera assez simple :\n\nNettoyer les noms de colonnes\nCompter le nombre d’observation pour chaque combinaison de coordonnées\n\n\ndf &lt;- frog_id %&gt;% \n  select(lat = decimalLatitude, \n         lon = decimalLongitude,\n         name = scientificName) %&gt;%\n  group_by(lat, lon) %&gt;%\n  count()\n\nPour le plaisir, je rajouterai les provinces du pays sur la carte. \nEnsuite, il suffit de créer la carte avec `leaflet()`.\n\n# Créer le nom des provinces\naus_provinces &lt;- data.frame(\n  name = c(\"New South Wales\", \"Victoria\", \"Queensland\", \"Western Australia\",\n           \"South Australia\", \"Tasmania\", \"Northern Territory\"),\n  latitude = c(-32, -36.5, -25, -26, -30, -42, -20),\n  longitude = c(151, 145, 148, 117, 137, 147, 131)\n)\n\n\nleaflet(df) %&gt;%\n  addTiles() %&gt;%\n  addHeatmap(\n    lng = ~ lon,\n    lat = ~ lat,\n    intensity = ~ n,\n    blur = 1,\n    max = 10, \n    radius = 15\n  )  %&gt;%\n  addLabelOnlyMarkers(\n    lng = ~ aus_provinces$longitude,\n    lat = ~aus_provinces$latitude,\n    label = ~ aus_provinces$name,\n    labelOptions = labelOptions(noHide = TRUE, direction = 'auto', textOnly = TRUE)\n  )\n\n\n\n\n\nCette carte permet de voir facilement que la côte Ouest a une densité d’observation bien plus importante que le reste du pays, principalement autour de Syndey et Melbourne, avec également un grand nombre d’observations autour de Perth à l’Ouest."
+  },
+  {
+    "objectID": "pages/projets.html",
+    "href": "pages/projets.html",
+    "title": "Projets",
+    "section": "",
+    "text": "Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n\n\n\n\n\n\nCautionCette section est encore en travaux !\n\n\n\nPlus de projets seront bientôt publiés ici\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGestionnaire_projets\n\n\nUn tableau de bord pour les chefs de projets\n\n\n\nFélix Marchais\n\n\nSep 15, 2025\n\n\n\n\n\n\nNo matching items"
   }
 ]
