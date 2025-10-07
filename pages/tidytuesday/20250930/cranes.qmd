@@ -5,11 +5,10 @@ description: Observations de grues en Suède
 date: "2025-10-07"
 format: html
 execute:
-  eval: true
+  eval: false
   echo: true
   message: false
   warning: false
-  
 ---
 
 Cette semaine, le jeu de données porte sur l'observation de grues (les oiseaux) au lac Hornborgasjön, en Suède, entre 1994 et 2025.
@@ -147,6 +146,4 @@ clean_cranes %>%
 
 ```
 
-
-
-
+![](my_plot.png){fig-align="center"}
