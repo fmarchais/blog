@@ -1,6 +1,6 @@
 ---
-title: "Tidytuesday - 2025-09-02"
-description: "Observations des grenouilles en Australie"
+title: "Frogs"
+description: "Observations des grenouilles en Australie - 2025-09-02"
 author: "Félix Marchais"
 date: "2025-09-14"
 format: html
