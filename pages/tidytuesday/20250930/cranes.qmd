@@ -147,5 +147,3 @@ clean_cranes %>%
 ```
 
 ![](cranes.png){fig-align="center"}
-
-![](my_plot.png){fig-align="center"}
