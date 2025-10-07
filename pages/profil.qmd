@@ -66,7 +66,7 @@ Les compétences que je souhaite développer dans les mois à venir, au 15 juin 
 
 -   Publier une première version de ce site (Rentrée 2025) ✅
 
--   Publier mes supports de cours dans un site Quarto (Rentrée 2025)
+-   Publier mes supports de cours dans un site Quarto (Rentrée 2025) ✅
 
 -   Développer mes compétences CI/CD (Automne 2025)
 
@@ -75,8 +75,6 @@ Les compétences que je souhaite développer dans les mois à venir, au 15 juin 
     -   Développer des applis Shiny *Production-grade* avec {rhino} et/ou {golem}, en intégrant des tests unitaires, d'intégration et End-to-End
 
     -   Apprendre la dockerisation et déployer au moins une appli Shiny dans un docker ✅
-
-        -   Déployer cette application via un workflow dans GitHub Pages (Septembre)
 
 -   Découvrir un client Cloud (GCP/AWS/Azure) (Fin 2025)
 
