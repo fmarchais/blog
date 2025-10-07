@@ -1,5 +1,5 @@
 ---
-title: "Tidytuesday 2025-09-30"
+title: "Cranes"
 author: "Félix Marchais"
 description: Observations de grues en Suède
 date: "2025-10-07"
@@ -152,3 +152,4 @@ clean_cranes %>%
 # ggsave(filename = "my_plot.png", dpi = "retina")
 
 ```
+
