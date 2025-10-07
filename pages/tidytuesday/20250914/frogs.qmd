@@ -9,8 +9,6 @@ execute:
   echo: true
   message: false
   warning: false
-editor_options: 
-  chunk_output_type: console
 ---
 
 ![](frogs.jpg)
@@ -24,7 +22,6 @@ Pour cette première participation, je vais simplement créer une heatmap pour v
 Dans un premier temps, on va récupérer les données de la semaine.
 
 ```{r setup}
-#| eval: FALSE
 
 library(tidytuesdayR)
 library(dplyr)
@@ -34,19 +31,6 @@ library(leaflet.extras)
 tuesdata <- tt_load("2025-09-02")
 
 frog_id <- tuesdata$frogID_data
-```
-
-```{r import}
-#| eval: true 
-#| echo: false
-
-library(dplyr)
-library(leaflet)
-library(leaflet.extras)
-library(tidytuesdayR)
-library(readr)
-
-frog_id <- read_csv("frog.csv")
 ```
 
 L'étape de transformation de données sera assez simple :

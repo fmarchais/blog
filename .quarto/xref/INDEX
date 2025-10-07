@@ -88,5 +88,14 @@
   },
   "pages/projets/Gestionnaire_projets.qmd": {
     "Gestionnaire_projets.html": "a48ae987"
+  },
+  "pages/tidytuesday/20250930/cranes.qmd": {
+    "cranes.html": "e8bc0dea"
+  },
+  "pages/tidytuesday/20250914/frogs.qmd": {
+    "frogs.html": "0b476403"
+  },
+  "pages/tidytuesday/20250930/cranes2.qmd": {
+    "cranes2.html": "b8a35208"
   }
 }

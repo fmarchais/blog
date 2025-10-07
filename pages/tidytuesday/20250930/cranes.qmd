@@ -44,6 +44,7 @@ cranes <- tuesdata$cranes
 clean_cranes <- cranes %>%
   mutate(
     year = year(date),
+    date = as.Date(sprintf("2025-%02d-%02d", month(date), day(date))),
     month_day = format(date, "%b-%d")
   ) %>%
   filter(!is.na(date) & !is.na(observations))
@@ -61,12 +62,12 @@ y_limit <- ((max(clean_cranes$observations, na.rm = TRUE) %/% 10000) + 1) * 1000
 clean_cranes %>%
   ggplot(aes(x = date, y = observations, group = factor(year), color = year)) +
 
-  # semi-transparent lines per year
-  geom_line(alpha = 0.35, size = 0.6) +
+  # light, semi-transparent lines per year
+  geom_line(alpha = 0.35, linewidth = 0.6) +
 
   # points sized by observation count (smaller range so they don't dominate)
   geom_point(aes(size = observations), alpha = 0.6, show.legend = FALSE) +
-  scale_size(range = c(0.7, 3.5)) +
+  scale_size(range = c(0.8, 3.5)) +
 
   # highlight the most recent year with a bold, bright line and points on top
   geom_line(
@@ -84,16 +85,15 @@ clean_cranes %>%
     inherit.aes = FALSE
   ) +
 
-  # continuous color gradient for the year variable using viridis palette
-  scale_color_viridis_c(
-    guide = guide_colorbar(title = "Year", barwidth = unit(6, "cm"))
-  ) +
+  # continuous color gradient for the year variable using the viridis-like ramp
+   scale_color_viridis_c(guide = guide_colorbar(title = "Year", barwidth = unit(6, "cm"))) +
 
   # radial (y) axis - keep the scale available for plotting but don't show the default radial text
   scale_y_continuous(
     limits = c(0, y_limit),
-    breaks = c(0, 10000, 20000, 30000),
-    labels = c("0", "10k", "20k", "30k")
+    expand = c(0, 0),
+    breaks = c(0,10000,20000),
+    labels = c("0","10k","20k")
   ) +
 
   # show months around the circle
@@ -103,47 +103,44 @@ clean_cranes %>%
     limits = c(as.Date("2025-01-01"), as.Date("2025-12-31"))
   ) +
 
-  # polar coordinates to get observations on a north-south axis
-  coord_polar(start = -pi / 2) +
+  # polar coordinates with January at top
+  coord_polar(start = -pi/2) +
 
   # labels
   labs(
     title = "Annual Pattern of Crane Observations",
-    subtitle = "Each year mapped onto a single calendar to reveal seasonal rhythms",
-    caption = "Data: EuroLeague | Viz: @fmarchais  | #TidyTuesday",
+    subtitle = "Each year mapped onto a single calendar",
+    caption = "Data: Tidytuesday | Viz: @fmarchais",
     x = NULL,
     y = NULL
   ) +
 
   # revert the earlier radial-label tweak (remove visible radial labels in the margin)
   theme(
-    # Black theme
     panel.background = element_rect(fill = "#0f1115", colour = NA),
     plot.background = element_rect(fill = "#0f1115", colour = NA),
     legend.background = element_rect(fill = "#0f1115", colour = NA),
     legend.key = element_rect(fill = NA, colour = NA),
-    # White text
     text = element_text(color = "white"),
-    plot.title = element_text(size = 15, face = "bold", color = "white"),
+    plot.title = element_text(size = 12, face = "bold", color = "white"),
     plot.subtitle = element_text(size = 9, color = "grey90"),
     plot.caption = element_text(size = 9, color = "grey70"),
-    
-    # make radial labels visible so the "net" shows values
-    axis.text.y = element_text(color = "grey85", size = 9),
-    axis.ticks.y = element_line(color = alpha("white", 0.5), size = 0.3),
 
-    # keep month labels bold and readable
+    # make y & x axis more visible
+    axis.text.y = element_text(color = "white", size = 10, margin = margin(r = 6), hjust = 0.5),
+    axis.ticks.y = element_line(color = "white", size = 0.5),
+    axis.ticks.length = unit(3, "pt"),
     axis.text.x = element_text(color = "grey95", size = 11),
 
-    # remove the background axis
+    # remove the "net" in the background (radial grid)
     panel.grid.major.y = element_blank(),
     panel.grid.major.x = element_blank(),
     panel.grid.minor = element_blank(),
+    axis.title = element_blank(),
+    plot.margin = margin(10, 10, 10, 10),
     
-    # Legend
     legend.position = "bottom"
   )
-
 
 
 # ggsave(filename = "my_plot.png", dpi = "retina")
