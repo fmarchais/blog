@@ -25,7 +25,6 @@ library(tidytuesdayR)
 library(lubridate)
 library(ggplot2)
 library(dplyr)
-library(plotly)
 library(scales)
 library(grid)
 
@@ -150,6 +149,7 @@ clean_cranes %>%
 # ggsave(filename = "my_plot.png", dpi = "retina")
 
 ```
+
 
 
 
