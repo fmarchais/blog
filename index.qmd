@@ -12,6 +12,13 @@ about:
       href: https://github.com/fmarchais
 ---
 
+::: callout-caution
+## Mon portfolio est encore en travaux !
+
+Plus de projets seront bientôt publiés ici
+:::
+
+
 Développeur R et Data Manager de données cliniques \n
 
 Diplômé d'un Master 2 de Biologie - Physiopathologie & Recherche Clinique \n
