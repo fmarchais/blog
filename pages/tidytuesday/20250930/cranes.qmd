@@ -5,7 +5,7 @@ description: Observations de grues en Suède
 date: "2025-10-07"
 format: html
 execute:
-  eval: false
+  eval: true
   echo: true
   message: false
   warning: false
@@ -15,8 +15,6 @@ execute:
 Cette semaine, le jeu de données porte sur l'observation de grues (les oiseaux) au lac Hornborgasjön, en Suède, entre 1994 et 2025.
 
 L'objectif de ma visualisation est de mettre en évidence la saisonnalité des observations ainsi que leur augmentation au fil des ans. L'année la plus récente (2025) est indiquée en blanc.
-
-![](cranes.png)
 
 Le code pour obtenir ce graphe :
 
@@ -152,5 +150,6 @@ clean_cranes %>%
 # ggsave(filename = "my_plot.png", dpi = "retina")
 
 ```
+
 
 
