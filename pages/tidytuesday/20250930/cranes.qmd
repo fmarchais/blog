@@ -113,7 +113,7 @@ clean_cranes %>%
   labs(
     title = "Annual Pattern of Crane Observations",
     subtitle = "Each year mapped onto a single calendar to reveal seasonal rhythms",
-    caption = "Data: Tidytuesday | Viz: @fmarchais  | #TidyTuesday",
+    caption = "Data: EuroLeague | Viz: @fmarchais  | #TidyTuesday",
     x = NULL,
     y = NULL
   ) +
@@ -152,4 +152,5 @@ clean_cranes %>%
 # ggsave(filename = "my_plot.png", dpi = "retina")
 
 ```
+
 
