@@ -141,7 +141,7 @@ Maintenant que le store est créé, on va enregistrer nos documents via une bouc
 Lorsqu'une URL est fournie, {ragnar} va scraper la page. Certains sites n'autorisent pas le webscraping (et c'est leur droit) et vous renverront une erreur 403. Dans ce cas, il n'y a pas grand chose à faire. On ajoutera un `tryCatch()` à notre boucle pour ne pas la casser si une erreur est renvoyée.
 :::
 
-```{r}
+```{r ingestion}
 for (path in full_links) {
   tryCatch({
     chunks <- path |>
@@ -170,7 +170,7 @@ ragnar_store_inspect(store)
 
 On va tester notre assistant en lui demander de nous aider à utiliser le framework {rhino}, développé par [Appsilon](https://www.appsilon.com/rhinoverse/rhino) pour aider à créer des applications R/Shiny robustes.
 
-```{r}
+```{r preparation}
 # Notre Query
 text <- "How to use the {Rhino} R package to create a Shiny app ? Be concise"
 
@@ -197,7 +197,7 @@ system_prompt <- stringr::str_squish(
 
 On va tout d'abord tester notre assistant, pour voir s'il connait le package {rhino} :
 
-```{r}
+```{r chat}
 
 chat <- ellmer::chat_ollama(
   system_prompt,
@@ -223,7 +223,7 @@ Pour le moment, il est incapable de répondre. \n
 
 On va maintenant lui donner accès au store :
 
-```{r}
+```{r post}
 ragnar_register_tool_retrieve(chat, store)
 chat$chat(text)
 
@@ -255,7 +255,7 @@ Il ne reste plus qu'à continuer avec tous les documents de notre bibliothèque 
 
 Notre modèle étant installé en local, l'assistant fonctionne même sans connection internet, de façon illimitée et gratuite. Si le modèle n'est pas assez performant pour vous, vous pouvez parcourir la liste de modèles Ollama pour en trouver un plus adapté à votre usage.
 
-::: caution-tip
+::: callout-tip
 -   Pour ajouter de nouveaux documents, on peut créer une nouvelle boucle avec `ragnar_store_insert` et `ragnar_store_build_index()`. On passera simplement l'étape `ragnar_store_create()` pour passer directement à `ragnar_store_connect()`
 -   Pour que l'assistant soit prêt dès le lancement de notre IDE, on peut enregistrer les étapes suivantes dans un .Rprofile
     -   `ragnar_store_connect()`
