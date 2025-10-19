@@ -97,5 +97,20 @@
   },
   "pages/tidytuesday/20250930/cranes2.qmd": {
     "cranes2.html": "b8a35208"
+  },
+  "pages/articles/ragnar.qmd": {
+    "ragnar.html": "b344f1d1"
+  },
+  "pages/articles/bigdata.qmd": {
+    "bigdata.html": "a9c57dbe"
+  },
+  "pages/articles/connections.qmd": {
+    "connections.html": "9e450f04"
+  },
+  "pages/articles/nettoyage.qmd": {
+    "nettoyage.html": "bfe430aa"
+  },
+  "pages/articles.qmd": {
+    "articles.html": "aa22acbf"
   }
 }

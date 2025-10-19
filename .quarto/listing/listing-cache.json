@@ -47,6 +47,9 @@
     "pages\\decouvrir_r.qmd": [
       "r_decouvrir/*.qmd",
       "decouvrir_r/*.qmd"
+    ],
+    "pages\\articles.qmd": [
+      "articles/*.qmd"
     ]
   }
 }
