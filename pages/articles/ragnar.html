@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Félix Marchais">
-<meta name="dcterms.date" content="2025-10-14">
-<meta name="description" content="Comment entraîner un modèle LLM open-source sur des documents pour se faire un assistant de code spécialisé dans son domaine d’expertise">
+<meta name="dcterms.date" content="2025-10-20">
+<meta name="description" content="Entraîner un LLM sur des documents pour se créer un assistant de code spécialisé dans son domaine d’expertise, local et gratuit">
 
-<title>Créer un assistant de code personnel avec {ragnar} et Zotero – Portfolio</title>
+<title>Créer un assistant de code personnel avec {ragnar}, Ollama et Zotero – Portfolio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -198,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Créer un assistant de code personnel avec {ragnar} et Zotero</h1>
+<h1 class="title">Créer un assistant de code personnel avec {ragnar}, Ollama et Zotero</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
     <div class="quarto-category">IA</div>
@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    Comment entraîner un modèle LLM open-source sur des documents pour se faire un assistant de code spécialisé dans son domaine d’expertise
+    Entraîner un LLM sur des documents pour se créer un assistant de code spécialisé dans son domaine d’expertise, local et gratuit
   </div>
 </div>
 
@@ -225,7 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 14, 2025</p>
+      <p class="date">October 20, 2025</p>
     </div>
   </div>
   
@@ -580,7 +580,7 @@ Tip
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/fmarchais\.github\.io\/portfolio\/");
+        var filterRegex = new RegExp("https:\/\/fmarchais\.github\.io\/blog\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
