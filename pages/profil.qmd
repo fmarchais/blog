@@ -1,10 +1,8 @@
 ---
-title: "Profil"
+title: "A propos de moi"
 page-layout: full
 toc: true
 ---
-
-# A propos de moi
 
 Issu d'un parcours en Biologie et Recherche Clinique, je me suis rapidement dirigé vers le traitement de données de santé à la fin de l'année de Master 1, en me formant en autodidacte au langage R.
 

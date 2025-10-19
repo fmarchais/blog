@@ -1,9 +1,9 @@
 ---
-title: "Créer un assistant de code personnel avec {ragnar} et Zotero"
-description: "Comment entraîner un modèle LLM open-source sur des documents pour se faire un assistant de code spécialisé dans son domaine d'expertise"
+title: "Créer un assistant de code personnel avec {ragnar}, Ollama et Zotero"
+description: "Entraîner un LLM sur des documents pour se créer un assistant de code spécialisé dans son domaine d'expertise, local et gratuit"
 format: html
 author: "Félix Marchais"
-date: "2025-10-14"
+date: "2025-10-20"
 categories:
   - R
   - IA
