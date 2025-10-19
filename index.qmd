@@ -1,6 +1,6 @@
 ---
 title: "Bienvenue"
-image: "/images/profile.jpg"
+image: profile.jpg
 about:
   template: jolla
   links:
