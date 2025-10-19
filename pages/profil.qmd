@@ -44,7 +44,7 @@ Mes missions actuelles portent principalement sur :
 
 -   CI/CD :
 
-    -   Git (GitHub, GitLab), Docker (en cours)
+    -   Git (GitHub, GitLab), Docker
 
 -   ETL :
 
@@ -54,9 +54,6 @@ Mes missions actuelles portent principalement sur :
 
     -   REDCap, EasyMedStats
 
--   Catalogues :
-
-    -   Open Metadata
 
 # Roadmap
 

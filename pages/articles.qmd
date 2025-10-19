@@ -1,10 +1,10 @@
 ---
-title: "Découvrir R"
+title: "Articles"
 format: html
 toc: true
 listing: 
   type: grid
-  contents: "decouvrir_r/*.qmd"
+  contents: "articles/*.qmd"
   categories: true
   sort-ui: true
 ---

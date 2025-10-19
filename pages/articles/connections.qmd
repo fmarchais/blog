@@ -1,12 +1,13 @@
 ---
-title: "Recueil de données"
-description: "Se connecter à tout type de données"
+title: "R : un outil à tout faire"
+description: "Se connecter à tout type de données avec R, en local ou sur le cloud"
 format: html
 author: "Félix Marchais"
 date: "2025-07-29"
 categories:
   - R
   - Bases de données
+image: "/pages/articles/images/R_database.png"
 execute: 
   eval: false 
   echo: true
@@ -79,7 +80,7 @@ head(covid_data)
 #| eval: false
 #| echo: false
 
-head(readr::read_csv("../../data/covid_data.csv"))
+head(readr::read_csv("data/covid_data.csv"))
 ```
 
 # Excel
@@ -164,11 +165,11 @@ Récemment, `{duckplyr}`, une librairie intégrant `{dplyr}` avec le moteur de `
 
 Si vous utilisez Rstudio, le moyen le plus simple de se connecter à une source de données est d'utiliser l'onglet *Connections*, généralement situé en haut à droite, avec votre *Environnement*. En cliquant sur *New connection*, une fenêtre apparaît et va automatiquement vous proposer les sources à disposition. \n
 
-![Exemple des connexions existantes sur mon poste](/images/rstudio_connections.png)
+![Exemple des connexions existantes sur mon poste](/pages/articles/images/rstudio_connections.png)
 
 Si vous avez déjà configuré un DSN contenant vos identifiants, les informations de connexion devraient déjà être remplies, vous n'avez plus qu'à cliquer sur "OK", et le code s'exécutera dans la console. Vous pourrez alors visualiser vos bases dans l'onglet *Connections*
 
-![](/images/rstudio_connections_dsn.png){width="515"}
+![](pages/articles/images/rstudio_connections_dsn.png){width="515"}
 
 Sinon, vous aurez besoin d'entrer les paramètres suivants :
 
@@ -210,7 +211,7 @@ R dispose de nombreuses librairies pour récupérer des données hébergées sur
 
 ## Google Cloud Platform
 
-Voici une liste non exhaustive des librairies permettant de travailler avec Google Cloud Platform, disponible sur la vignette de [`{googleAuthR}`](https://code.markedmondson.me/googleAuthR/)
+Voici une liste non exhaustive des librairies permettant de travailler avec Google Cloud Platform, disponible sur la vignette de [googleAuthR](https://code.markedmondson.me/googleAuthR/)
 
 -   [googleComputeEngineR](https://cloudyr.github.io/googleComputeEngineR/) - Google Compute Engine VMs API
 
@@ -248,7 +249,7 @@ On utilisera également la librairie `{jsonlite}` pour convertir les données r�
 
 ::: callout-tip
 ## Astuce
-Le package `{httr2}` nécessite l'installation du package `{curl}`, qui peut poser problème si vous êtes sur un réseau professionnel protégé par un pare-feu. Dans ce cas, contactez votre DSI, ou ... faites un partage de connexion depuis votre téléphone 🤫
+Le package `{httr2}` nécessite l'installation du package `{curl}`, qui peut poser problème si vous êtes sur un réseau professionnel protégé par un pare-feu. Dans ce cas, contactez votre DSI.
 :::
 
 ```{r hubeau}
@@ -287,7 +288,7 @@ head(df_data)
 #| eval: false
 #| echo: false
 
-head(readr::read_csv("../../data/hubeau_data.csv"))
+head(readr::read_csv("data/hubeau_data.csv"))
 ```
 
 
@@ -345,7 +346,7 @@ head(cities_table)
 ```{r webscraping_2}
 #| eval: true
 #| echo: false
-head(readr::read_csv("../../data/cities_table.csv"))
+head(readr::read_csv("data/cities_table.csv"))
 ```
 
 # OCR et PDF  

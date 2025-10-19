@@ -1,6 +1,6 @@
 ---
 title: "Bienvenue"
-image: profile.jpg
+image: /images/profile.jpg
 about:
   template: jolla
   links:
@@ -13,9 +13,9 @@ about:
 ---
 
 ::: callout-caution
-## Mon portfolio est encore en travaux !
+## Ce blog est encore en travaux !
 
-Plus de projets seront bientôt publiés ici
+Vous verrez bientôt ma tête ici
 :::
 
 
@@ -25,4 +25,4 @@ Diplômé d'un Master 2 de Biologie - Physiopathologie & Recherche Clinique \n
 
 Je me suis spécialisé dans la programmation en R pour des missions de traitement de données de santé, visualisation et automatisation de process. \n
 
-Dans ce portfolio, vous pourrez retrouver plus de détails sur [mon profil](pages/profil.qmd), découvrir [les différents usages de R](pages/decouvrir_r.qmd) et mes différents [projets](pages/projets.qmd)
+Dans ce blog, vous pourrez retrouver plus de détails sur [mon profil](pages/profil.qmd), découvrir [les différents usages de R](pages/articles.qmd) et mes différents [projets](pages/projets.qmd)
