@@ -1,11 +1,5 @@
 [
   {
-    "listing": "/pages/decouvrir_r.html",
-    "items": [
-      "/pages/decouvrir_r/decouvrir_connections.html"
-    ]
-  },
-  {
     "listing": "/pages/tidytuesday.html",
     "items": [
       "/pages/tidytuesday/20250930/cranes.html",
@@ -16,6 +10,13 @@
     "listing": "/pages/projets.html",
     "items": [
       "/pages/projets/Gestionnaire_projets.html"
+    ]
+  },
+  {
+    "listing": "/pages/articles.html",
+    "items": [
+      "/pages/articles/ragnar.html",
+      "/pages/articles/connections.html"
     ]
   }
 ]
