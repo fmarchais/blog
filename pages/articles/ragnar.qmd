@@ -1,6 +1,6 @@
 ---
-title: "Créer un assistant de code personnel avec {ragnar}, Ollama et Zotero"
-description: "Entraîner un LLM sur des documents pour se créer un assistant de code spécialisé dans son domaine d'expertise, local et gratuit"
+title: "Créer un assistant de code personnel avec R, {ragnar}, Ollama et Zotero"
+description: "Entraîner un LLM sur des documents pour se créer un assistant de code local et gratuit, spécialisé dans son domaine d'expertise"
 format: html
 author: "Félix Marchais"
 date: "2025-10-20"
@@ -18,15 +18,15 @@ execute:
 
 Etant plutôt du genre à être dans les derniers à suivre une tendance, mon utilisation des LLM était jusqu'à récemment limitée à poser des questions à chat-GPT ou GitHub Copilot. Il y a environ deux semaines, en discutant avec un ami dont le métier est justement d'accompagner les entreprises dans leur passage à l'IA, celui-ci m'a expliqué les différents mots-clés du domaine : "MCP", "Agent", "Contexte" et surtout : **la "RAG"** (Retrieval-Augmented Generation), ou "Génération Augmentée par Récupération".
 
-La RAG, c'est faire lire des documents à un LLM pour qu'il puisse les utiliser dans ses réponse. Cela revient à ajouter de nouvelles données (que l'on estime fiables) à sa base d'entraînement et permet de le spécialiser dans un domaine.
+La RAG, c'est faire lire des documents à un LLM pour qu'il puisse les utiliser dans ses réponse. Cela revient à ajouter de nouvelles données (que l'on estime fiables) à sa base d'entraînement et permet d'étendre ses connaissances dans un domaine précis.
 
 Ca tombe bien ! Depuis que j'ai commencé à coder, j'utilise Zotero pour indexer des tonnes de guides et d'articles sur R. L'idée m'est immédiatement venue : créer un assistant de code spécialisé en R et en données de santé.
 
 # Zotero, c'est quoi ?
 
-[Zotero](https://www.zotero.org), c'est un logiciel gratuit qui permet de se créer une bibliothèque composée de différentes pages Web ou documents. En le téléchargeant, on ajoute une extension à son navigateur, qui permet d'ajouter le lien de la page visitée à sa bibliothèque, et si la page affiche un document PDF, de le télécharger.
+[Zotero](https://www.zotero.org), c'est un logiciel gratuit qui permet de se créer une bibliothèque composée de différentes pages Web ou documents. En le téléchargeant, on ajoute une extension à son navigateur qui permet d'ajouter le lien de la page visitée à sa bibliothèque, et si la page affiche un document PDF, de le télécharger.
 
-Ma bibliothèque Zotero contient aujourd'hui près d'un millier de documents : des liens vers des livres comme "R for Data Science" d'Hadley Wickham (un classique), des articles de blog, ou des *cheatsheets* (antisèches) résumant le fonctionnement des principaux packages du `Tidyverse`, que l'on peut retrouver par exemple [ici](https://dplyr.tidyverse.org/). Cette bibliothèque est une mine d'or pour moi car elle me permet de retrouver facilement la documentation que j'ai pu parcourir, et sera parfaite pour entraîner notre assistant IA.
+Ma bibliothèque Zotero contient aujourd'hui près d'un millier de documents : des liens vers des livres comme "R for Data Science" d'Hadley Wickham (un classique), des articles de blog, ou des *cheatsheets* (antisèches) résumant le fonctionnement des principaux packages du `Tidyverse`, que l'on peut retrouver par exemple [ici](https://dplyr.tidyverse.org/). Cette bibliothèque est une mine d'or pour moi car elle me permet de retrouver facilement la documentation que j'ai pu parcourir, et sera parfaite pour entraîner un assistant IA.
 
 ![Extrait d'une bibliothèque Zotero. Source : https://www.zotero.org/?lang=fr_fr](images/zotero.png)
 
@@ -40,9 +40,11 @@ Ragnar permet seulement de créer le store et de l'utiliser. Il faudra ensuite u
 
 # Quel modèle choisir ?
 
-`Ragnar` fonctionne avec différents fournisseurs d'IA, dont OpenAI (ChatGPT), mais notre objectif est ici de se créer un assistant local et gratuit, on se tournera donc plutôt vers [Ollama.](https://ollama.com/) \n
+`Ragnar` fonctionne avec différents fournisseurs d'IA, dont OpenAI (ChatGPT), mais notre objectif est ici de se créer un assistant local et gratuit, on se tournera donc plutôt vers [Ollama](https://ollama.com/). \n
 
 Ollama est une plateforme qui met à disposition des modèles de LLM gratuits et téléchargeables en local. Ces modèles sont évidemment moins puissants que ChatGPT ou Claude, mais ce n'est pas très grave puisque l'on va entraîner le notre sur des données qui seront pertinentes pour nous.
+
+Pour cet exemple, j'ai choisi le modèle llama3.2:3b-instruct-q4_K_M.
 
 ::: callout-caution
 Tous les modèles présents sur Ollama ne sont pas compatibles avec la RAG, il faut choisir une variante "-instruct". Pour cela, une fois votre modèle choisi, cliquez sur "View all" pour voir toutes les variantes du modèles, et choisissez un "-instruct".
@@ -64,11 +66,13 @@ Maintenant que l'on a tous les ingrédients, on peut commencer à se mettre au t
 
 ## Récupérer les documents
 
-Tout d'abord, commençons par extraire notre bibliothèque Zotero. On aura besoin des PDFs déjà récupérés et des liens vers les documents enregistrés. \n
+Tout d'abord, commençons par extraire notre bibliothèque Zotero. On aura besoin des PDFs déjà récupérés et des URLs des pages enregistrées. \n
 
-Pour les PDFs, dans Zotero allez dans Fichier \> Exporter la bibliothèque \> Format : "Zotero RDF" et cochez "Exporter les fichiers". Vous obtiendrez ainsi un dossier "Ma bibliothèque", qui contient un sous-dossier "files", qui contient les documents, et un fichier "Ma bibliothèque.rdf" que nous n'utiliserons pas.
+Pour les PDFs, une fois dans Zotero allez dans Fichier \> Exporter la bibliothèque \> Format : "Zotero RDF" et cochez "Exporter les fichiers". Vous obtiendrez ainsi un dossier "Ma bibliothèque", qui contient un sous-dossier "files", qui contient les PDFs, et un fichier "Ma bibliothèque.rdf" que nous n'utiliserons pas.
 
 Pour obtenir les URLs, exportez simplement votre bibliothèque au format.csv.
+
+On peut désormais commencer à coder : 
 
 ```{r setup}
 library(readr)
@@ -94,9 +98,9 @@ zotero_urls <- zotero_csv %>%
   na.omit() %>%
   unique()
 
-# Ragnar permet aussi de récupérer les liens présents sur une page.
+# Ragnar permet aussi de récupérer les liens présents sur une page web.
 # On peut ainsir récupérer toutes les pages d'une documentation 
-# à partir du lien principal
+# à partir du lien de la page d'accueil
 zotero_external_links <- c()
 for(link in zotero_urls){
   tryCatch({
@@ -111,7 +115,7 @@ full_links <- c(pdf_paths, zotero_urls, zotero_external_links) %>%
 ```
 
 ::: callout-caution
-Ma bibliothèque compte aujourd'hui près d'un millier de documents, et en considérant une moyenne d'une minute par document, il m'a fallu plus de 30 heures pour tout ingérer. Pour faire cette expérience de votre côté, vous pouvez tester avec seulement la documentation du package {rhino} en remplaçant `full_links` par ce lien : "https://appsilon.github.io/rhino/articles/tutorial/create-your-first-rhino-app.html"
+En considérant une moyenne d'une minute par document, il m'a fallu plus de 30 heures pour ingérer ma bibliothèque qui en contient près d'un millier. Pour faire cette expérience de votre côté, vous pouvez tester avec seulement la documentation du package {rhino} en remplaçant `full_links` par ce lien : "https://appsilon.github.io/rhino/articles/tutorial/create-your-first-rhino-app.html"
 :::
 
 ## Créer le store
@@ -135,10 +139,10 @@ store <- ragnar_store_connect("zotero_ragnar.duckdb", read_only = FALSE)
 
 ## Ingérer les documents dans le store
 
-Maintenant que le store est créé, on va enregistrer nos documents via une boucle. `read_as_markdown` permet de transformer le document (URL, PDF ou autre) en markdown, puis `markdown_chunk` permet de le découper en chunk pour que le LLM puisse l'exploiter.
+Maintenant que le store est créé, on va enregistrer nos documents via une boucle. `read_as_markdown()` permet de transformer le document (URL, PDF ou autre) en markdown, puis `markdown_chunk()` permet de le découper en chunks pour que le LLM puisse l'exploiter.
 
 ::: callout-caution
-Lorsqu'une URL est fournie, {ragnar} va scraper la page. Certains sites n'autorisent pas le webscraping (et c'est leur droit) et vous renverront une erreur 403. Dans ce cas, il n'y a pas grand chose à faire. On ajoutera un `tryCatch()` à notre boucle pour ne pas la casser si une erreur est renvoyée.
+Lorsqu'une URL est fournie, {ragnar} va scraper la page. Certains sites n'autorisent pas le webscraping (c'est leur droit) et vous renverront une erreur 403. Dans ce cas, il n'y a pas grand chose à faire. On ajoutera un `tryCatch()` à notre boucle pour ne pas la casser si une erreur est renvoyée.
 :::
 
 ```{r ingestion}
@@ -149,26 +153,27 @@ for (path in full_links) {
       markdown_chunk()
     
     ragnar_store_insert(store, chunks)
+    
     # pour visualiser la progression
     print(which(path == full_links), "/", length(full_links))
-
+    
   }, error = function(e) {
     cat("Error processing", path, ":", e$message, "\n")
-    # Optionally log the error or take other action
   })
 }
 
+# Créer un index de recherche pour les chunks
 # Indispensable pour rendre notre store exploitable
 ragnar_store_build_index(store)
 
-# On peut ensuite vérifier l'intégration des documents avec
+# On peut ensuite vérifier la bonne intégration des documents avec
 ragnar_store_inspect(store)
 
 ```
 
 ## Préparer l'assistant
 
-On va tester notre assistant en lui demander de nous aider à utiliser le framework {rhino}, développé par [Appsilon](https://www.appsilon.com/rhinoverse/rhino) pour aider à créer des applications R/Shiny robustes.
+Nous allons tester notre assistant en lui demandant de nous aider à utiliser le framework {rhino}, développé par [Appsilon](https://www.appsilon.com/rhinoverse/rhino) pour créer des applications R/Shiny robustes.
 
 ```{r preparation}
 # Notre Query
@@ -198,7 +203,6 @@ system_prompt <- stringr::str_squish(
 On va tout d'abord tester notre assistant, pour voir s'il connait le package {rhino} :
 
 ```{r chat}
-
 chat <- ellmer::chat_ollama(
   system_prompt,
   model = "llama3.2:3b-instruct-q4_K_M"
@@ -225,8 +229,8 @@ On va maintenant lui donner accès au store :
 
 ```{r post}
 ragnar_register_tool_retrieve(chat, store)
-chat$chat(text)
 
+chat$chat(text)
 
 
 # ◯ \[tool call\] rag_retrieve_from_store_003(text = " installing and loading shiny package") ● #\> \[{"origin":"https://appsilon.github.io/rhino/articles/tutorial/create-your-first-rhino-app.html","doc_id":1,"ch… To create a Shiny app using the Rhino package, follow these steps:
@@ -256,33 +260,10 @@ Il ne reste plus qu'à continuer avec tous les documents de notre bibliothèque 
 Notre modèle étant installé en local, l'assistant fonctionne même sans connection internet, de façon illimitée et gratuite. Si le modèle n'est pas assez performant pour vous, vous pouvez parcourir la liste de modèles Ollama pour en trouver un plus adapté à votre usage.
 
 ::: callout-tip
--   Pour ajouter de nouveaux documents, on peut créer une nouvelle boucle avec `ragnar_store_insert` et `ragnar_store_build_index()`. On passera simplement l'étape `ragnar_store_create()` pour passer directement à `ragnar_store_connect()`
+-   Pour ajouter de nouveaux documents, on peut créer une nouvelle boucle avec `ragnar_store_insert()` et `ragnar_store_build_index()`. On passera simplement l'étape `ragnar_store_create()` pour passer directement à `ragnar_store_connect()`
 -   Pour que l'assistant soit prêt dès le lancement de notre IDE, on peut enregistrer les étapes suivantes dans un .Rprofile
     -   `ragnar_store_connect()`
     -   Le `system_prompt`
     -   La création de `chat` avec `ellmer::chat_ollama()`
 
 :::
-
-```{r include = FALSE}
-# Post linkedin :
-
-# version chatgpt
-"Et si vous pouviez créer votre propre assistant de code IA, spécialisé dans votre domaine, 100% gratuit, local et open-source ?
-
-C’est exactement ce que j’ai fait la semaine dernière. En partant d’une idée simple : utiliser la RAG (Retrieval-Augmented Generation) pour alimenter un modèle LLM avec ma propre base de connaissances sur R, issue de ma bibliothèque Zotero riche de plus de 1 000 ressources.
-
-Grâce à Ollama, j’ai pu faire tourner des modèles open-source localement, sans dépendre d’API cloud.
-
-Résultat : un assistant IA qui connaît R sur le bout des doigts, fonctionne sans connexion, et ne coûte rien.
-
-Dans l’article ci-dessous, je détaille toute la démarche, le setup, les outils, et je partage le code pour que vous puissiez faire la même chose chez vous 👇
-🔗 [Lien vers l'article]"
-
-
-
-
-
-
-
-```
