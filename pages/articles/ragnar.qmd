@@ -257,7 +257,7 @@ Victoire ! Notre assistant connaît désormais {rhino} et peut nous accompagner 
 
 Il ne reste plus qu'à continuer avec tous les documents de notre bibliothèque pour développer les connaissances de notre assistant.
 
-Notre modèle étant installé en local, l'assistant fonctionne même sans connection internet, de façon illimitée et gratuite. Si le modèle n'est pas assez performant pour vous, vous pouvez parcourir la liste de modèles Ollama pour en trouver un plus adapté à votre usage.
+Notre modèle étant installé en local, l'assistant fonctionne même sans connexion internet, de façon illimitée et gratuite. Si le modèle n'est pas assez performant pour vous, vous pouvez parcourir la liste de modèles Ollama pour en trouver un plus adapté à votre usage.
 
 ::: callout-tip
 -   Pour ajouter de nouveaux documents, on peut créer une nouvelle boucle avec `ragnar_store_insert()` et `ragnar_store_build_index()`. On passera simplement l'étape `ragnar_store_create()` pour passer directement à `ragnar_store_connect()`
