@@ -58,7 +58,7 @@ A noter que tous les modèles "-instruct" ne sont pas nécéssairement compatibl
 
 # Ellmer
 
-`Ellmer` est un package R du `Tidyverse` et développé par Hadley Wickham (encore lui), qui permet de discuter avec différents LLMs depuis R. On utilisera sa fonction `char_ollama()` pour discuter avec notre assistant.
+`Ellmer` est un package R du `Tidyverse` et développé par Hadley Wickham (encore lui), qui permet de discuter avec différents LLMs depuis R. On utilisera sa fonction `chat_ollama()` pour discuter avec notre assistant.
 
 # Créér son assistant
 
