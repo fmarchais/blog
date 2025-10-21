@@ -1,15 +1,15 @@
 [
   {
+    "listing": "/pages/projets.html",
+    "items": [
+      "/pages/projets/Gestionnaire_projets.html"
+    ]
+  },
+  {
     "listing": "/pages/tidytuesday.html",
     "items": [
       "/pages/tidytuesday/20250930/cranes.html",
       "/pages/tidytuesday/20250914/frogs.html"
-    ]
-  },
-  {
-    "listing": "/pages/projets.html",
-    "items": [
-      "/pages/projets/Gestionnaire_projets.html"
     ]
   },
   {
