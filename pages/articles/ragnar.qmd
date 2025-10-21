@@ -99,7 +99,7 @@ zotero_urls <- zotero_csv %>%
   unique()
 
 # Ragnar permet aussi de récupérer les liens présents sur une page web.
-# On peut ainsir récupérer toutes les pages d'une documentation 
+# On peut ainsi récupérer toutes les pages d'une documentation 
 # à partir du lien de la page d'accueil
 zotero_external_links <- c()
 for(link in zotero_urls){
