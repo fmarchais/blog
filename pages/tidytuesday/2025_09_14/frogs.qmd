@@ -4,8 +4,8 @@ description: "Observations des grenouilles en Australie - 2025-09-02"
 author: "Félix Marchais"
 date: "2025-09-14"
 format: html
-execute: 
-  eval: true 
+execute:
+  eval: true
   echo: true
   message: false
   warning: false
@@ -41,10 +41,12 @@ L'étape de transformation de données sera assez simple :
 
 ```{r cleaning}
 
-df <- frog_id %>% 
-  select(lat = decimalLatitude, 
-         lon = decimalLongitude,
-         name = scientificName) %>%
+df <- frog_id %>%
+  select(
+    lat = decimalLatitude,
+    lon = decimalLongitude,
+    name = scientificName
+  ) %>%
   group_by(lat, lon) %>%
   count()
 
@@ -57,8 +59,15 @@ Ensuite, il suffit de créer la carte avec \`leaflet()\`.
 ```{r plot}
 # Créer le nom des provinces
 aus_provinces <- data.frame(
-  name = c("New South Wales", "Victoria", "Queensland", "Western Australia",
-           "South Australia", "Tasmania", "Northern Territory"),
+  name = c(
+    "New South Wales",
+    "Victoria",
+    "Queensland",
+    "Western Australia",
+    "South Australia",
+    "Tasmania",
+    "Northern Territory"
+  ),
   latitude = c(-32, -36.5, -25, -26, -30, -42, -20),
   longitude = c(151, 145, 148, 117, 137, 147, 131)
 )
@@ -67,18 +76,22 @@ aus_provinces <- data.frame(
 leaflet(df) %>%
   addTiles() %>%
   addHeatmap(
-    lng = ~ lon,
-    lat = ~ lat,
-    intensity = ~ n,
+    lng = ~lon,
+    lat = ~lat,
+    intensity = ~n,
     blur = 1,
-    max = 10, 
+    max = 10,
     radius = 15
-  )  %>%
+  ) %>%
   addLabelOnlyMarkers(
     lng = ~ aus_provinces$longitude,
-    lat = ~aus_provinces$latitude,
+    lat = ~ aus_provinces$latitude,
     label = ~ aus_provinces$name,
-    labelOptions = labelOptions(noHide = TRUE, direction = 'auto', textOnly = TRUE)
+    labelOptions = labelOptions(
+      noHide = TRUE,
+      direction = 'auto',
+      textOnly = TRUE
+    )
   )
 
 ```
