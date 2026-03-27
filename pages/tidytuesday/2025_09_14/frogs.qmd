@@ -9,6 +9,7 @@ execute:
   echo: true
   message: false
   warning: false
+  draft: true
 ---
 
 ![](frogs.jpg)
