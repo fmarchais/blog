@@ -1,5 +1,5 @@
 ---
-title: "R pour le Big Data"
+title: "R pour le Medium Data"
 format: html
 description: "Traiter des données plus volumineuses que la mémoire vive avec R"
 author: "Félix Marchais"
@@ -7,59 +7,54 @@ date: "2025-07-30"
 categories:
   - R
   - Big Data
-execute: 
-  eval: false 
-  echo: true
+image: "/pages/articles/images/r_big_data.png"
 draft: true
 ---
 
-# Big Data  
+# Medium Data
 
-## Apache Arrow et DuckDB  
+Tout le monde connaît cette problématique, qui introduit tous les cours sur le Big Data : "*Plus le temps passe et plus les volumes de données à traiter augmentent, d'où l'intérêt d'outils puissants de calcul distribué...*" *et caetera*. Aujourd'hui, je parlerai de *Medium Data* : des données trop volumineuses pour être traitées par la mémoire vive d'un ordinateur (*small data*) mais pouvant être stockée sur un seul ordinateur (à contrario du *Big Data*). En résumé : Comment analyser un jeu de données de 10Go à ~ 1T grâce à R, qui stocke habituellement les données traitées en mémoire vive (16 à 32Go sur les ordinateurs actuels).
 
-Grâce à Apache Arrow et Duckdb, il est possible de traiter de grands volumes de données facilement avec R. Ci-dessous, un exemple de requête sur un jeu de données de plus d'1 milliard de lignes. \n
+## Apache Arrow
 
-Les données sont celles du dataset TLC Trip Record Data (https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), et contiennent les informations de trajets de taxis new-yorkais. \n
+Apache Arrow est un framework de traitement de données, utilisant un format colonnaire pour améliorer la performance du traitement. Il est indépendant du langage de programmation (en R, on utilisera le package `{arrow}`) et compatible avec de nombreux formats, comme .csv ou .parquet, mais également avec des bases SQL via son API *ADBC* (Arrow Database Connectivity) et ses drivers.
 
-Dans cet exemple, les données de chaque mois entre janvier 2013 et avril 2025 ont été récupérées et regroupées dans un dossier appelé taxi_dataset. Ce dossier contient 147 fichiers au format .Parquet et pèse 14Go pour plus d'un milliard de lignes (le format .Parquet est un format compressé, le même jeu de données en .csv pèse environ 100Go). \n
+En R, le package `{adbcdrivermanager}` permet de gérer ces drivers, à la manière de `{odbc}`. Vous pouvez retrouver la documentation d'Apache sur son utilisation dans R [ici](https://arrow.apache.org/adbc/current/r/index.html) et celle d'`abcdrivermanager` [ici](https://arrow.apache.org/adbc/current/r/adbcdrivermanager/index.html)
 
-```{r echo = TRUE, eval = FALSE, comment = FALSE, message = FALSE}
+A noter que le package `{arrow}` est nativement compatible avec `{dplyr}`, ce qui nous permet de garder la syntaxe simple du *Tidyverse* tout en profitant de la puissance de Arrow.
 
-library(tidyverse) # Tidyverse sert à la manipulation de données
-library(duckdb) # duckdb pour créer une base duckdb virtuelle
-library(arrow) # Arrow pour lire des fichiers .Parquet
-library(duckplyr) # Duckplyr pour utiliser dplyr avec le moteur duckdb
-library(DBI) # DBI pour créer une connection à la base duckdb virtuelle
-library(microbenchmark) # Pour vérifier les temps d'exécution
+Ci-dessous, un exemple de requête sur un jeu de données de plus d'1 milliard de lignes. Les données sont celles du dataset TLC Trip Record Data (https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), et contiennent les informations de trajets de taxis new-yorkais. Dans cet exemple, les données de chaque mois entre janvier 2013 et avril 2025 ont été récupérées et regroupées dans un dossier appelé `taxi_dataset`. Ce dossier contient 147 fichiers au format .parquet et pèse 14Go pour plus d'un milliard de lignes (le format .parquet est un format compressé, le même jeu de données en .csv pèse environ 100Go). \n
 
-# Créer une base duckdb virtuelle
-conn_ddb <- dbConnect(duckdb(), dbdir = ":memory:")
-
-yellow_taxi <- conn_ddb %>% 
-  tbl("read_parquet('D:\\taxi_dataset\\*.parquet')" )
-# Il suffit d'indiquer le chemin vers le dossier contenant les 157 fichiers pour que {arrow} reconstitue le tout et le considère comme un seul dataset (il faut évidemment que les jeux de données suivent le même schéma)
-# Ici, yellow_taxi ne contient pas directement les données, mais une connexion au dataset.
-# on peut désormais requêter yellow_taxi comme un dataframe classique avec la grammaire de {dplyr}, sans avoir chargé les données dans la mémoire vive de R
-
-yellow %>% count()
-# 1.101.292.583 => 1 milliard de lignes
-
-# Utiliser microbenchmark() pour calculer le temps d'éxécution
-microbenchmark(
-  res = x <- yellow %>% 
-    # filtrer les lignes
-    filter(trip_distance >=2) %>%  
-    # Créer une colonne "year" qui contient l'année du voyage
-    mutate(year = year(tpep_pickup_datetime)) %>% 
-    # Aggréger tip_amount pour obtenir la moyenne du pourboire par nombre de passagers
-    summarize(mean_tip_amount = mean(tip_amount), .by = year) %>%
-    collect(), # Ajouter collect() pour récupérer les données
-  times = 1
+```{.r}
+# Créer un objet ds de classe "dataset"
+ds <- open_dataset("D:\\R\\Data engineering\\Big Data\\taxi_dataset",
+                   schema = schema(
+                     VendorID= int64(),
+                     tpep_pickup_datetime= timestamp("us"),
+                     tpep_dropoff_datetime= timestamp("us"),
+                     passenger_count= int64(),
+                     trip_distance= double(),
+                     RatecodeID= int64(),
+                     store_and_fwd_flag= string(),
+                     PULocationID= int64(),
+                     DOLocationID= int64(),
+                     payment_type= int64(),
+                     fare_amount= double(),
+                     extra= double(),
+                     mta_tax= double(),
+                     tip_amount= double(),
+                     tolls_amount= double(),
+                     improvement_surcharge= double(),
+                     total_amount= double(),
+                     airport_fee = double(),
+                     congestion_surcharge = double()
+                   )
 )
-# 14.2 secondes
 ```
 
+## DuckDB
 
-## Spark et Hadoop  
+
+## Spark et Hadoop
 
 On peut aussi se connecter à un cluster Spark, et envoyer ses requêtes depuis R avec la syntaxe de {dplyr} en utilisant {sparklyr}.

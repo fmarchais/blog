@@ -1,15 +1,6 @@
 ---
 title: "Bienvenue"
 image: profile.jpg
-about:
-  template: jolla
-  links:
-    - icon: linkedin
-      text: LinkedIn
-      href: www.linkedin.com/in/félix-marchais 
-    - icon: github
-      text: Github
-      href: https://github.com/fmarchais
 ---
 
 ::: callout-caution
@@ -19,10 +10,10 @@ Vous verrez bientôt ma tête ici
 :::
 
 
-Développeur R et Data Manager de données cliniques \n
+Coordinateur en Data Management et développeur R \n
 
 Diplômé d'un Master 2 de Biologie - Physiopathologie & Recherche Clinique \n
 
-Je me suis spécialisé dans la programmation en R pour des missions de traitement de données de santé, visualisation et automatisation de process. \n
+Je me suis spécialisé dans la Gouvernance des données et la programmation en R pour des missions de traitement de données de santé, visualisation et automatisation de process. \n
 
-Dans ce blog, vous pourrez retrouver plus de détails sur [mon profil](pages/profil.qmd), découvrir [les différents usages de R](pages/articles.qmd) et mes différents [projets](pages/projets.qmd)
+Dans ce blog, vous pourrez retrouver plus de détails sur [mon profil](/pages/profil.qmd), découvrir [les différents usages de R](/pages/articles.qmd) et mes différents [projets](/pages/projets.qmd)

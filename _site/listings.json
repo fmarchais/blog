@@ -31,6 +31,7 @@
   {
     "listing": "/pages/projets.html",
     "items": [
+      "/pages/projets/forgeurs.html",
       "/pages/projets/Gestionnaire_projets.html"
     ]
   },
@@ -38,7 +39,8 @@
     "listing": "/pages/articles.html",
     "items": [
       "/pages/articles/ragnar.html",
-      "/pages/articles/connections.html"
+      "/pages/articles/connections.html",
+      "/pages/articles/bigdata.html"
     ]
   }
 ]

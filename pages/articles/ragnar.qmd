@@ -9,11 +9,6 @@ categories:
   - IA
   - LLM
 image: "/pages/articles/images/ragnar_logo.png"
-execute: 
-  eval: false 
-  echo: true
-  message: false
-  warning: false
 ---
 
 Etant plutôt du genre à être dans les derniers à suivre une tendance, mon utilisation des LLM était jusqu'à récemment limitée à poser des questions à chat-GPT ou GitHub Copilot. Il y a environ deux semaines, en discutant avec un ami dont le métier est justement d'accompagner les entreprises dans leur passage à l'IA, celui-ci m'a expliqué les différents mots-clés du domaine : "MCP", "Agent", "Contexte" et surtout : **la "RAG"** (Retrieval-Augmented Generation), ou "Génération Augmentée par Récupération".
@@ -72,7 +67,7 @@ Pour les PDFs, une fois dans Zotero allez dans Fichier \> Exporter la bibliothè
 
 Pour obtenir les URLs, exportez simplement votre bibliothèque au format.csv.
 
-On peut désormais commencer à coder : 
+On peut désormais commencer à coder :
 
 ```{r setup}
 library(readr)
@@ -84,33 +79,34 @@ library(rollama)
 # Récupérer tous les chemins des fichiers PDF dans le dossier "files"
 pdf_paths <- list.files(
   path = "D:/Ma bibliothèque/files/",
-   pattern = "\\.pdf", 
-   full.names = TRUE, 
-   recursive = TRUE)
+  pattern = "\\.pdf",
+  full.names = TRUE,
+  recursive = TRUE
+)
 
 # Récupérer les liens dans le fichier .csv
 zotero_csv <- read_csv2("D:/ma_biblio_csv.csv") %>%
-  filter(!is.na(Url) | !is.na(`Link Attachments`) )
+  filter(!is.na(Url) | !is.na(`Link Attachments`))
 
-zotero_urls <- zotero_csv %>% 
+zotero_urls <- zotero_csv %>%
   select(Url, `Link Attachments`) %>%
   unlist() %>%
   na.omit() %>%
   unique()
 
 # Ragnar permet aussi de récupérer les liens présents sur une page web.
-# On peut ainsi récupérer toutes les pages d'une documentation 
+# On peut ainsi récupérer toutes les pages d'une documentation
 # à partir du lien de la page d'accueil
 zotero_external_links <- c()
-for(link in zotero_urls){
+for (link in zotero_urls) {
   tryCatch({
     doc <- ragnar_find_links(link, depth = 2)
     zotero_external_links <- append(zotero_external_links, doc)
   })
 }
-  
+
 # On combine le tout pour obtenir un seul vecteur
-full_links <- c(pdf_paths, zotero_urls, zotero_external_links) %>% 
+full_links <- c(pdf_paths, zotero_urls, zotero_external_links) %>%
   unique()
 ```
 
@@ -147,19 +143,21 @@ Lorsqu'une URL est fournie, {ragnar} va scraper la page. Certains sites n'autori
 
 ```{r ingestion}
 for (path in full_links) {
-  tryCatch({
-    chunks <- path |>
-      read_as_markdown() |>
-      markdown_chunk()
-    
-    ragnar_store_insert(store, chunks)
-    
-    # pour visualiser la progression
-    print(which(path == full_links), "/", length(full_links))
-    
-  }, error = function(e) {
-    cat("Error processing", path, ":", e$message, "\n")
-  })
+  tryCatch(
+    {
+      chunks <- path |>
+        read_as_markdown() |>
+        markdown_chunk()
+
+      ragnar_store_insert(store, chunks)
+
+      # pour visualiser la progression
+      print(which(path == full_links), "/", length(full_links))
+    },
+    error = function(e) {
+      cat("Error processing", path, ":", e$message, "\n")
+    }
+  )
 }
 
 # Créer un index de recherche pour les chunks
@@ -212,11 +210,11 @@ chat$chat(text)
 
 
 # I'm unable to retrieve accurate information regarding the "{Rhino}" R package without more context. However, I can provide general guidance on creating a Shiny app using the Shiny package in R.
-# 
+#
 # To start building a Shiny app:
-# 
+#
 # 1.  Install and load the `shiny` package:
-# 
+#
 # ``` r
 # install.packages("shiny")
 # library(shiny)
@@ -232,14 +230,13 @@ ragnar_register_tool_retrieve(chat, store)
 
 chat$chat(text)
 
-
 # ◯ \[tool call\] rag_retrieve_from_store_003(text = " installing and loading shiny package") ● #\> \[{"origin":"https://appsilon.github.io/rhino/articles/tutorial/create-your-first-rhino-app.html","doc_id":1,"ch… To create a Shiny app using the Rhino package, follow these steps:
-# 
+#
 # 1.  Install Rhino: `package::install("rhino")`
 # 2.  Create an initial Rhino application: `rhino::init("RhinoApplication")`
-# 
+#
 # Install necessary packages:
-# 
+#
 # ``` r
 # # In R console
 # rhino::pkg_install(c(

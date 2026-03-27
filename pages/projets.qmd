@@ -2,8 +2,9 @@
 title: "Projets"
 format: html
 listing:
-  contents: "projets/*.qmd"
   type: grid
+  contents:
+    - "projets/*.qmd"
 ---
 
 Ci-dessous vous pourrez retrouver des outils développés pour des projets professionnels ou personnels. \n
@@ -13,6 +14,3 @@ Ci-dessous vous pourrez retrouver des outils développés pour des projets profe
 
 Plus de projets seront bientôt publiés ici
 :::
-
-
-

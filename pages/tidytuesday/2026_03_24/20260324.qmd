@@ -1,0 +1,220 @@
+---
+title: "Frogs"
+description: "Observations des grenouilles en Australie - 2025-09-02"
+author: "Félix Marchais"
+date: "2025-09-14"
+format: html
+execute:
+  eval: true
+  echo: true
+  message: false
+  warning: false
+---
+
+```{r}
+library(tidytuesdayR)
+library(dplyr)
+library(ggplot2)
+
+tuesdata <- tt_load("2026-03-24")
+
+pi_digits <- tuesdata$pi_digits
+```
+
+
+
+```{r}
+pi_digits_m <- pi_digits %>%
+  mutate(
+    `1` = cumsum(digit == 1) / digit_position,
+    `2` = cumsum(digit == 2) / digit_position,
+    `3` = cumsum(digit == 3) / digit_position,
+    `4` = cumsum(digit == 4) / digit_position,
+    `5` = cumsum(digit == 5) / digit_position,
+    `6` = cumsum(digit == 6) / digit_position,
+    `7` = cumsum(digit == 7) / digit_position,
+    `8` = cumsum(digit == 8) / digit_position,
+    `9` = cumsum(digit == 9) / digit_position,
+    `0` = cumsum(digit == 0) / digit_position
+  )
+
+pi_pivot <- pi_digits_m %>%
+  group_by(digit_position) %>%
+  pivot_longer(
+    cols = `1`:`0`,
+    names_to = "value",
+    values_to = "cumsum"
+  )
+
+
+ggplot(
+  pi_pivot,
+  aes(x = digit_position, y = cumsum, group = value, color = value)
+) +
+  geom_line() +
+  #geom_hline(yintercept = 0.1) +
+  coord_cartesian(ylim = c(0, 0.3), xlim = c(0, 1000000)) +
+  labs(
+    title = "Décimales de π : fréquence cumulative des chiffres (0–9)",
+    subtitle = paste0(
+      "1 point tous les ",
+      step,
+      " chiffres ; référence : 10 % (ligne pointillée)"
+    ),
+    x = "Position dans les décimales",
+    y = "Fréquence cumulative",
+    color = "Chiffre"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "right")
+```
+
+
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(scales)
+
+# -------------------------------------------------------------------
+# Objectif global :
+# Construire une heatmap 100×100 des séquences de 4 chiffres (4-grams)
+# - Axe Y : les 2 premiers chiffres (préfixe d1d2)
+# - Axe X : les 2 derniers chiffres (suffixe d3d4)
+# - Couleur : écart relatif à une distribution uniforme attendue
+#   (c’est-à-dire "plus fréquent / moins fréquent que prévu")
+# -------------------------------------------------------------------
+
+# 1) Sécuriser l'ordre et le type des colonnes
+pi_sorted <- pi_digits %>%
+  transmute(
+    # pos : position numérique (doit permettre un tri correct)
+    pos = as.integer(digit_position),
+
+    # digit : converti en chaîne, pour pouvoir concaténer ensuite
+    digit = as.character(digit)
+  ) %>%
+  # Filtre de qualité : on ne garde que les digits valides 0..9 et des positions non manquantes
+  filter(!is.na(pos), digit %in% as.character(0:9)) %>%
+  # Tri par position : indispensable pour que lead() prenne les "digits suivants"
+  arrange(pos)
+
+# Remarque importante :
+# Ce tri suppose que digit_position reflète bien l’ordre réel des décimales
+# et qu’il n’y a pas de doublons/mauvais ordonnancement.
+# En cas de "trous" de positions, lead() va sauter des digits (ça peut biaiser les 4-grams).
+# Si besoin, on peut utiliser row_number() après tri comme index "réel".
+
+# 2) Construire les 4 chiffres successifs via lead()
+quad_counts <- pi_sorted %>%
+  mutate(
+    # d1 : digit courant
+    d1 = digit,
+
+    # d2, d3, d4 : digits suivants (fenêtre glissante)
+    # lead(digit, k) = digit à la position i+k
+    d2 = lead(digit, 1),
+    d3 = lead(digit, 2),
+    d4 = lead(digit, 3)
+  ) %>%
+  # On supprime les dernières lignes qui n’ont pas 4 digits complets
+  # (les 3 dernières lignes auront d4 = NA)
+  filter(!is.na(d4)) %>% # garde les fenêtres complètes
+  transmute(
+    # prefix : concaténation des 2 premiers digits (d1d2)
+    prefix = paste0(d1, d2),
+
+    # suffix : concaténation des 2 derniers digits (d3d4)
+    suffix = paste0(d3, d4)
+  ) %>%
+  # Comptage : pour chaque couple (prefix, suffix), on compte le nombre d’occurrences
+  # => donne une table de fréquences (jusqu’à 100×100 = 10 000 combinaisons)
+  count(prefix, suffix, name = "n")
+
+# Interprétation :
+# Chaque occurrence correspond à un 4-gram "chevauchant" :
+# position i..i+3, puis i+1..i+4, etc.
+# C’est le choix standard pour détecter des motifs locaux (comme pour les PINs).
+
+# 3) Préparer la grille complète 00..99 pour X et Y
+all2 <- sprintf("%02d", 0:99)
+# all2 = c("00","01",...,"99")
+# Sert à forcer l’affichage de toutes les combinaisons même si absentes (n=0).
+
+# 4) Compléter la matrice : rendre explicites les combinaisons manquantes
+quad_full <- quad_counts %>%
+  # complete() remplit toutes les combinaisons prefix × suffix
+  # et met n = 0 quand la combinaison n’existait pas dans les données
+  complete(prefix = all2, suffix = all2, fill = list(n = 0)) %>%
+  mutate(
+    # Facteurs avec niveaux ordonnés "00"->"99" pour un axe ordonné et stable
+    prefix = factor(prefix, levels = all2),
+    suffix = factor(suffix, levels = all2)
+  )
+
+# À ce stade :
+# quad_full a toujours 10 000 lignes (100×100),
+# ce qui est parfait pour une heatmap stable et comparable.
+
+# -------------------------------------------------------------------
+# 5) Écart par rapport à l’attendu uniforme
+# -------------------------------------------------------------------
+
+# Nombre total de fenêtres de longueur 4 possibles :
+# si on a N digits, il y a (N - 3) fenêtres chevauchantes de taille 4
+total_windows <- nrow(pi_sorted) - 3L
+
+# Attendu sous hypothèse d’uniformité "parfaitement" répartie :
+# 10 000 séquences possibles (0000..9999) => ici compressées en (prefix,suffix)
+# chaque cellule attendue = total_windows / 10000
+expected <- total_windows / 10000
+
+quad_dev <- quad_full %>%
+  mutate(
+    # diff : écart absolu à l’attendu (en nombre d’occurrences)
+    diff = n - expected,
+
+    # rel : écart relatif (proportionnel), pratique pour comparer
+    # rel = (observé - attendu) / attendu
+    rel = (n - expected) / expected
+  )
+
+# Interprétation :
+# rel = 0     => exactement comme attendu
+# rel = 0.10  => +10% plus fréquent que prévu
+# rel = -0.10 => -10% moins fréquent que prévu
+# Sur 1e6 digits, l’attendu est ≈ 100 occurrences par cellule (ordre de grandeur),
+# donc les fluctuations naturelles seront visibles mais modestes.
+
+# -------------------------------------------------------------------
+# 6) Heatmap des écarts relatifs
+# -------------------------------------------------------------------
+ggplot(quad_dev, aes(suffix, prefix, fill = rel)) +
+  # geom_tile : un carré par combinaison (prefix,suffix)
+  geom_tile() +
+  # Échelle divergente : bleu = moins fréquent, rouge = plus fréquent
+  # midpoint=0 centre la palette sur "aucun écart"
+  scale_fill_gradient2(
+    low = "#2c7bb6",
+    mid = "white",
+    high = "#d7191c",
+    midpoint = 0,
+    labels = percent_format(accuracy = 0.1)
+  ) +
+  labs(
+    title = "π — Écart relatif à l'uniforme (séquences de 4 chiffres)",
+    subtitle = "Bleu = moins fréquent que prévu, rouge = plus fréquent que prévu",
+    x = "Suffixe (d3d4)",
+    y = "Préfixe (d1d2)",
+    fill = "Écart relatif"
+  ) +
+  # carrés proportionnés (sinon la heatmap serait étirée)
+  coord_equal() +
+  theme_minimal(base_size = 12) +
+  theme(
+    # Axes denses (100 niveaux) : on réduit la taille et on pivote X
+    axis.text.x = element_text(size = 6, angle = 90, vjust = 0.5, hjust = 1),
+    axis.text.y = element_text(size = 6)
+  )
+```
