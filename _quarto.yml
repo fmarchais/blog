@@ -35,3 +35,5 @@ execute:
   comment: false
   warning: false
   message: false
+
+lightbox: true

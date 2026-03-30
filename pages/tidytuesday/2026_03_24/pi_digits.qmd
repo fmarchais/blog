@@ -1,6 +1,6 @@
 ---
-title: "Frogs"
-description: "Observations des grenouilles en Australie - 2025-09-02"
+title: "Pi digits"
+description: "Recherche de patterns dans un million de décimales de Pi - 2025-09-02"
 author: "Félix Marchais"
 date: "2025-09-14"
 format: html

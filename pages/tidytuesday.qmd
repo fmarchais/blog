@@ -8,3 +8,4 @@ listing:
 
 Le Tidytuesday, c'est un évènement qui a lieu chaque semaine, où la communauté R se challenge pour créer des visualisations à partir d'un nouveau jeu de données, publié tous les mardis. \n
 
+L'objectif n'est pas d'analyser ou de tirer des conclusions à partir de ces données (souvent partielles), mais simplement de s'exercer à identifier des patterns ou des relations dans les données et les mettre en image de manière pertinente.

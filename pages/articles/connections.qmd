@@ -29,13 +29,13 @@ Mais pas seulement ! R peut également travailler avec des images (OCRiser un PD
 
 Commençons avec le plus simple : les fichiers CSV
 
-```{.r csv}
+```r
 library(readr) # package du Tidyverse
 read_csv("path/to/iris.csv")
 ```
 
 
-```{.r}
+```{r}
 #| eval: true
 #| echo: false
 head(iris)
@@ -51,7 +51,7 @@ Pour des formats encore plus exotiques (tsv par exemple), `read_delim()` permet 
 
 On notera aussi que les fonctions `read_*()` fournissent des arguments permettant d'expliciter les valeurs nulles, de retirer les espaces en début/fin de chaîne (ce qui arrive très souvent sur des données saisies à la main dans Excel), de différencier des noms de colonnes en doublons, ou encore de sauter les premières lignes d'un fichier.
 
-```{.r csv_2}
+```r
 library(readr)
 read_csv2("path/to/file_fr.csv", # lire un fichier au format FR, delim = ;
           na = c("","NULL","NA"), # les cases contenant "","NULL" et "NA" seront vides
@@ -65,17 +65,15 @@ read_csv2("path/to/file_fr.csv", # lire un fichier au format FR, delim = ;
 
 Les fonctions `read.*()` (en base R) et `read_*()` (`{readr}`) permettent toutes de charger des fichiers CSV via une URL.
 
-```{.r read_csv_url}
-#| eval: true
-covid_data <- readr::read_csv2("https://www.data.gouv.fr/api/1/datasets/r/fe3e7099-a975-4181-9fb5-2dd1b8f1b552")
+```r
+covid_data <- read.csv2("https://www.data.gouv.fr/api/1/datasets/r/fe3e7099-a975-4181-9fb5-2dd1b8f1b552")
 head(covid_data)
 ```
 
-```{.r read_csv_url_2}
-#| eval: false
+```{r read_csv_url_2}
+#| eval: true
 #| echo: false
-
-head(readr::read_csv("data/covid_data.csv"))
+head(read.csv("data/covid_data.csv"))
 ```
 
 # Excel
@@ -84,8 +82,7 @@ Les fichiers dits "Excel" ont l'extension .xls ou .xlsx, et peuvent contenir dif
 
 Pour lire ces données, il existe plusieurs librairies : `{readxl}`, `{openxslx}` ou `{openxslx2}`
 
-```{.r readxl}
-
+```r
 library(readxl)
 read_excel("path/to/file.xslx",
            sheet = 1, # feuillet, par numéro ou par nom
@@ -93,7 +90,6 @@ read_excel("path/to/file.xslx",
            na = c("","NULL","NA"), # les cellules à considérer vides
            .name_repair = "unique" # différencier les noms en doublons
 )
-
 ```
 
 # Parquet
@@ -108,7 +104,7 @@ Les deux méthodes permettent de créer une *connexion* vers le jeu de données,
 
 On notera également la capacité à lire plusieurs fichiers regroupés dans un dossier (ayant le même schéma), voire même des fichiers partitionnés ([au style Hive](https://arrow.apache.org/docs/r/reference/hive_partition.html)), permettant de ne scanner que les données nécessaires, pour optimiser encore plus la performance de requêtage.
 
-```{.r parquet}
+```r
 
 # Arrow :
 library(arrow)
@@ -164,7 +160,7 @@ Si vous utilisez Rstudio, le moyen le plus simple de se connecter à une source 
 
 Si vous avez déjà configuré un DSN contenant vos identifiants, les informations de connexion devraient déjà être remplies, vous n'avez plus qu'à cliquer sur "OK", et le code s'exécutera dans la console. Vous pourrez alors visualiser vos bases dans l'onglet *Connections*
 
-![](pages/articles/images/rstudio_connections_dsn.png){width="515"}
+![](images/rstudio_connections_dsn.png){width="515"}
 
 Sinon, vous aurez besoin d'entrer les paramètres suivants :
 
@@ -180,7 +176,7 @@ Si vous utilisez uniquement la console, vous pouvez rentrer directement les para
 
 Une fois connecté, on peut requêter ses données avec `{dplyr}` ou en SQL, en utilisant `dbGetQuery()`
 
-```{.r db_get_query}
+```r
 library(DBI)
 library(odbc)
 conn <- DBI::dbConnect(odbc::odbc() ,"server-name", database = "MA_BASE")
@@ -247,9 +243,7 @@ On utilisera également la librairie `{jsonlite}` pour convertir les données r�
 Le package `{httr2}` nécessite l'installation du package `{curl}`, qui peut poser problème si vous êtes sur un réseau professionnel protégé par un pare-feu. Dans ce cas, contactez votre DSI.
 :::
 
-```{.r hubeau}
-#| eval: true
-
+```r
 library(httr2)
 library(jsonlite)
 
@@ -300,7 +294,7 @@ Ainsi, vos identifiants sont présents dans votre environnement sans avoir à le
 Si vous souhaitez récupérer des données sur un site web qui ne propose pas d'API, l'une des solutions est le [*web scraping*](https://fr.wikipedia.org/wiki/Web_scraping).
 
 
-::: {.callout-warning}
+:::{.callout-warning}
 ## Attention
 Tous les sites n'autorisent pas le web scraping, et les données doivent être *nativement* publiques, *tombées* dans le domaine publique ou sous licence libre *si votre usage n'est pas commercial*. Renseignez-vous avant de scraper une page !
 :::
@@ -311,8 +305,7 @@ Ces règles permettent d'éviter de causer des problèmes en récoltant des donn
 
 Dans cet exemple, nous allons récupérer une table contenant la liste des communes de Vendée, sur [cette page wikipédia](https://fr.wikipedia.org/wiki/Liste_des_communes_de_la_Vend%C3%A9e)
 
-```{.r webscraping}
-
+```r
 library(rvest)
 library(polite)
 
@@ -335,7 +328,6 @@ cities_table <- page |>
 # html_table() permet de convertir des données tabulaires en un dataframe
 
 head(cities_table)
-
 ```
 
 ```{r webscraping_2}
@@ -352,7 +344,7 @@ L'OCR (Optical Character Recognition) est un système de *machine learning* perm
 
 Dans cet exemple, nous utiliserons le modèle **Tesseract**, développé par Google et aujourd'hui Open Source. Nous utiliserons également la librairie `doParallel` pour paralléliser le traitement des images et augmenter la vitesse d'OCRisation
 
-```{.r ocr}
+```r
 library(tidyverse)
 library(tesseract)
 library(doParallel)
@@ -415,11 +407,14 @@ resr <- res %>%
 
 Pour visualiser l'impact de la parallélisation :
 
+![](/pages/articles/images/ggplot2_ocr.png)
+
 ```{r ocr2}
 #| echo: false
-#| eval: true
+#| eval: false
 
-library(ggplot2)
+# pour retrouver le code de ce graphe si besoin de l'améliorer
+#library(ggplot2)
 
 plot <- data.frame(
   time_s = c(16, 34, 49, 79, 140, 28, 95, 148, 340, 445),
@@ -438,9 +433,6 @@ ggplot(
   ggtitle("Comparaison du temps d'OCR selon le mode de calcul")
 
 ```
-
-
-
 
 
 # JSON et XML

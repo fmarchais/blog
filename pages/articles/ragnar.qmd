@@ -69,7 +69,7 @@ Pour obtenir les URLs, exportez simplement votre bibliothèque au format.csv.
 
 On peut désormais commencer à coder :
 
-```{r setup}
+```r
 library(readr)
 library(dplyr)
 library(glue)
@@ -118,7 +118,7 @@ En considérant une moyenne d'une minute par document, il m'a fallu plus de 30 h
 
 Le store est une base DuckDB qui contiendra nos documents, découpés en *chunks*, pour permettre à l'assistant d'y accéder.
 
-```{r store}
+```r
 # Si on ne met que le nom, enregistré sous C:/user/votre_nom/ (sur Windows)
 store_location <- "zotero_ragnar.duckdb"
 
@@ -141,7 +141,7 @@ Maintenant que le store est créé, on va enregistrer nos documents via une bouc
 Lorsqu'une URL est fournie, {ragnar} va scraper la page. Certains sites n'autorisent pas le webscraping (c'est leur droit) et vous renverront une erreur 403. Dans ce cas, il n'y a pas grand chose à faire. On ajoutera un `tryCatch()` à notre boucle pour ne pas la casser si une erreur est renvoyée.
 :::
 
-```{r ingestion}
+```r
 for (path in full_links) {
   tryCatch(
     {
@@ -173,7 +173,7 @@ ragnar_store_inspect(store)
 
 Nous allons tester notre assistant en lui demandant de nous aider à utiliser le framework {rhino}, développé par [Appsilon](https://www.appsilon.com/rhinoverse/rhino) pour créer des applications R/Shiny robustes.
 
-```{r preparation}
+```r
 # Notre Query
 text <- "How to use the {Rhino} R package to create a Shiny app ? Be concise"
 
@@ -200,7 +200,7 @@ system_prompt <- stringr::str_squish(
 
 On va tout d'abord tester notre assistant, pour voir s'il connait le package {rhino} :
 
-```{r chat}
+```r
 chat <- ellmer::chat_ollama(
   system_prompt,
   model = "llama3.2:3b-instruct-q4_K_M"
@@ -225,7 +225,7 @@ Pour le moment, il est incapable de répondre. \n
 
 On va maintenant lui donner accès au store :
 
-```{r post}
+```r
 ragnar_register_tool_retrieve(chat, store)
 
 chat$chat(text)

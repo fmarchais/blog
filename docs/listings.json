@@ -1,16 +1,16 @@
 [
   {
-    "listing": "/pages/projets.html",
-    "items": [
-      "/pages/projets/forgeurs.html",
-      "/pages/projets/Gestionnaire_projets.html"
-    ]
-  },
-  {
     "listing": "/pages/tidytuesday.html",
     "items": [
       "/pages/tidytuesday/2025_09_30/cranes.html",
       "/pages/tidytuesday/2025_09_14/frogs.html"
+    ]
+  },
+  {
+    "listing": "/pages/projets.html",
+    "items": [
+      "/pages/projets/forgeurs.html",
+      "/pages/projets/Gestionnaire_projets.html"
     ]
   },
   {
