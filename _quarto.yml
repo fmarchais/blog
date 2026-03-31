@@ -20,7 +20,7 @@ website:
       - icon: github
         href: https://github.com/fmarchais
       - icon: linkedin
-        href: www.linkedin.com/in/félix-marchais
+        href: https://www.linkedin.com/in/félix-marchais
 format:
   html:
     theme: sandstone
